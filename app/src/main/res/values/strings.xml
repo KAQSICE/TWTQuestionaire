@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TWTQuestionaire</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="main_questionaire">新建问卷</string>
+    <string name="main_vote">新建投票</string>
+    <string name="main_quiz">新建答题</string>
+    <string name="main_created">我创建的</string>
+    <string name="main_participated">我参与的</string>
+    <string name="main_trash">回收站</string>
+</resources>
