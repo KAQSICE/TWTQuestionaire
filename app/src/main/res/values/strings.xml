@@ -8,4 +8,14 @@
     <string name="main_created">我创建的</string>
     <string name="main_participated">我参与的</string>
     <string name="main_trash">回收站</string>
+    <string name="new_questionaire_title">问卷名称</string>
+    <string name="new_questionaire_description">问卷说明</string>
+    <string name="new_questionaire_begin">开始时间</string>
+    <string name="new_questionaire_end">结束时间</string>
+    <string name="new_questionaire_title_hint">输入问卷名称</string>
+    <string name="new_questionaire_description_hint">输入问卷说明</string>
+    <string name="date_picker_hint">请选择日期</string>
+    <string name="new_questionaire_create_btn">创建问卷</string>
+    <string name="questionaire_editor_toolbar_preview">预览</string>
+    <string name="questionaire_editor_add_item_button">添加题目</string>
 </resources>

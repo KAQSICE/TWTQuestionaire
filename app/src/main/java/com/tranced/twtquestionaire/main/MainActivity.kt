@@ -1,6 +1,8 @@
 package com.tranced.twtquestionaire.main
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +14,12 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.questionaire.NewQuestionaireActivity
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 /**
  * MainActivity
@@ -25,6 +30,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var drawerToggle: ActionBarDrawerToggle
     private lateinit var drawerList: ListView
+    private lateinit var questionaire: CardView
+    private lateinit var vote: CardView
+    private lateinit var quiz: CardView
+    private lateinit var created: CardView
+    private lateinit var participated: CardView
+    private lateinit var trash: CardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +43,19 @@ class MainActivity : AppCompatActivity() {
         findViews()
         initToolbarAndDrawerLayout()
         initDrawerLayout()
-
+        setOnClickListeners()
     }
 
     private fun findViews() {
         toolbar = findViewById(R.id.main_toolbar)
         drawerLayout = findViewById(R.id.main_drawerlayout)
         drawerList = findViewById(R.id.main_drawerlayout_list)
+        questionaire = findViewById(R.id.main_drawerlayout_questionaire)
+        vote = findViewById(R.id.main_drawerlayout_vote)
+        quiz = findViewById(R.id.main_drawerlayout_quiz)
+        created = findViewById(R.id.main_drawerlayout_created)
+        participated = findViewById(R.id.main_drawerlayout_participated)
+        trash = findViewById(R.id.main_drawerlayout_trash)
     }
 
     private fun initToolbarAndDrawerLayout() {
@@ -60,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         }
         drawerToggle.apply {
             syncState()
-//            isDrawerIndicatorEnabled = false
+            isDrawerIndicatorEnabled = true
         }
         drawerLayout.addDrawerListener(drawerToggle)
 
@@ -80,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initDrawerLayout() {
-        var data = ArrayList<DrawerItem>()
+        val data = ArrayList<DrawerItem>()
         for (i in 1..10) {
             data.add(DrawerItem("Item$i", 0))
         }
@@ -88,12 +105,20 @@ class MainActivity : AppCompatActivity() {
             DrawerItemAdapter(baseContext, R.layout.main_drawerlayout_item, data)
         drawerList.adapter = drawerItemAdapter
     }
+
+    private fun setOnClickListeners() {
+        questionaire.onClick {
+            var intent = Intent(this@MainActivity, NewQuestionaireActivity::class.java)
+            startActivity(intent)
+        }
+    }
 }
 
 class DrawerItem(val content: String, val imgId: Int)
 
-class DrawerItemAdapter(context: Context, val tvId: Int, val data: List<DrawerItem>) :
+class DrawerItemAdapter(context: Context, private val tvId: Int, data: List<DrawerItem>) :
     ArrayAdapter<DrawerItem>(context, tvId, data) {
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val item = getItem(position)
         val view = LayoutInflater.from(context)
