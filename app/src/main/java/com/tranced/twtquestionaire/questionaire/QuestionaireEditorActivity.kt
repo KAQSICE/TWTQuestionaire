@@ -3,12 +3,18 @@ package com.tranced.twtquestionaire.questionaire
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.edu.twt.retrox.recyclerviewdsl.ItemAdapter
+import cn.edu.twt.retrox.recyclerviewdsl.ItemManager
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.questionaire.editor.AddItemButton
+import com.tranced.twtquestionaire.questionaire.editor.QuestionaireTypeSelectionActivity
 import com.tranced.twtquestionaire.questionaire.editor.addAddItemButton
 import com.tranced.twtquestionaire.questionaire.editor.addInfo
 import java.util.*
@@ -17,6 +23,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var itemList: RecyclerView
     private lateinit var questionaire: Questionaire
+    private lateinit var itemManager: ItemManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +46,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
 
     private fun getQuestionaireInfo() {
         questionaire = Questionaire(
-            intent.getStringExtra("title"),
+            intent.getStringExtra("title")!!,
             intent.getStringExtra("description"),
             intent.getSerializableExtra("beginDate") as Date?,
             intent.getSerializableExtra("endDate") as Date?
@@ -74,9 +81,32 @@ class QuestionaireEditorActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@QuestionaireEditorActivity)
             withItems {
                 addInfo(questionaire.title, questionaire.description)
-                addAddItemButton()
-                this[adapter?.itemCount?.minus(1)!!].controller
+                itemManager = ItemManager(this)
+            }
+            adapter = ItemAdapter(itemManager)
+            itemManager.apply {
+                refreshAddItemButton(this)
             }
         }
     }
+
+    private fun refreshAddItemButton(itemManager: ItemManager) {
+        itemManager.apply {
+            addAddItemButton(View.OnClickListener {
+                if (last() is AddItemButton) {
+                    val intent = Intent(
+                        this@QuestionaireEditorActivity,
+                        QuestionaireTypeSelectionActivity::class.java
+                    )
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    startActivity(intent)
+                    Toast.makeText(baseContext, "我就弹个窗试试", Toast.LENGTH_SHORT).show()
+                    removeAt(size - 1)
+                    //TODO: 这里添加对应item
+                    refreshAddItemButton(itemManager)
+                }
+            })
+        }
+    }
+
 }

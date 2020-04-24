@@ -9,11 +9,14 @@ import cn.edu.twt.retrox.recyclerviewdsl.Item
 import cn.edu.twt.retrox.recyclerviewdsl.ItemController
 import com.tranced.twtquestionaire.R
 
-class AddItemButton : Item {
+class AddItemButton(val onClickListener: View.OnClickListener) : Item {
+
     companion object AddItemButtonController : ItemController {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item) {
             holder as AddItemButtonViewHolder
             item as AddItemButton
+            holder.itemView.setOnClickListener(item.onClickListener)
+            holder.button.setOnClickListener(item.onClickListener)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -31,4 +34,5 @@ class AddItemButton : Item {
         RecyclerView.ViewHolder(itemView)
 }
 
-fun MutableList<Item>.addAddItemButton() = add(AddItemButton())
+fun MutableList<Item>.addAddItemButton(onClickListener: View.OnClickListener) =
+    add(AddItemButton(onClickListener))

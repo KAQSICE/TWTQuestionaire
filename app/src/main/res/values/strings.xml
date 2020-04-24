@@ -18,4 +18,11 @@
     <string name="new_questionaire_create_btn">创建问卷</string>
     <string name="questionaire_editor_toolbar_preview">预览</string>
     <string name="questionaire_editor_add_item_button">添加题目</string>
+    <string name="questionaire_editor_type_selection_single">单选题</string>
+    <string name="questionaire_editor_type_selection_multiple">多选题</string>
+    <string name="questionaire_editor_type_selection_blank">填空题</string>
+    <string name="questionaire_editor_type_selection_paragraph">段落题</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
