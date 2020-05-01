@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="300dp"
-    android:layout_height="400dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/questionaire_editor_type_selection_toolbar"
         layout="@layout/common_toolbar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/questionaire_editor_type_selection_set"
+        android:id="@+id/q1_e_type_selection_set"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/questionaire_editor_type_selection_import"
+        app:layout_constraintBottom_toTopOf="@id/q1_e_type_selection_import"
         app:layout_constraintTop_toBottomOf="@id/questionaire_editor_type_selection_toolbar">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/questionaire_editor_type_selection_single"
+            android:id="@+id/q1_e_type_selection_single"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
@@ -24,23 +24,23 @@
             app:cardBackgroundColor="@color/main_card_background"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
-            app:layout_constraintBottom_toTopOf="@id/questionaire_editor_type_selection_paragraph"
+            app:layout_constraintBottom_toTopOf="@id/q1_e_type_selection_paragraph"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/questionaire_editor_type_selection_multiple"
+            app:layout_constraintRight_toLeftOf="@id/q1_e_type_selection_multiple"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/questionaire_editor_type_selection_single"
+                android:text="@string/q1_e_type_selection_single"
                 android:textColor="@color/main_text"
                 android:textSize="20sp" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/questionaire_editor_type_selection_multiple"
+            android:id="@+id/q1_e_type_selection_multiple"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
@@ -48,23 +48,23 @@
             app:cardBackgroundColor="@color/main_card_background"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
-            app:layout_constraintBottom_toTopOf="@id/questionaire_editor_type_selection_score"
-            app:layout_constraintLeft_toRightOf="@id/questionaire_editor_type_selection_single"
-            app:layout_constraintRight_toLeftOf="@id/questionaire_editor_type_selection_blank"
+            app:layout_constraintBottom_toTopOf="@id/q1_e_type_selection_rating"
+            app:layout_constraintLeft_toRightOf="@id/q1_e_type_selection_single"
+            app:layout_constraintRight_toLeftOf="@id/q1_e_type_selection_blank"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/questionaire_editor_type_selection_single"
+                android:text="@string/q1_e_type_selection_multiple"
                 android:textColor="@color/main_text"
                 android:textSize="20sp" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/questionaire_editor_type_selection_blank"
+            android:id="@+id/q1_e_type_selection_blank"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
@@ -72,8 +72,8 @@
             app:cardBackgroundColor="@color/main_card_background"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
-            app:layout_constraintBottom_toTopOf="@id/questionaire_editor_type_selection_sort"
-            app:layout_constraintLeft_toRightOf="@id/questionaire_editor_type_selection_multiple"
+            app:layout_constraintBottom_toTopOf="@id/q1_e_type_selection_sort"
+            app:layout_constraintLeft_toRightOf="@id/q1_e_type_selection_multiple"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -81,14 +81,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/questionaire_editor_type_selection_single"
+                android:text="@string/q1_e_type_selection_blank"
                 android:textColor="@color/main_text"
                 android:textSize="20sp" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/questionaire_editor_type_selection_paragraph"
+            android:id="@+id/q1_e_type_selection_paragraph"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
@@ -98,21 +98,21 @@
             app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/questionaire_editor_type_selection_score"
-            app:layout_constraintTop_toBottomOf="@id/questionaire_editor_type_selection_single">
+            app:layout_constraintRight_toLeftOf="@id/q1_e_type_selection_rating"
+            app:layout_constraintTop_toBottomOf="@id/q1_e_type_selection_single">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/questionaire_editor_type_selection_single"
+                android:text="@string/q1_e_type_selection_paragraph"
                 android:textColor="@color/main_text"
                 android:textSize="20sp" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/questionaire_editor_type_selection_score"
+            android:id="@+id/q1_e_type_selection_rating"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
@@ -121,22 +121,22 @@
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/questionaire_editor_type_selection_paragraph"
-            app:layout_constraintRight_toLeftOf="@id/questionaire_editor_type_selection_sort"
-            app:layout_constraintTop_toBottomOf="@id/questionaire_editor_type_selection_multiple">
+            app:layout_constraintLeft_toRightOf="@id/q1_e_type_selection_paragraph"
+            app:layout_constraintRight_toLeftOf="@id/q1_e_type_selection_sort"
+            app:layout_constraintTop_toBottomOf="@id/q1_e_type_selection_multiple">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/questionaire_editor_type_selection_single"
+                android:text="@string/q1_e_type_selection_rating"
                 android:textColor="@color/main_text"
                 android:textSize="20sp" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/questionaire_editor_type_selection_sort"
+            android:id="@+id/q1_e_type_selection_sort"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
@@ -145,15 +145,15 @@
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/questionaire_editor_type_selection_score"
+            app:layout_constraintLeft_toRightOf="@id/q1_e_type_selection_rating"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/questionaire_editor_type_selection_blank">
+            app:layout_constraintTop_toBottomOf="@id/q1_e_type_selection_blank">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/questionaire_editor_type_selection_single"
+                android:text="@string/q1_e_type_selection_sort"
                 android:textColor="@color/main_text"
                 android:textSize="20sp" />
 
@@ -163,7 +163,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/questionaire_editor_type_selection_import"
+        android:id="@+id/q1_e_type_selection_import"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -174,14 +174,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/questionaire_editor_type_selection_set">
+        app:layout_constraintTop_toBottomOf="@id/q1_e_type_selection_set">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="30dp"
-            android:text="@string/questionaire_editor_type_selection_single"
+            android:text="@string/q1_e_type_selection_import"
             android:textColor="@color/main_text"
             android:textSize="20sp" />
 

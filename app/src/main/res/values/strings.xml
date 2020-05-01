@@ -16,13 +16,26 @@
     <string name="new_questionaire_description_hint">输入问卷说明</string>
     <string name="date_picker_hint">请选择日期</string>
     <string name="new_questionaire_create_btn">创建问卷</string>
-    <string name="questionaire_editor_toolbar_preview">预览</string>
-    <string name="questionaire_editor_add_item_button">添加题目</string>
-    <string name="questionaire_editor_type_selection_single">单选题</string>
-    <string name="questionaire_editor_type_selection_multiple">多选题</string>
-    <string name="questionaire_editor_type_selection_blank">填空题</string>
-    <string name="questionaire_editor_type_selection_paragraph">段落题</string>
+    <string name="q1_e_toolbar_preview">预览</string>
+    <string name="q1_e_add_item_button">添加题目</string>
+    <string name="q1_e_type_selection_single">单选题</string>
+    <string name="q1_e_type_selection_multiple">多选题</string>
+    <string name="q1_e_type_selection_blank">填空题</string>
+    <string name="q1_e_type_selection_paragraph">段落题</string>
+    <string name="q1_e_type_selection_rating">量表题</string>
+    <string name="q1_e_type_selection_sort">排序题</string>
+    <string name="q1_e_type_selection_import">批量导入</string>
+    <string name="q1_e_single_appearance_text">题面</string>
+    <string name="q1_e_single_input_question">请输入问题</string>
+    <string name="q1_e_single_input_option">请输入选项</string>
+    <string name="q1_e_single_add_option">添加选项</string>
+    <string name="q1_e_more_settings_text">更多设置</string>
+    <string name="q1_e_single_option_edit">请输入选项</string>
+    <string name="q1_e_single_compulsion_text">是否必答</string>
+    <string name="q1_e_single_condition_text">显示条件</string>
+    <string name="q1_e_single_jump_text">跳转设置</string>
+    <string name="q1_e_single_toolbar_create">创建</string>
+    <string name="q1_e_settled">已设置</string>
+    <string name="q1_e_unsettled">未设置</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

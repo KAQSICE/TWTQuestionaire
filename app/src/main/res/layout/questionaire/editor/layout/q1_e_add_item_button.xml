@@ -5,10 +5,10 @@
     android:layout_height="wrap_content">
 
     <Button
-        android:id="@+id/questionaire_editor_add_item_button"
+        android:id="@+id/q1_e_add_item_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/questionaire_editor_add_item_button"
+        android:text="@string/q1_e_add_item_button"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

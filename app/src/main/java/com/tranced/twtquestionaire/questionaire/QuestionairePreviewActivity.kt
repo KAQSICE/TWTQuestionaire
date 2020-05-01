@@ -1,24 +1,22 @@
-package com.tranced.twtquestionaire.questionaire.editor
+package com.tranced.twtquestionaire.questionaire
 
 import android.os.Bundle
-import android.view.Display
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.tranced.twtquestionaire.R
 
-class QuestionaireTypeSelectionActivity : AppCompatActivity() {
+class QuestionairePreviewActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
-    private lateinit var display: Display
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.questionaire_editor_type_selection_activity)
+        setContentView(R.layout.q1_p_activity)
         toolbar = findViewById(R.id.common_toolbar)
-        toolbar.title = "添加题目"
+        toolbar.title = "" //TODO: 这里是问卷名
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
-            setHomeButtonEnabled(true)
             setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
         }
         toolbar.setNavigationOnClickListener {
             finish()

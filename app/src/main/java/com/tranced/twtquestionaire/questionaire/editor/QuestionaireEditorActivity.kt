@@ -1,4 +1,4 @@
-package com.tranced.twtquestionaire.questionaire
+package com.tranced.twtquestionaire.questionaire.editor
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,22 +12,26 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.edu.twt.retrox.recyclerviewdsl.ItemAdapter
 import cn.edu.twt.retrox.recyclerviewdsl.ItemManager
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
+import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
-import com.tranced.twtquestionaire.questionaire.editor.AddItemButton
-import com.tranced.twtquestionaire.questionaire.editor.QuestionaireTypeSelectionActivity
-import com.tranced.twtquestionaire.questionaire.editor.addAddItemButton
-import com.tranced.twtquestionaire.questionaire.editor.addInfo
-import java.util.*
+import com.tranced.twtquestionaire.questionaire.QuestionairePreviewActivity
+import com.tranced.twtquestionaire.questionaire.QuestionaireTypeSelectionActivity
+import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.blankRequestCode
+import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.multipleRequestCode
+import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.paragraphRequestCode
+import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.ratingRequestCode
+import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.singleRequestCode
+import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.sortRequestCode
 
 class QuestionaireEditorActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var itemList: RecyclerView
-    private lateinit var questionaire: Questionaire
+    private lateinit var questionaire: Paper
     private lateinit var itemManager: ItemManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.questionaire_editor_activity)
+        setContentView(R.layout.q1_e_activity)
         getQuestionaireInfo()
         findViews()
         setToolbar()
@@ -35,21 +39,30 @@ class QuestionaireEditorActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.questionaire_editor_toolbar_menu, menu)
+        menuInflater.inflate(R.menu.q1_e_toolbar_menu, menu)
         return true
     }
 
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
-        itemList = findViewById(R.id.questionaire_editor_item_list)
+        itemList = findViewById(R.id.q1_e_item_list)
     }
 
     private fun getQuestionaireInfo() {
-        questionaire = Questionaire(
+        questionaire = Paper(
             intent.getStringExtra("title")!!,
-            intent.getStringExtra("description"),
-            intent.getSerializableExtra("beginDate") as Date?,
-            intent.getSerializableExtra("endDate") as Date?
+            type = "问卷",
+            description = intent.getStringExtra("description"),
+            faculty = "-1",
+            profession = "-1",
+            power = 0,
+            lastTime = -1,
+            creator = "-1",
+            questionCount = 0,
+            questions = mutableListOf()
+            //TODO:是不是应该把开始和结束日期转化成天数？
+//            (intent.getSerializableExtra("beginDate") as Date?).day,
+//            intent.getSerializableExtra("endDate") as Date?
         )
     }
 
@@ -66,9 +79,12 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                 finish()
             }
             setOnMenuItemClickListener {
-                if (it.itemId == R.id.questionaire_editor_toolbar_preview) {
+                if (it.itemId == R.id.q1_e_toolbar_preview) {
                     //TODO:要跳转至预览界面
-                    val previewIntent = Intent()
+                    val previewIntent = Intent(
+                        this@QuestionaireEditorActivity,
+                        QuestionairePreviewActivity::class.java
+                    )
                     startActivity(previewIntent)
                 }
                 return@setOnMenuItemClickListener true
@@ -99,7 +115,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                         QuestionaireTypeSelectionActivity::class.java
                     )
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                    startActivity(intent)
+                    startActivityForResult(intent, 0)
                     Toast.makeText(baseContext, "我就弹个窗试试", Toast.LENGTH_SHORT).show()
                     removeAt(size - 1)
                     //TODO: 这里添加对应item
@@ -109,4 +125,28 @@ class QuestionaireEditorActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            singleRequestCode -> {
+                //TODO: 这里应该addSingleChoiceItem(data.getSerializableExtra("single"))
+            }
+            multipleRequestCode -> {
+
+            }
+            blankRequestCode -> {
+
+            }
+            paragraphRequestCode -> {
+
+            }
+            ratingRequestCode -> {
+
+            }
+            sortRequestCode -> {
+
+            }
+        }
+        data?.getSerializableExtra("single")
+    }
 }

@@ -1,4 +1,4 @@
 package com.tranced.twtquestionaire.questionaire.editor
 
-class ScoreEditorItem {
+class RatingEditorItem {
 }

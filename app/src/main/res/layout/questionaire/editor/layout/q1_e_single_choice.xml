@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".questionaire.editor.single.SingleChoiceEditor">
+
+    <include
+        android:id="@+id/q1_e_single_toolbar"
+        layout="@layout/common_toolbar" />
+
+    <TextView
+        android:id="@+id/q1_e_single_appearance_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/q1_e_single_appearance_text"
+        android:textColor="@color/main_text"
+        android:textSize="@dimen/new_questionaire_text_size"
+        app:layout_constraintTop_toBottomOf="@id/q1_e_single_toolbar" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/q1_e_single_appearance_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/q1_e_single_appearance_text">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/q1_e_single_input_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/q1_e_single_input_question"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/q1_e_single_option_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/q1_e_single_input_question" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/q1_e_single_more_settings_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/q1_e_more_settings_text"
+        android:textColor="@color/main_text"
+        android:textSize="@dimen/new_questionaire_text_size"
+        app:layout_constraintTop_toBottomOf="@id/q1_e_single_appearance_set" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/q1_e_single_more_settings_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/q1_e_single_more_settings_text">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/q1_e_single_compulsion_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/q1_e_single_compulsion_text"
+                android:textColor="@color/main_text"
+                android:textSize="@dimen/new_questionaire_text_size"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Switch
+                android:id="@+id/q1_e_single_compulsion_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/q1_e_single_condition_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/q1_e_single_condition_text"
+                android:textColor="@color/main_text"
+                android:textSize="@dimen/new_questionaire_text_size"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/q1_e_single_compulsion_text" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/q1_e_single_condition_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/q1_e_single_compulsion_switch">
+
+                <TextView
+                    android:id="@+id/q1_e_single_condition_button_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/q1_e_unsettled"
+                    android:textSize="@dimen/new_questionaire_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/q1_e_single_condition_button_image"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/q1_e_single_condition_button_image"
+                    android:layout_width="@dimen/new_questionaire_text_size"
+                    android:layout_height="@dimen/new_questionaire_text_size"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_launcher_round"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/q1_e_single_condition_button_text"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/q1_e_single_jump_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/q1_e_single_jump_text"
+                android:textColor="@color/main_text"
+                android:textSize="@dimen/new_questionaire_text_size"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/q1_e_single_condition_text" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/q1_e_single_jump_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/q1_e_single_condition_button">
+
+                <TextView
+                    android:id="@+id/q1_e_single_jump_button_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/q1_e_unsettled"
+                    android:textSize="@dimen/new_questionaire_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/q1_e_single_jump_button_image"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/q1_e_single_jump_button_image"
+                    android:layout_width="@dimen/new_questionaire_text_size"
+                    android:layout_height="@dimen/new_questionaire_text_size"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_launcher_round"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/q1_e_single_jump_button_text"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

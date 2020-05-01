@@ -21,8 +21,8 @@ class AddItemButton(val onClickListener: View.OnClickListener) : Item {
 
         override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.questionaire_editor_add_item_button, parent, false)
-            val button = itemView.findViewById<Button>(R.id.questionaire_editor_add_item_button)
+                .inflate(R.layout.q1_e_add_item_button, parent, false)
+            val button = itemView.findViewById<Button>(R.id.q1_e_add_item_button)
             return AddItemButtonViewHolder(itemView, button)
         }
     }

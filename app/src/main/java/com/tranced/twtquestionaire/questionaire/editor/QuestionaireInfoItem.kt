@@ -21,11 +21,11 @@ class QuestionaireInfoItem(val questionaireTitle: String, val questionaireDescri
 
         override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.questionaire_editor_info_item, parent, false)
+                .inflate(R.layout.q1_e_info_item, parent, false)
             val questionaireTitle =
-                itemView.findViewById<TextView>(R.id.questionaire_editor_info_title)
+                itemView.findViewById<TextView>(R.id.q1_e_info_title)
             val questionaireDescription =
-                itemView.findViewById<TextView>(R.id.questionaire_editor_info_description)
+                itemView.findViewById<TextView>(R.id.q1_e_info_description)
             return QuestionaireInfoItemViewHolder(
                 itemView,
                 questionaireTitle,

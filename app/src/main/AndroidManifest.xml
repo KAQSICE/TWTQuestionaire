@@ -9,12 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".questionaire.editor.QuestionairePreviewActivity"></activity>
         <activity
-            android:name=".questionaire.editor.QuestionaireTypeSelectionActivity"
+            android:name=".questionaire.editor.single.SingleChoiceEditor"
             android:theme="@style/DialogActivity" />
         <activity
-            android:name=".questionaire.QuestionaireEditorActivity"
+            android:name=".questionaire.QuestionairePreviewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".questionaire.QuestionaireTypeSelectionActivity"
+            android:theme="@style/DialogActivity" />
+        <activity
+            android:name=".questionaire.editor.QuestionaireEditorActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".questionaire.NewQuestionaireActivity"

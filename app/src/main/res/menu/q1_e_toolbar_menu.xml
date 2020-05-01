@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/questionaire_editor_toolbar_preview"
+        android:id="@+id/q1_e_toolbar_preview"
         android:orderInCategory="90"
-        android:title="@string/questionaire_editor_toolbar_preview"
+        android:title="@string/q1_e_toolbar_preview"
         app:showAsAction="always" />
 
 </menu>

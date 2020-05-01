@@ -50,7 +50,7 @@ import static android.app.ActivityManager.ProcessErrorStateInfo.NO_ERROR;
  * <li>Apply a tiny change immediately - possible if we can detect that the change is only used in
  * a limited context (such as in a layout) and we can directly poke the view hierarchy and
  * schedule a paint.
- * <li>Apply a change to the current activity. We can restart just the activity while the app
+ * <li>Apply a change to the current q1_p_activity. We can restart just the q1_p_activity while the app
  * continues running.
  * <li>Restart the app with state persistence (simulates what happens when a user puts an app in
  * the background, then it gets killed by the memory monitor, and then restored when the user
@@ -62,7 +62,7 @@ public class Restarter {
     public static String LOG_TAG = "Restarter";
 
     /**
-     * Restart an activity. Should preserve as much state as possible.
+     * Restart an q1_p_activity. Should preserve as much state as possible.
      */
     public static void restartActivityOnUiThread(@NonNull final Activity activity) {
         activity.runOnUiThread(
@@ -82,13 +82,13 @@ public class Restarter {
             Log.v(LOG_TAG, "About to restart " + activity.getClass().getSimpleName());
         }
 
-        // You can't restart activities that have parents: find the top-most activity
+        // You can't restart activities that have parents: find the top-most q1_p_activity
         while (activity.getParent() != null) {
             if (Log.isLoggable(LOG_TAG, Log.VERBOSE)) {
                 Log.v(
                         LOG_TAG,
                         activity.getClass().getSimpleName()
-                                + " is not a top level activity; restarting "
+                                + " is not a top level q1_p_activity; restarting "
                                 + activity.getParent().getClass().getSimpleName()
                                 + " instead");
             }
@@ -103,9 +103,9 @@ public class Restarter {
      * Attempt to restart the app. Ideally this should also try to preserve as much state as
      * possible:
      * <ul>
-     * <li>The current activity</li>
-     * <li>If possible, state in the current activity, and</li>
-     * <li>The activity stack</li>
+     * <li>The current q1_p_activity</li>
+     * <li>If possible, state in the current q1_p_activity, and</li>
+     * <li>The q1_p_activity stack</li>
      * </ul>
      * <p>
      * This may require some framework support. Apparently it may already be possible
@@ -116,7 +116,7 @@ public class Restarter {
                                   @NonNull Collection<Activity> knownActivities,
                                   boolean toast) {
         if (!knownActivities.isEmpty()) {
-            // Can't live patch resources; instead, try to restart the current activity
+            // Can't live patch resources; instead, try to restart the current q1_p_activity
             Activity foreground = getForegroundActivity(appContext);
 
             if (foreground != null) {
@@ -139,7 +139,7 @@ public class Restarter {
                 if (Log.isLoggable(LOG_TAG, Log.VERBOSE)) {
                     Log.v(
                             LOG_TAG,
-                            "Scheduling activity "
+                            "Scheduling q1_p_activity "
                                     + foreground
                                     + " to start after exiting process");
                 }
@@ -158,7 +158,7 @@ public class Restarter {
 
     static void showToast(@NonNull final Activity activity, @NonNull final String text) {
         if (Log.isLoggable(LOG_TAG, Log.VERBOSE)) {
-            Log.v(LOG_TAG, "About to show toast for activity " + activity + ": " + text);
+            Log.v(LOG_TAG, "About to show toast for q1_p_activity " + activity + ": " + text);
         }
         activity.runOnUiThread(
                 new Runnable() {
@@ -240,7 +240,7 @@ public class Restarter {
                         continue;
                     }
                 }
-                Field activityField = activityClientRecordClass.getDeclaredField("activity");
+                Field activityField = activityClientRecordClass.getDeclaredField("q1_p_activity");
                 activityField.setAccessible(true);
                 Activity activity = (Activity) activityField.get(activityClientRecord);
                 if (activity != null) {
@@ -278,7 +278,7 @@ public class Restarter {
             for (ActivityManager.ProcessErrorStateInfo info : processesInErrorState) {
                 if (info.processName.equals(currentPackageName) && info.condition != NO_ERROR) {
                     if (Log.isLoggable(LOG_TAG, Log.VERBOSE)) {
-                        Log.v(LOG_TAG, "App Thread has crashed, return empty activity list.");
+                        Log.v(LOG_TAG, "App Thread has crashed, return empty q1_p_activity list.");
                     }
                     return true;
                 }
@@ -287,7 +287,7 @@ public class Restarter {
         return false;
     }
 
-    // Use reflection to determine the package name from activity thread.
+    // Use reflection to determine the package name from q1_p_activity thread.
     private static String getPackageName(
             @NonNull Class activityThreadClass, @Nullable Object activityThread)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -299,7 +299,7 @@ public class Restarter {
     private static void updateActivity(@NonNull Activity activity) {
         // This method can be called for activities that are not in the foreground, as long
         // as some of its resources have been updated. Therefore we'll need to make sure
-        // that this activity is in the foreground, and if not do nothing. Ways to do
+        // that this q1_p_activity is in the foreground, and if not do nothing. Ways to do
         // that are outlined here:
         // http://stackoverflow.com/questions/3667022/checking-if-an-android-application-is-running-in-the-background/5862048#5862048
 
