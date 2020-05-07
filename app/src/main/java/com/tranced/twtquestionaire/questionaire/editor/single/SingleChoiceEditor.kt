@@ -90,14 +90,14 @@ class SingleChoiceEditor : AppCompatActivity() {
                     (adapter as SingleOptionAdapter).apply {
                         optionContentList.removeAt(position)
                         delete(position)
-                        for (pos in 0 until optionContentList.size) {
-                            getChildAt(pos).findViewById<EditText>(R.id.q1_e_single_option_edit_text)
-                                .setText(
-                                    optionContentList[pos].toCharArray(),
-                                    0,
-                                    optionContentList[pos].length
-                                )
-                        }
+//                        for (pos in 0 until optionContentList.size) {
+//                            getChildAt(pos).findViewById<EditText>(R.id.q1_e_single_option_edit_text)
+//                                .setText(
+//                                    optionContentList[pos].toCharArray(),
+//                                    0,
+//                                    optionContentList[pos].length
+//                                )
+//                        }
                         isDeleting = false
                     }
                 }
@@ -113,6 +113,14 @@ class SingleChoiceEditor : AppCompatActivity() {
                     )
                 )
                 notifyItemInserted(optionList.size - 1)
+//                for (pos in 0 until optionContentList.size) {
+//                    optionListRecyclerView.getChildAt(pos).findViewById<EditText>(R.id.q1_e_single_option_edit_text)
+//                        .setText(
+//                            optionContentList[pos].toCharArray(),
+//                            0,
+//                            optionContentList[pos].length
+//                        )
+//                }
             }
         }
     }
@@ -141,6 +149,7 @@ class SingleChoiceEditor : AppCompatActivity() {
         RecyclerView.Adapter<SingleOptionViewHolder>() {
 
         private lateinit var onDeleteListener: OnDeleteListener
+        private var isWatcherSettled = false
         var isDeleting = false
         val optionContentList: MutableList<String> = mutableListOf()
 
@@ -157,7 +166,11 @@ class SingleChoiceEditor : AppCompatActivity() {
             notifyDataSetChanged()
         }
 
-        fun restoreOptionContent(position: Int) {
+        fun restoreOptionContent() {
+            val tempList = optionList
+            optionList.clear()
+            optionList.addAll(tempList)
+            notifyDataSetChanged()
 
         }
 
@@ -175,6 +188,7 @@ class SingleChoiceEditor : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: SingleOptionViewHolder, position: Int) {
 //            holder.setIsRecyclable(false)
+
             if (position >= optionContentList.size) {
                 optionContentList.add(optionContentList.size, "")
                 holder.editText.setText(
@@ -211,16 +225,23 @@ class SingleChoiceEditor : AppCompatActivity() {
                 }
             }
             holder.apply {
+                editText.setText(
+                    optionContentList[position].toCharArray(),
+                    0,
+                    optionContentList[position].length
+                )
                 editText.apply {
                     if (tag is TextWatcher) {
                         removeTextChangedListener(tag as TextWatcher)
+                        isWatcherSettled = true
+                        addTextChangedListener(watcher)
+                        tag = watcher
                     }
-                    addTextChangedListener(watcher)
-                    tag = watcher
                 }
                 deleteButton.onClick {
                     isDeleting = true
                     onDeleteListener.onDelete(position)
+                    restoreOptionContent()
                 }
             }
         }
