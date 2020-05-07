@@ -41,16 +41,20 @@ android {
     sourceSets {
         main {
             res.srcDirs =
-                [
-                    'src/main/res/layout/questionaire',
-                    'src/main/res/layout/questionaire/editor/',
-                    'src/main/res/layout/questionaire/preview',
-                    'src/main/res/layout',
-                    'src/main/res'
-                ]
+                    [
+                            'src/main/res/layout/questionaire',
+                            'src/main/res/layout/questionaire/editor/',
+                            'src/main/res/layout/questionaire/preview',
+                            'src/main/res/layout',
+                            'src/main/res'
+                    ]
         }
     }
 
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {

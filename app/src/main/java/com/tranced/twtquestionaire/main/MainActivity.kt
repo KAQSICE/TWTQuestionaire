@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.orhanobut.hawk.Hawk
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.questionaire.NewQuestionaireActivity
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var created: CardView
     private lateinit var participated: CardView
     private lateinit var trash: CardView
+    private lateinit var star: CardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         initToolbarAndDrawerLayout()
         initDrawerLayout()
         setOnClickListeners()
+        Hawk.init(this).build()
     }
 
     private fun findViews() {

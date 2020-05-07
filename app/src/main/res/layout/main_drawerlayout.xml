@@ -115,7 +115,7 @@
             app:cardBackgroundColor="@color/main_card_background"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/main_drawerlayout_star"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/main_drawerlayout_trash"
             app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_quiz">
@@ -134,12 +134,15 @@
             android:id="@+id/main_drawerlayout_trash"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="0dp"
             android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="@color/main_card_background"
             app:cardCornerRadius="10dp"
             app:cardElevation="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/main_drawerlayout_participated"
             app:layout_constraintLeft_toRightOf="@id/main_drawerlayout_participated"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_created">
@@ -149,6 +152,33 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/main_trash"
+                android:textColor="@color/main_text"
+                android:textSize="20sp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/main_drawerlayout_star"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="30dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/main_card_background"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/main_drawerlayout_participated"
+            app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_participated">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/main_star"
                 android:textColor="@color/main_text"
                 android:textSize="20sp" />
 

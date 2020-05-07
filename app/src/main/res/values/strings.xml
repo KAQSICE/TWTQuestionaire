@@ -8,6 +8,8 @@
     <string name="main_created">我创建的</string>
     <string name="main_participated">我参与的</string>
     <string name="main_trash">回收站</string>
+    <string name="main_star">查看标星</string>
+
     <string name="new_questionaire_title">问卷名称</string>
     <string name="new_questionaire_description">问卷说明</string>
     <string name="new_questionaire_begin">开始时间</string>
@@ -38,4 +40,11 @@
     <string name="q1_e_settled">已设置</string>
     <string name="q1_e_unsettled">未设置</string>
 
+    <string name="new_vote_title">投票名称</string>
+    <string name="new_vote_description">投票说明</string>
+    <string name="new_vote_begin">开始时间</string>
+    <string name="new_vote_end">结束时间</string>
+    <string name="new_vote_title_hint">输入投票名称</string>
+    <string name="new_vote_description_hint">输入投票说明</string>
+    <string name="new_vote_create_btn">创建投票</string>
 </resources>
