@@ -88,16 +88,8 @@ class SingleChoiceEditor : AppCompatActivity() {
                 SingleOptionAdapter.OnDeleteListener {
                 override fun onDelete(position: Int) {
                     (adapter as SingleOptionAdapter).apply {
-                        optionContentList.removeAt(position)
                         delete(position)
-//                        for (pos in 0 until optionContentList.size) {
-//                            getChildAt(pos).findViewById<EditText>(R.id.q1_e_single_option_edit_text)
-//                                .setText(
-//                                    optionContentList[pos].toCharArray(),
-//                                    0,
-//                                    optionContentList[pos].length
-//                                )
-//                        }
+                        optionListRecyclerView.adapter = this
                         isDeleting = false
                     }
                 }
@@ -113,14 +105,6 @@ class SingleChoiceEditor : AppCompatActivity() {
                     )
                 )
                 notifyItemInserted(optionList.size - 1)
-//                for (pos in 0 until optionContentList.size) {
-//                    optionListRecyclerView.getChildAt(pos).findViewById<EditText>(R.id.q1_e_single_option_edit_text)
-//                        .setText(
-//                            optionContentList[pos].toCharArray(),
-//                            0,
-//                            optionContentList[pos].length
-//                        )
-//                }
             }
         }
     }
@@ -130,7 +114,7 @@ class SingleChoiceEditor : AppCompatActivity() {
 
     private fun returnSingleChoiceQuestion() {
         if (isReturnable) {
-
+            //TODO:还是写进缓存比较靠谱
         } else {
             val message: String = if (singleChoiceQuestion.stem.isEmpty()) {
                 "题干不能为空"
@@ -149,9 +133,7 @@ class SingleChoiceEditor : AppCompatActivity() {
         RecyclerView.Adapter<SingleOptionViewHolder>() {
 
         private lateinit var onDeleteListener: OnDeleteListener
-        private var isWatcherSettled = false
         var isDeleting = false
-        val optionContentList: MutableList<String> = mutableListOf()
 
         interface OnDeleteListener {
             fun onDelete(position: Int)
@@ -163,15 +145,7 @@ class SingleChoiceEditor : AppCompatActivity() {
 
         fun delete(position: Int) {
             optionList.removeAt(position)
-            notifyDataSetChanged()
-        }
-
-        fun restoreOptionContent() {
-            val tempList = optionList
-            optionList.clear()
-            optionList.addAll(tempList)
-            notifyDataSetChanged()
-
+            notifyItemRemoved(position)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleOptionViewHolder {
@@ -187,28 +161,11 @@ class SingleChoiceEditor : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: SingleOptionViewHolder, position: Int) {
-//            holder.setIsRecyclable(false)
-
-            if (position >= optionContentList.size) {
-                optionContentList.add(optionContentList.size, "")
-                holder.editText.setText(
-                    optionContentList[optionContentList.size - 1].toCharArray(),
-                    0,
-                    optionContentList[optionContentList.size - 1].length
-                )
-            }
             val watcher = object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    if (isDeleting) {
-
-                    } else {
-                        if (position >= optionContentList.size) {
-                            optionContentList.add(position, s.toString())
-                        } else {
-                            optionContentList[position] = s.toString()
-                        }
+                    if (!isDeleting) {
+                        optionList[position].content = s.toString()
                     }
-
                 }
 
                 override fun beforeTextChanged(
@@ -225,27 +182,22 @@ class SingleChoiceEditor : AppCompatActivity() {
                 }
             }
             holder.apply {
-                editText.setText(
-                    optionContentList[position].toCharArray(),
-                    0,
-                    optionContentList[position].length
-                )
                 editText.apply {
                     if (tag is TextWatcher) {
                         removeTextChangedListener(tag as TextWatcher)
-                        isWatcherSettled = true
-                        addTextChangedListener(watcher)
-                        tag = watcher
                     }
-                }
-                deleteButton.onClick {
-                    isDeleting = true
-                    onDeleteListener.onDelete(position)
-                    restoreOptionContent()
+                    addTextChangedListener(watcher)
+                    setText(
+                        optionList[position].content.toCharArray(),
+                        0,
+                        optionList[position].content.length
+                    )
+                    deleteButton.onClick {
+                        onDeleteListener.onDelete(position)
+                    }
                 }
             }
         }
-
     }
 
     private class SingleOptionViewHolder(
