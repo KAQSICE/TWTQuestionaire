@@ -1,6 +1,5 @@
 package com.tranced.twtquestionaire
 
-
 data class Paper(
     var title: String,
     var type: String,
@@ -22,7 +21,6 @@ data class Question(
     var optionsCount: Int,
     var options: Options //TODO:填空题怎么搞
 )
-
 
 data class Options(
     var questionId: Int,

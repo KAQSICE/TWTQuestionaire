@@ -1,4 +1,4 @@
-package com.tranced.twtquestionaire.vote
+package com.tranced.twtquestionaire.quiz
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -12,7 +12,7 @@ import com.tranced.twtquestionaire.R
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.*
 
-class NewVoteActivity : AppCompatActivity() {
+class NewQuizActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var titleEditText: EditText
     private lateinit var descriptionEditText: EditText
@@ -25,7 +25,7 @@ class NewVoteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.new_vote_activity)
+        setContentView(R.layout.new_quiz_activity)
         findViews()
         setToolbar()
         setBeginAndEndDatePicker()
@@ -34,15 +34,15 @@ class NewVoteActivity : AppCompatActivity() {
 
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
-        titleEditText = findViewById(R.id.new_vote_title)
-        descriptionEditText = findViewById(R.id.new_vote_description)
-        beginEditText = findViewById(R.id.new_vote_begin)
-        endEditText = findViewById(R.id.new_vote_end)
-        createBtn = findViewById(R.id.new_vote_create_btn)
+        titleEditText = findViewById(R.id.new_quiz_title)
+        descriptionEditText = findViewById(R.id.new_quiz_description)
+        beginEditText = findViewById(R.id.new_quiz_begin)
+        endEditText = findViewById(R.id.new_quiz_end)
+        createBtn = findViewById(R.id.new_quiz_create_btn)
     }
 
     private fun setToolbar() {
-        toolbar.title = "新建投票"
+        toolbar.title = "新建答题"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
@@ -66,7 +66,7 @@ class NewVoteActivity : AppCompatActivity() {
                         beginEditText.setText(beginDateText.toCharArray(), 0, beginDateText.length)
                     }
                 val dialog = DatePickerDialog(
-                    this@NewVoteActivity,
+                    this@NewQuizActivity,
                     onDateSetListener,
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
@@ -87,7 +87,7 @@ class NewVoteActivity : AppCompatActivity() {
                         endEditText.setText(endDateText.toCharArray(), 0, endDateText.length)
                     }
                 val dialog = DatePickerDialog(
-                    this@NewVoteActivity,
+                    this@NewQuizActivity,
                     onDateSetListener,
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
@@ -102,19 +102,19 @@ class NewVoteActivity : AppCompatActivity() {
         createBtn.onClick {
             //TODO:这里还要判断一下日期先后
             if (titleEditText.text.toString().isEmpty()) {
-                AlertDialog.Builder(this@NewVoteActivity)
+                AlertDialog.Builder(this@NewQuizActivity)
                     .setTitle("警告")
                     .setMessage("问卷名称不能为空")
                     .setPositiveButton("确定", null)
                     .show()
             } else {
-                AlertDialog.Builder(this@NewVoteActivity)
+                AlertDialog.Builder(this@NewQuizActivity)
                     .setTitle("是否创建")
                     .setPositiveButton("确定") { _, _ ->
                         val intent =
                             Intent(
-                                this@NewVoteActivity,
-                                TODO("VoteEditorActivity::class.java")
+                                this@NewQuizActivity,
+                                TODO("QuizEditorActivity::class.java")
                             )
                         intent.putExtra("title", titleEditText.text.toString())
                         if (descriptionEditText.text.isNullOrEmpty()) {

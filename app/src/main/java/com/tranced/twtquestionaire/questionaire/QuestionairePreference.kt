@@ -1,10 +1,11 @@
 package com.tranced.twtquestionaire.questionaire
 
+import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.Question
 import com.tranced.twtquestionaire.commons.experimental.preference.hawk
 
-class QuestionairePreference {
-    var questionaireEditorQuestion: Question? by hawk("q1_e_question", null)
+object QuestionairePreference {
+    var q1Question: Question? by hawk("q1_e_question", null)
 
-    var questionaireEditorQuestionaire: Questionaire? by hawk("q1_e_questionaire", null)
+    var q1Paper: Paper? by hawk("q1_e_questionaire", null)
 }

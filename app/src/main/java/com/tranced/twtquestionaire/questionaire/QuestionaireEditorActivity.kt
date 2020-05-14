@@ -1,4 +1,4 @@
-package com.tranced.twtquestionaire.questionaire.editor
+package com.tranced.twtquestionaire.questionaire
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,14 +14,15 @@ import cn.edu.twt.retrox.recyclerviewdsl.ItemManager
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
 import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
-import com.tranced.twtquestionaire.questionaire.QuestionairePreviewActivity
-import com.tranced.twtquestionaire.questionaire.QuestionaireTypeSelectionActivity
+import com.tranced.twtquestionaire.questionaire.editor.AddItemButton
 import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.blankRequestCode
 import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.multipleRequestCode
 import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.paragraphRequestCode
 import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.ratingRequestCode
 import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.singleRequestCode
 import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.sortRequestCode
+import com.tranced.twtquestionaire.questionaire.editor.addAddItemButton
+import com.tranced.twtquestionaire.questionaire.editor.addInfo
 
 class QuestionaireEditorActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
@@ -49,21 +50,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
     }
 
     private fun getQuestionaireInfo() {
-        questionaire = Paper(
-            intent.getStringExtra("title")!!,
-            type = "问卷",
-            description = intent.getStringExtra("description"),
-            faculty = "-1",
-            profession = "-1",
-            power = 0,
-            lastTime = -1,
-            creator = "-1",
-            questionCount = 0,
-            questions = mutableListOf()
-            //TODO:是不是应该把开始和结束日期转化成天数？
-//            (intent.getSerializableExtra("beginDate") as Date?).day,
-//            intent.getSerializableExtra("endDate") as Date?
-        )
+        questionaire = QuestionairePreference.q1Paper!!
     }
 
     private fun setToolbar() {

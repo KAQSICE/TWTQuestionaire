@@ -2,6 +2,10 @@
     <string name="app_name">TWTQuestionaire</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <!-- main -->
+    <string name="main_title">TWT编辑后台</string>
+    <string name="main_search_query_hint">请输入搜索内容</string>
     <string name="main_questionaire">新建问卷</string>
     <string name="main_vote">新建投票</string>
     <string name="main_quiz">新建答题</string>
@@ -10,6 +14,7 @@
     <string name="main_trash">回收站</string>
     <string name="main_star">查看标星</string>
 
+    <!-- questionaire -->
     <string name="new_questionaire_title">问卷名称</string>
     <string name="new_questionaire_description">问卷说明</string>
     <string name="new_questionaire_begin">开始时间</string>
@@ -40,6 +45,7 @@
     <string name="q1_e_settled">已设置</string>
     <string name="q1_e_unsettled">未设置</string>
 
+    <!-- vote -->
     <string name="new_vote_title">投票名称</string>
     <string name="new_vote_description">投票说明</string>
     <string name="new_vote_begin">开始时间</string>
@@ -47,4 +53,13 @@
     <string name="new_vote_title_hint">输入投票名称</string>
     <string name="new_vote_description_hint">输入投票说明</string>
     <string name="new_vote_create_btn">创建投票</string>
+
+    <!-- quiz -->
+    <string name="new_quiz_title">答题名称</string>
+    <string name="new_quiz_description">答题说明</string>
+    <string name="new_quiz_begin">开始时间</string>
+    <string name="new_quiz_end">结束时间</string>
+    <string name="new_quiz_title_hint">输入答题名称</string>
+    <string name="new_quiz_description_hint">输入答题说明</string>
+    <string name="new_quiz_create_btn">创建答题</string>
 </resources>

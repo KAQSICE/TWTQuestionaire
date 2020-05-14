@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cn.edu.twt.retrox.recyclerviewdsl.Item
 import cn.edu.twt.retrox.recyclerviewdsl.ItemController
-import com.tranced.twtquestionaire.questionaire.QuestionaireItem
 
-class SingleChoiceItem : QuestionaireItem(), Item {
+class SingleChoiceItem : Item {
     companion object SingleChoiceItemController : ItemController {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item) {
             holder as SingleChoiceItemViewHolder

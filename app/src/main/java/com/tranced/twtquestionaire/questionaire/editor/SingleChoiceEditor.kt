@@ -1,4 +1,4 @@
-package com.tranced.twtquestionaire.questionaire.editor.single
+package com.tranced.twtquestionaire.questionaire.editor
 
 import android.os.Bundle
 import android.text.Editable
@@ -26,7 +26,7 @@ class SingleChoiceEditor : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var optionListRecyclerView: RecyclerView
     private lateinit var addOptionButton: Button
-    private val optionsList: MutableList<Option> = mutableListOf()
+    private val mOptionList: MutableList<Option> = mutableListOf()
     private var isReturnable: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,11 +79,14 @@ class SingleChoiceEditor : AppCompatActivity() {
 
     private fun initOptionListRecyclerView() {
         repeat(3) {
-            optionsList.add(Option("", it, ""))
+            mOptionList.add(Option("", it, ""))
         }
         optionListRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@SingleChoiceEditor)
-            adapter = SingleOptionAdapter(optionsList)
+            adapter =
+                SingleOptionAdapter(
+                    mOptionList
+                )
             (adapter as SingleOptionAdapter).setOnDeleteListener(object :
                 SingleOptionAdapter.OnDeleteListener {
                 override fun onDelete(position: Int) {
@@ -153,7 +156,11 @@ class SingleChoiceEditor : AppCompatActivity() {
                 .inflate(R.layout.q1_e_single_option, parent, false)
             val editText = itemView.findViewById<EditText>(R.id.q1_e_single_option_edit_text)!!
             val deleteButton = itemView.findViewById<ImageView>(R.id.q1_e_single_delete)!!
-            return SingleOptionViewHolder(itemView, editText, deleteButton)
+            return SingleOptionViewHolder(
+                itemView,
+                editText,
+                deleteButton
+            )
         }
 
         override fun getItemCount(): Int {

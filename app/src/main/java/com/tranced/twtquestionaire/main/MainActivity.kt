@@ -9,17 +9,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.SearchView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.orhanobut.hawk.Hawk
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.created.CreatedActivity
+import com.tranced.twtquestionaire.data.getData
+import com.tranced.twtquestionaire.participated.ParticipatedActivity
 import com.tranced.twtquestionaire.questionaire.NewQuestionaireActivity
+import com.tranced.twtquestionaire.quiz.NewQuizActivity
+import com.tranced.twtquestionaire.vote.NewVoteActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 /**
@@ -31,13 +41,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var drawerToggle: ActionBarDrawerToggle
     private lateinit var drawerList: ListView
-    private lateinit var questionaire: CardView
-    private lateinit var vote: CardView
-    private lateinit var quiz: CardView
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var search: SearchView
+    private lateinit var new: CardView
     private lateinit var created: CardView
     private lateinit var participated: CardView
     private lateinit var trash: CardView
     private lateinit var star: CardView
+    private val newItemsIntent: MutableList<Intent> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,38 +57,31 @@ class MainActivity : AppCompatActivity() {
         initToolbarAndDrawerLayout()
         initDrawerLayout()
         setOnClickListeners()
+        setSwipeRefreshLayout()
         Hawk.init(this).build()
+        getData()
     }
 
     private fun findViews() {
         toolbar = findViewById(R.id.main_toolbar)
         drawerLayout = findViewById(R.id.main_drawerlayout)
         drawerList = findViewById(R.id.main_drawerlayout_list)
-        questionaire = findViewById(R.id.main_drawerlayout_questionaire)
-        vote = findViewById(R.id.main_drawerlayout_vote)
-        quiz = findViewById(R.id.main_drawerlayout_quiz)
+        swipeRefreshLayout = findViewById(R.id.main_drawerlayout_swipe_refresh)
+        search = findViewById(R.id.main_drawerlayout_search)
+        new = findViewById(R.id.main_drawerlayout_new)
         created = findViewById(R.id.main_drawerlayout_created)
         participated = findViewById(R.id.main_drawerlayout_participated)
+        star = findViewById(R.id.main_drawerlayout_star)
         trash = findViewById(R.id.main_drawerlayout_trash)
     }
 
     private fun initToolbarAndDrawerLayout() {
-        toolbar.title = "问卷答题投票"
+        toolbar.title = ""
         drawerToggle = object : ActionBarDrawerToggle(
             this, drawerLayout, toolbar,
             R.string.open,
             R.string.close
-        ) {
-            override fun onDrawerOpened(drawerView: View) {
-                super.onDrawerOpened(drawerView)
-                Toast.makeText(baseContext, "open!!!", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onDrawerClosed(drawerView: View) {
-                super.onDrawerClosed(drawerView)
-                Toast.makeText(baseContext, "close!!!", Toast.LENGTH_SHORT).show()
-            }
-        }
+        ) {}
         drawerToggle.apply {
             syncState()
             isDrawerIndicatorEnabled = true
@@ -97,6 +101,7 @@ class MainActivity : AppCompatActivity() {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
         }
+        toolbar.setNavigationIcon(R.mipmap.main_navigation_icon)
     }
 
     private fun initDrawerLayout() {
@@ -110,9 +115,46 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setOnClickListeners() {
-        questionaire.onClick {
-            var intent = Intent(this@MainActivity, NewQuestionaireActivity::class.java)
+        val newItemsText = arrayOf("问卷", "投票", "答题")
+        newItemsIntent.addAll(
+            mutableListOf(
+                Intent(this@MainActivity, NewQuestionaireActivity::class.java),
+                Intent(this@MainActivity, NewVoteActivity::class.java),
+                Intent(this@MainActivity, NewQuizActivity::class.java)
+            )
+        )
+        new.onClick {
+            @Suppress("UNCHECKED_CAST")
+            AlertDialog.Builder(this@MainActivity).setTitle("选择类型")
+                .setItems(
+                    newItemsText
+                ) { _, i -> startActivity(newItemsIntent[i]) }
+                .setNegativeButton("手滑了", null)
+                .show()
+        }
+        created.onClick {
+            val intent = Intent(this@MainActivity, CreatedActivity::class.java)
             startActivity(intent)
+        }
+        participated.onClick {
+            val intent = Intent(this@MainActivity, ParticipatedActivity::class.java)
+            startActivity(intent)
+        }
+        star.onClick {
+            val intent = Intent(this@MainActivity, TODO())
+            startActivity(intent)
+        }
+    }
+
+    private fun setSwipeRefreshLayout() {
+        swipeRefreshLayout.apply {
+            setOnRefreshListener {
+                GlobalScope.launch {
+                    //TODO:这里要重新进行数据请求
+                    delay(3000)
+                }
+                isRefreshing = false
+            }
         }
     }
 }

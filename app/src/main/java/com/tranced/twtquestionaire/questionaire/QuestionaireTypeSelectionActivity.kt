@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.tranced.twtquestionaire.R
-import com.tranced.twtquestionaire.questionaire.editor.single.SingleChoiceEditor
+import com.tranced.twtquestionaire.questionaire.editor.SingleChoiceEditor
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class QuestionaireTypeSelectionActivity : AppCompatActivity() {

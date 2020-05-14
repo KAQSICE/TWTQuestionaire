@@ -3,15 +3,29 @@
     package="com.tranced.twtquestionaire">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".vote.NewVoteActivity"></activity>
         <activity
-            android:name=".questionaire.editor.single.SingleChoiceEditor"
+            android:name=".participated.ParticipatedActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".created.CreatedActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".quiz.NewQuizActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".questionaire.editor.MultipleChoiceEditor"
+            android:theme="@style/DialogActivity" />
+        <activity
+            android:name=".vote.NewVoteActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".questionaire.editor.SingleChoiceEditor"
             android:theme="@style/DialogActivity" />
         <activity
             android:name=".questionaire.QuestionairePreviewActivity"
@@ -20,7 +34,7 @@
             android:name=".questionaire.QuestionaireTypeSelectionActivity"
             android:theme="@style/DialogActivity" />
         <activity
-            android:name=".questionaire.editor.QuestionaireEditorActivity"
+            android:name=".questionaire.QuestionaireEditorActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".questionaire.NewQuestionaireActivity"

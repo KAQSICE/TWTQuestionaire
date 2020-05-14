@@ -10,179 +10,349 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/main_drawerlayout_questionaire"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="30dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/main_card_background"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            app:layout_constraintBottom_toTopOf="@id/main_drawerlayout_quiz"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/main_drawerlayout_vote"
-            app:layout_constraintTop_toTopOf="parent">
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/main_drawerlayout_swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/main_questionaire"
-                android:textColor="@color/main_text"
-                android:textSize="20sp" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.cardview.widget.CardView>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/main_drawerlayout_vote"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="30dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/main_card_background"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            app:layout_constraintBottom_toTopOf="@id/main_drawerlayout_created"
-            app:layout_constraintLeft_toRightOf="@id/main_drawerlayout_questionaire"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+                    <SearchView
+                        android:id="@+id/main_drawerlayout_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:iconifiedByDefault="false"
+                        android:queryHint="@string/main_search_query_hint"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/main_vote"
-                android:textColor="@color/main_text"
-                android:textSize="20sp" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/main_drawerlayout_new"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="3dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardMaxElevation="2dp"
+                        app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_search">
 
-        </androidx.cardview.widget.CardView>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/main_drawerlayout_quiz"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="30dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/main_card_background"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            app:layout_constraintBottom_toTopOf="@id/main_drawerlayout_participated"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/main_drawerlayout_created"
-            app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_questionaire">
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/main_drawerlayout_new_icon"
+                                android:layout_width="0dp"
+                                android:layout_height="80dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintDimensionRatio="1"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/main_drawerlayout_new_text"
+                                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/main_quiz"
-                android:textColor="@color/main_text"
-                android:textSize="20sp" />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="14.5dp"
+                                    android:layout_marginVertical="24.5dp"
+                                    android:contentDescription="@null"
+                                    android:src="@mipmap/main_new_icon"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.cardview.widget.CardView>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/main_drawerlayout_created"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="30dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/main_card_background"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            app:layout_constraintBottom_toTopOf="@id/main_drawerlayout_trash"
-            app:layout_constraintLeft_toRightOf="@id/main_drawerlayout_quiz"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_vote">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/main_created"
-                android:textColor="@color/main_text"
-                android:textSize="20sp" />
+                            <TextView
+                                android:id="@+id/main_drawerlayout_new_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="7.5dp"
+                                android:text="@string/main_questionaire"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toRightOf="@id/main_drawerlayout_new_icon"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.cardview.widget.CardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/main_drawerlayout_participated"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="30dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/main_card_background"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            app:layout_constraintBottom_toTopOf="@id/main_drawerlayout_star"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/main_drawerlayout_trash"
-            app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_quiz">
+                    </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/main_participated"
-                android:textColor="@color/main_text"
-                android:textSize="20sp" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/main_drawerlayout_participated"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="3dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardMaxElevation="2dp"
+                        app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_new">
 
-        </androidx.cardview.widget.CardView>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/main_drawerlayout_trash"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="0dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/main_card_background"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/main_drawerlayout_participated"
-            app:layout_constraintLeft_toRightOf="@id/main_drawerlayout_participated"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_created">
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/main_drawerlayout_participated_icon"
+                                android:layout_width="0dp"
+                                android:layout_height="80dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintDimensionRatio="1"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/main_drawerlayout_participated_text"
+                                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/main_trash"
-                android:textColor="@color/main_text"
-                android:textSize="20sp" />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="14.5dp"
+                                    android:layout_marginVertical="24.5dp"
+                                    android:contentDescription="@null"
+                                    android:src="@mipmap/main_participated_icon"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.cardview.widget.CardView>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/main_drawerlayout_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="30dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/main_card_background"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="@id/main_drawerlayout_participated"
-            app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_participated">
+                            <TextView
+                                android:id="@+id/main_drawerlayout_participated_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="7.5dp"
+                                android:text="@string/main_participated"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toRightOf="@id/main_drawerlayout_participated_icon"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/main_star"
-                android:textColor="@color/main_text"
-                android:textSize="20sp" />
+                            <ImageView
+                                android:id="@+id/main_drawerlayout_participated_arrow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="16dp"
+                                android:contentDescription="@null"
+                                android:src="@mipmap/main_arrow"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.cardview.widget.CardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/main_drawerlayout_created"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="3dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardMaxElevation="2dp"
+                        app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_participated">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/main_drawerlayout_created_icon"
+                                android:layout_width="0dp"
+                                android:layout_height="80dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintDimensionRatio="1"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="14.5dp"
+                                    android:layout_marginVertical="24.5dp"
+                                    android:contentDescription="@null"
+                                    android:src="@mipmap/main_created_icon"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <TextView
+                                android:id="@+id/main_drawerlayout_created_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="7.5dp"
+                                android:text="@string/main_created"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toRightOf="@id/main_drawerlayout_created_icon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/main_drawerlayout_created_arrow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="16dp"
+                                android:contentDescription="@null"
+                                android:src="@mipmap/main_arrow"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/main_drawerlayout_star"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="3dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardMaxElevation="2dp"
+                        app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_created">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/main_drawerlayout_star_icon"
+                                android:layout_width="0dp"
+                                android:layout_height="80dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintDimensionRatio="1"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="14.5dp"
+                                    android:layout_marginVertical="24.5dp"
+                                    android:contentDescription="@null"
+                                    android:src="@mipmap/main_star_icon"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            <TextView
+                                android:id="@+id/main_drawerlayout_star_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="7.5dp"
+                                android:text="@string/main_star"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toRightOf="@id/main_drawerlayout_star_icon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/main_drawerlayout_star_arrow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="16dp"
+                                android:contentDescription="@null"
+                                android:src="@mipmap/main_arrow"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/main_drawerlayout_trash"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="3dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardMaxElevation="2dp"
+                        app:layout_constraintTop_toBottomOf="@id/main_drawerlayout_star">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/main_drawerlayout_trash_icon"
+                                android:layout_width="0dp"
+                                android:layout_height="80dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintDimensionRatio="1"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="14.5dp"
+                                    android:layout_marginVertical="24.5dp"
+                                    android:contentDescription="@null"
+                                    android:src="@mipmap/main_trash_icon"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            <TextView
+                                android:id="@+id/main_drawerlayout_trash_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="7.5dp"
+                                android:text="@string/main_questionaire"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toRightOf="@id/main_drawerlayout_trash_icon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/main_drawerlayout_trash_arrow"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="16dp"
+                                android:contentDescription="@null"
+                                android:src="@mipmap/main_arrow"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -12,6 +12,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -112,7 +113,8 @@ dependencies {
 
     // CircleImageView
     api 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha02'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha03'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.android.support:multidex:1.0.3'
 
 }

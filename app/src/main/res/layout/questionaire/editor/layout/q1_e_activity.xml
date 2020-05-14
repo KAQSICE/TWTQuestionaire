@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/default_background_color"
-    tools:context=".questionaire.editor.QuestionaireEditorActivity">
+    tools:context=".questionaire.QuestionaireEditorActivity">
 
     <include
         android:id="@+id/q1_e_toolbar"
