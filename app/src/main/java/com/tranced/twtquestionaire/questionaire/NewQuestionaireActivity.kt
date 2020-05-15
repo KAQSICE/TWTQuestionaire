@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.tranced.twtquestionaire.Paper
@@ -15,6 +16,7 @@ import java.util.*
 
 class NewQuestionaireActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
+    private lateinit var toolbarTitle: TextView
     private lateinit var titleEditText: EditText
     private lateinit var descriptionEditText: EditText
     private lateinit var beginEditText: EditText
@@ -35,6 +37,7 @@ class NewQuestionaireActivity : AppCompatActivity() {
 
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
+        toolbarTitle = findViewById(R.id.common_toolbar_title)
         titleEditText = findViewById(R.id.new_questionaire_title)
         descriptionEditText = findViewById(R.id.new_questionaire_description)
         beginEditText = findViewById(R.id.new_questionaire_begin)
@@ -43,7 +46,8 @@ class NewQuestionaireActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        toolbar.title = "新建问卷"
+        toolbar.title = ""
+        toolbarTitle.text = "新建问卷"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)

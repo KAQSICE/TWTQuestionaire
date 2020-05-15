@@ -12,7 +12,6 @@ import android.widget.ListView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
@@ -20,6 +19,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.orhanobut.hawk.Hawk
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.created.CreatedActivity
 import com.tranced.twtquestionaire.data.getData
@@ -124,12 +124,22 @@ class MainActivity : AppCompatActivity() {
             )
         )
         new.onClick {
-            @Suppress("UNCHECKED_CAST")
-            AlertDialog.Builder(this@MainActivity).setTitle("选择类型")
-                .setItems(
-                    newItemsText
-                ) { _, i -> startActivity(newItemsIntent[i]) }
-                .setNegativeButton("手滑了", null)
+//            @Suppress("UNCHECKED_CAST")
+//            AlertDialog.Builder(this@MainActivity).setTitle("选择类型")
+//                .setItems(
+//                    newItemsText
+//                ) { _, i -> startActivity(newItemsIntent[i]) }
+//                .setNegativeButton("手滑了", null)
+//                .show()
+            QMUIBottomSheet.BottomListSheetBuilder(this@MainActivity)
+                .addItem(newItemsText[0])
+                .addItem(newItemsText[1])
+                .addItem(newItemsText[2])
+                .setOnSheetItemClickListener { dialog, _, position, _ -> //
+                    dialog.dismiss()//                     dialog!!.dismiss()
+                    startActivity(newItemsIntent[position])
+                }
+                .build()
                 .show()
         }
         created.onClick {
