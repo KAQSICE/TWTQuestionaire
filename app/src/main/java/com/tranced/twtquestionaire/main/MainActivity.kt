@@ -124,19 +124,12 @@ class MainActivity : AppCompatActivity() {
             )
         )
         new.onClick {
-//            @Suppress("UNCHECKED_CAST")
-//            AlertDialog.Builder(this@MainActivity).setTitle("选择类型")
-//                .setItems(
-//                    newItemsText
-//                ) { _, i -> startActivity(newItemsIntent[i]) }
-//                .setNegativeButton("手滑了", null)
-//                .show()
             QMUIBottomSheet.BottomListSheetBuilder(this@MainActivity)
                 .addItem(newItemsText[0])
                 .addItem(newItemsText[1])
                 .addItem(newItemsText[2])
-                .setOnSheetItemClickListener { dialog, _, position, _ -> //
-                    dialog.dismiss()//                     dialog!!.dismiss()
+                .setOnSheetItemClickListener { dialog, _, position, _ ->
+                    dialog.dismiss()
                     startActivity(newItemsIntent[position])
                 }
                 .build()

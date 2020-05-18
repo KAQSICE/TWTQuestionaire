@@ -13,6 +13,7 @@
     <string name="main_participated">我参与的</string>
     <string name="main_trash">回收站</string>
     <string name="main_star">查看标星</string>
+    <string name="little_star">*</string>
 
     <!-- questionaire -->
     <string name="new_questionaire_title">问卷名称</string>
@@ -38,6 +39,8 @@
     <string name="q1_e_single_add_option">添加选项</string>
     <string name="q1_e_more_settings_text">更多设置</string>
     <string name="q1_e_single_option_edit">请输入选项</string>
+    <string name="q1_e_single_answer_text">设置答案</string>
+    <string name="q1_e_single_score_text">设置分值</string>
     <string name="q1_e_single_compulsion_text">是否必答</string>
     <string name="q1_e_single_condition_text">显示条件</string>
     <string name="q1_e_single_jump_text">跳转设置</string>

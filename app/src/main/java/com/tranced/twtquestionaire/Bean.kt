@@ -19,12 +19,7 @@ data class Question(
     var point: Int,
     var correctAnwser: String,
     var optionsCount: Int,
-    var options: Options //TODO:填空题怎么搞
-)
-
-data class Options(
-    var questionId: Int,
-    val options: MutableList<Option>
+    var options: MutableList<Option> //TODO:填空题怎么搞
 )
 
 data class Option(

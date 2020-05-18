@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,17 +15,13 @@ import cn.edu.twt.retrox.recyclerviewdsl.withItems
 import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.questionaire.editor.AddItemButton
-import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.blankRequestCode
-import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.multipleRequestCode
-import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.paragraphRequestCode
-import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.ratingRequestCode
-import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.singleRequestCode
-import com.tranced.twtquestionaire.questionaire.editor.Constants.Companion.sortRequestCode
 import com.tranced.twtquestionaire.questionaire.editor.addAddItemButton
 import com.tranced.twtquestionaire.questionaire.editor.addInfo
+import com.tranced.twtquestionaire.questionaire.item.addSingleChoiceItem
 
 class QuestionaireEditorActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
+    private lateinit var toolbarTitle: TextView
     private lateinit var itemList: RecyclerView
     private lateinit var questionaire: Paper
     private lateinit var itemManager: ItemManager
@@ -46,6 +42,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
 
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
+        toolbarTitle = findViewById(R.id.common_toolbar_title)
         itemList = findViewById(R.id.q1_e_item_list)
     }
 
@@ -54,7 +51,8 @@ class QuestionaireEditorActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        toolbar.title = "编辑问卷"
+        toolbar.title = ""
+        toolbarTitle.text = "编辑问卷"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
@@ -66,6 +64,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                 finish()
             }
             setOnMenuItemClickListener {
+                //TODO:这里是预览还是设置
                 if (it.itemId == R.id.q1_e_toolbar_preview) {
                     //TODO:要跳转至预览界面
                     val previewIntent = Intent(
@@ -83,7 +82,11 @@ class QuestionaireEditorActivity : AppCompatActivity() {
         itemList.apply {
             layoutManager = LinearLayoutManager(this@QuestionaireEditorActivity)
             withItems {
+                clear()
                 addInfo(questionaire.title, questionaire.description)
+                for (question in questionaire.questions) {
+                    addSingleChoiceItem(question)
+                }
                 itemManager = ItemManager(this)
             }
             adapter = ItemAdapter(itemManager)
@@ -103,7 +106,6 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                     )
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     startActivityForResult(intent, 0)
-                    Toast.makeText(baseContext, "我就弹个窗试试", Toast.LENGTH_SHORT).show()
                     removeAt(size - 1)
                     //TODO: 这里添加对应item
                     refreshAddItemButton(itemManager)
@@ -114,24 +116,12 @@ class QuestionaireEditorActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            singleRequestCode -> {
-                //TODO: 这里应该addSingleChoiceItem(data.getSerializableExtra("single"))
-            }
-            multipleRequestCode -> {
-
-            }
-            blankRequestCode -> {
-
-            }
-            paragraphRequestCode -> {
-
-            }
-            ratingRequestCode -> {
-
-            }
-            sortRequestCode -> {
-
+        when (resultCode) {
+            1 -> {
+                if (QuestionairePreference.q1Question != null) {
+                    questionaire.questions.add(QuestionairePreference.q1Question!!)
+                    initItemList()
+                }
             }
         }
         data?.getSerializableExtra("single")

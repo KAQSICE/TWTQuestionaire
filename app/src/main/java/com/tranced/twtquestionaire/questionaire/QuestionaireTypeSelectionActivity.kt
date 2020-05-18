@@ -2,7 +2,6 @@ package com.tranced.twtquestionaire.questionaire
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
@@ -11,6 +10,7 @@ import com.tranced.twtquestionaire.questionaire.editor.SingleChoiceEditor
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class QuestionaireTypeSelectionActivity : AppCompatActivity() {
+    private val nullRequestCode: Int = 400
     private val singleRequestCode: Int = 101
     private val multipleRequestCode: Int = 102
 
@@ -25,21 +25,23 @@ class QuestionaireTypeSelectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.q1_e_type_selection_activity)
-        setActivitySize()
+//        setActivitySize()
         setToolbar()
         findViews()
         setOnClickListeners()
     }
-
-    @Suppress("DEPRECATION")
-    private fun setActivitySize() {
-        val display = windowManager.defaultDisplay
-        val layoutParams: WindowManager.LayoutParams = window.attributes
-        layoutParams.apply {
-            width = (display.width * 0.8).toInt()
-            height = (display.height * 0.5).toInt()
-        }
-    }
+/*
+还是做成全屏的
+@Suppress("DEPRECATION")
+private fun setActivitySize() {
+val display = windowManager.defaultDisplay
+val layoutParams: WindowManager.LayoutParams = window.attributes
+layoutParams.apply {
+width = (display.width * 0.8).toInt()
+height = (display.height * 0.5).toInt()
+}
+}
+*/
 
     private fun setToolbar() {
         toolbar = findViewById(R.id.common_toolbar)
@@ -65,7 +67,6 @@ class QuestionaireTypeSelectionActivity : AppCompatActivity() {
 
     private fun setOnClickListeners() {
         singleCardView.onClick {
-            finish()
             val intent =
                 Intent(this@QuestionaireTypeSelectionActivity, SingleChoiceEditor::class.java)
             startActivityForResult(intent, 101)
@@ -76,12 +77,18 @@ class QuestionaireTypeSelectionActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         val intent = Intent()
         when (resultCode) {
+            nullRequestCode -> {
+                intent.putExtra("question", 0)
+                setResult(nullRequestCode, intent)
+                finish()
+            }
             singleRequestCode -> {
-                intent.putExtra("single", 1)
-                setResult(singleRequestCode, intent)
+                intent.putExtra("question", 1)
+                setResult(1, intent)
+                finish()
             }
             multipleRequestCode -> {
-                intent.putExtra("multiple", 2)
+                intent.putExtra("question", 2)
                 setResult(multipleRequestCode, intent)
             }
         }

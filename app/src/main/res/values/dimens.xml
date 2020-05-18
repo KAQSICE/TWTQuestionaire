@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="new_questionaire_text_size">15sp</dimen>
+    <dimen name="option_margin_vertical">7dp</dimen>
+    <dimen name="option_margin_horizontal">25.5dp</dimen>
 </resources>
