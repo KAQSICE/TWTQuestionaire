@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.questionaire.editor.BlankEditor
+import com.tranced.twtquestionaire.questionaire.editor.MultipleChoiceEditor
 import com.tranced.twtquestionaire.questionaire.editor.SingleChoiceEditor
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -70,6 +72,16 @@ height = (display.height * 0.5).toInt()
             val intent =
                 Intent(this@QuestionaireTypeSelectionActivity, SingleChoiceEditor::class.java)
             startActivityForResult(intent, 101)
+        }
+        multipleCardView.onClick {
+            val intent =
+                Intent(this@QuestionaireTypeSelectionActivity, MultipleChoiceEditor::class.java)
+            startActivityForResult(intent, 102)
+        }
+        blankCardView.onClick {
+            val intent =
+                Intent(this@QuestionaireTypeSelectionActivity, BlankEditor::class.java)
+            startActivityForResult(intent, 103)
         }
     }
 

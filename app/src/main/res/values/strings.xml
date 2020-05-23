@@ -45,6 +45,7 @@
     <string name="q1_e_single_condition_text">显示条件</string>
     <string name="q1_e_single_jump_text">跳转设置</string>
     <string name="q1_e_single_toolbar_create">创建</string>
+    <string name="q1_e_rating_style_text">选择样式</string>
     <string name="q1_e_settled">已设置</string>
     <string name="q1_e_unsettled">未设置</string>
 
