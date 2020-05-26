@@ -194,7 +194,7 @@ class MultipleChoiceEditor : AppCompatActivity() {
     }
 
     private fun getIsReturnableState(): Boolean {
-        if (multipleChoiceQuestion.stem.isEmpty()) {
+        if (stemEditText.text.isEmpty()) {
             return false
         }
         for (option in multipleChoiceQuestion.options) {

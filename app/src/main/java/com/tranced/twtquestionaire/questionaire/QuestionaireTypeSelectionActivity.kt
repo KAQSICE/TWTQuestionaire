@@ -12,9 +12,10 @@ import com.tranced.twtquestionaire.questionaire.editor.SingleChoiceEditor
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class QuestionaireTypeSelectionActivity : AppCompatActivity() {
-    private val nullRequestCode: Int = 400
-    private val singleRequestCode: Int = 101
-    private val multipleRequestCode: Int = 102
+    private val nullResultCode: Int = 400
+    private val singleResultCode: Int = 101
+    private val multipleResultCode: Int = 102
+    private val blankResultCode: Int = 103
 
     private lateinit var toolbar: Toolbar
     private lateinit var singleCardView: CardView
@@ -89,19 +90,24 @@ height = (display.height * 0.5).toInt()
         super.onActivityResult(requestCode, resultCode, data)
         val intent = Intent()
         when (resultCode) {
-            nullRequestCode -> {
+            nullResultCode -> {
                 intent.putExtra("question", 0)
-                setResult(nullRequestCode, intent)
+                setResult(nullResultCode, intent)
                 finish()
             }
-            singleRequestCode -> {
+            singleResultCode -> {
                 intent.putExtra("question", 1)
                 setResult(1, intent)
                 finish()
             }
-            multipleRequestCode -> {
+            multipleResultCode -> {
                 intent.putExtra("question", 2)
-                setResult(multipleRequestCode, intent)
+                setResult(2, intent)
+            }
+            blankResultCode -> {
+                intent.putExtra("question", 3)
+                setResult(3, intent)
+                finish()
             }
         }
     }
