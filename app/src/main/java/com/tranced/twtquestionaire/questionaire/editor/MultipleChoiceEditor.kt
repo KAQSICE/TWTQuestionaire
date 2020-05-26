@@ -33,7 +33,7 @@ class MultipleChoiceEditor : AppCompatActivity() {
     private lateinit var conditionButton: TextView
     private lateinit var jumpButton: TextView
     private lateinit var createButton: Button
-    private var answerId: Int = -1
+    private var answerId = mutableListOf<Int>()
     private var score: Int = 0
     private lateinit var optionListRecyclerView: RecyclerView
     private lateinit var addOptionButton: Button
@@ -49,18 +49,9 @@ class MultipleChoiceEditor : AppCompatActivity() {
         setOnClickListeners()
     }
 
-    /*
-    @Suppress("DEPRECATION")
-    private fun setActivitySize() {
-        val display = windowManager.defaultDisplay
-        val layoutParams: WindowManager.LayoutParams = window.attributes
-        layoutParams.apply {
-            width = (display.width * 0.8).toInt()
-            height = (display.height * 0.75).toInt()
-        }
-    }
+    /**
+     * 这个还用说吗
      */
-
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
         optionListRecyclerView = findViewById(R.id.q1_e_multiple_option_list)
@@ -76,6 +67,9 @@ class MultipleChoiceEditor : AppCompatActivity() {
         createButton = findViewById(R.id.q1_e_multiple_create)
     }
 
+    /**
+     * 设置Toolbar及其属性
+     */
     private fun setToolbar() {
         toolbar.title = "编辑题目"
         setSupportActionBar(toolbar)
@@ -98,6 +92,9 @@ class MultipleChoiceEditor : AppCompatActivity() {
         }
     }
 
+    /**
+     * 初始化选项列表
+     */
     private fun initOptionListRecyclerView() {
         repeat(3) {
             optionList.add(Option("", it, ""))
@@ -139,6 +136,9 @@ class MultipleChoiceEditor : AppCompatActivity() {
         }
     }
 
+    /**
+     * 设置按钮们的点击监听
+     */
     private fun setOnClickListeners() {
         answerButton.onClick {
             var isAnyOptionEmpty = false
@@ -193,11 +193,14 @@ class MultipleChoiceEditor : AppCompatActivity() {
         }
     }
 
+    /**
+     * 获取题目能否返回的状态
+     */
     private fun getIsReturnableState(): Boolean {
         if (stemEditText.text.isEmpty()) {
             return false
         }
-        for (option in multipleChoiceQuestion.options) {
+        for (option in optionList) {
             if (option.content.isEmpty()) {
                 return false
             }
@@ -205,15 +208,25 @@ class MultipleChoiceEditor : AppCompatActivity() {
         return true
     }
 
+    /**
+     * 这个用来进行二进制转换
+     */
+    private fun getCorrectAnswer() {
+
+    }
+
+    /**
+     * 返回一个多选题
+     */
     private fun returnMultipleChoiceQuestion() {
-//        multipleChoiceQuestion = Question(
-//            multipleChoiceQuestion.stem.text.toString(),
-//            "单选",
-//            score,
-//            answerId.toString(),
-//            optionList.size,
-//            optionList
-//        )
+        multipleChoiceQuestion = Question(
+            stemEditText.text.toString(),
+            "多选",
+            score,
+            "",
+            optionList.size,
+            optionList
+        )
         if (getIsReturnableState()) {
             //TODO:还是写进缓存比较靠谱
             QuestionairePreference.q1Question = multipleChoiceQuestion
@@ -231,11 +244,18 @@ class MultipleChoiceEditor : AppCompatActivity() {
         }
     }
 
+    /**
+     * MultipleOptionAdapter
+     * @author TranceD
+     */
     private class MultipleOptionAdapter :
         RecyclerView.Adapter<MultipleOptionViewHolder>() {
         private lateinit var onDeleteListener: OnDeleteListener
         var isDeleting = false
 
+        /**
+         * 选项删除监听器
+         */
         interface OnDeleteListener {
             fun onDelete(position: Int)
         }
@@ -301,7 +321,6 @@ class MultipleChoiceEditor : AppCompatActivity() {
                     }
                 }
             }
-
         }
     }
 

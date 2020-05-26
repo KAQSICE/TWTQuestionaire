@@ -50,19 +50,6 @@ class SingleChoiceEditor : AppCompatActivity() {
         setOnClickListeners()
     }
 
-    /*
-    想来想去还是全屏activity好看
-    @Suppress("DEPRECATION")
-    private fun setActivitySize() {
-    val display = windowManager.defaultDisplay
-    val layoutParams: WindowManager.LayoutParams = window.attributes
-    layoutParams.apply {
-    width = (display.width * 0.8).toInt()
-    height = (display.height * 0.75).toInt()
-    }
-    }
-    */
-
     private fun setToolbar() {
         toolbar.title = ""
         toolbarTitle.text = "编辑题目"
@@ -200,6 +187,15 @@ class SingleChoiceEditor : AppCompatActivity() {
         }
     }
 
+    /**
+     * 按顺序设置选项id
+     */
+    private fun setOptionId() {
+        for (i in 0 until optionList.size) {
+            optionList[i].id = i
+        }
+    }
+
     private fun getIsReturnableState(): Boolean {
         if (singleChoiceQuestion.stem.isEmpty()) {
             return false
@@ -213,6 +209,7 @@ class SingleChoiceEditor : AppCompatActivity() {
     }
 
     private fun returnSingleChoiceQuestion() {
+        setOptionId()
         singleChoiceQuestion = Question(
             stemEditText.text.toString(),
             "单选",
@@ -238,7 +235,7 @@ class SingleChoiceEditor : AppCompatActivity() {
         }
     }
 
-    private class SingleOptionAdapter() :
+    private class SingleOptionAdapter :
         RecyclerView.Adapter<SingleOptionViewHolder>() {
 
         private lateinit var onDeleteListener: OnDeleteListener
