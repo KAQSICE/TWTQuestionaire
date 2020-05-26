@@ -103,6 +103,7 @@ height = (display.height * 0.5).toInt()
             multipleResultCode -> {
                 intent.putExtra("question", 2)
                 setResult(2, intent)
+                finish()
             }
             blankResultCode -> {
                 intent.putExtra("question", 3)

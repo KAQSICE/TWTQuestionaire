@@ -209,16 +209,26 @@ class MultipleChoiceEditor : AppCompatActivity() {
     }
 
     /**
+     * 按顺序设置选项id
+     */
+    private fun setOptionId() {
+        for (i in 0 until optionList.size) {
+            optionList[i].id = i
+        }
+    }
+
+    /**
      * 这个用来进行二进制转换
      */
     private fun getCorrectAnswer() {
-
+        TODO()
     }
 
     /**
      * 返回一个多选题
      */
     private fun returnMultipleChoiceQuestion() {
+        setOptionId()
         multipleChoiceQuestion = Question(
             stemEditText.text.toString(),
             "多选",
