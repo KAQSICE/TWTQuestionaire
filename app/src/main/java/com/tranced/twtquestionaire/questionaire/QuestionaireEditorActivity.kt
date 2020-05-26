@@ -19,6 +19,7 @@ import com.tranced.twtquestionaire.questionaire.editor.addAddItemButton
 import com.tranced.twtquestionaire.questionaire.editor.addInfo
 import com.tranced.twtquestionaire.questionaire.item.addBlankItem
 import com.tranced.twtquestionaire.questionaire.item.addMultipleChoiceItem
+import com.tranced.twtquestionaire.questionaire.item.addParagraphItem
 import com.tranced.twtquestionaire.questionaire.item.addSingleChoiceItem
 
 class QuestionaireEditorActivity : AppCompatActivity() {
@@ -91,6 +92,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                         "单选" -> addSingleChoiceItem(question)
                         "多选" -> addMultipleChoiceItem(question)
                         "填空" -> addBlankItem(question)
+                        "段落" -> addParagraphItem(question)
                     }
                 }
                 itemManager = ItemManager(this)
@@ -136,6 +138,12 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                 }
             }
             3 -> {
+                if (QuestionairePreference.q1Question != null) {
+                    questionaire.questions.add(QuestionairePreference.q1Question!!)
+                    initItemList()
+                }
+            }
+            4 -> {
                 if (QuestionairePreference.q1Question != null) {
                     questionaire.questions.add(QuestionairePreference.q1Question!!)
                     initItemList()
