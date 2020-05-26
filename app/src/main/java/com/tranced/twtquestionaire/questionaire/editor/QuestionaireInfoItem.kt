@@ -16,7 +16,9 @@ class QuestionaireInfoItem(val questionaireTitle: String, val questionaireDescri
             holder as QuestionaireInfoItemViewHolder
             item as QuestionaireInfoItem
             holder.title.text = item.questionaireTitle
-            holder.description.text = item.questionaireDescription
+            if (item.questionaireDescription!!.isNotEmpty()) {
+                holder.description.text = item.questionaireDescription
+            }
         }
 
         override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {

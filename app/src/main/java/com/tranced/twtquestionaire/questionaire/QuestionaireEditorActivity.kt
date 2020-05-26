@@ -88,7 +88,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                 for (question in questionaire.questions) {
                     when (question.type) {
                         "单选" -> addSingleChoiceItem(question)
-
+                        //"多选" -> addMultipleChoiceItem(question)
                         "填空" -> addBlankItem(question)
                     }
                 }

@@ -32,9 +32,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"
+                android:text="@string/questionaire_info"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/q1_e_info_title" />
+                app:layout_constraintTop_toBottomOf="@id/q1_e_info_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
