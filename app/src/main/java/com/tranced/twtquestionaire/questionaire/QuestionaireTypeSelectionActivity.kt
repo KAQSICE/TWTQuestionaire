@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.tranced.twtquestionaire.R
-import com.tranced.twtquestionaire.questionaire.editor.BlankEditor
-import com.tranced.twtquestionaire.questionaire.editor.MultipleChoiceEditor
-import com.tranced.twtquestionaire.questionaire.editor.ParagraphEditor
-import com.tranced.twtquestionaire.questionaire.editor.SingleChoiceEditor
+import com.tranced.twtquestionaire.questionaire.editor.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class QuestionaireTypeSelectionActivity : AppCompatActivity() {
@@ -18,6 +15,7 @@ class QuestionaireTypeSelectionActivity : AppCompatActivity() {
     private val multipleResultCode: Int = 102
     private val blankResultCode: Int = 103
     private val paragraphResultCode: Int = 104
+    private val ratingResultCode: Int = 105
 
     private lateinit var toolbar: Toolbar
     private lateinit var singleCardView: CardView
@@ -91,6 +89,11 @@ height = (display.height * 0.5).toInt()
                 Intent(this@QuestionaireTypeSelectionActivity, ParagraphEditor::class.java)
             startActivityForResult(intent, 104)
         }
+        ratingCardView.onClick {
+            val intent =
+                Intent(this@QuestionaireTypeSelectionActivity, RatingEditor::class.java)
+            startActivityForResult(intent, 105)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -120,6 +123,11 @@ height = (display.height * 0.5).toInt()
             paragraphResultCode -> {
                 intent.putExtra("question", 4)
                 setResult(4, intent)
+                finish()
+            }
+            ratingResultCode -> {
+                intent.putExtra("question", 5)
+                setResult(5, intent)
                 finish()
             }
         }

@@ -42,6 +42,7 @@
     <string name="q1_e_single_option_edit">请输入选项</string>
     <string name="q1_e_single_answer_text">设置答案</string>
     <string name="q1_e_single_score_text">设置分值</string>
+    <string name="q1_e_rating_score_text">最高分值</string>
     <string name="q1_e_single_compulsion_text">是否必答</string>
     <string name="q1_e_single_condition_text">显示条件</string>
     <string name="q1_e_single_jump_text">跳转设置</string>

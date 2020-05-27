@@ -164,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="14dp"
-                android:text="@string/q1_e_single_score_text"
+                android:text="@string/q1_e_rating_score_text"
                 android:textSize="@dimen/new_questionaire_text_size"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/q1_e_rating_answer_text" />
@@ -213,7 +213,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/q1_e_blank_create"
+        android:id="@+id/q1_e_rating_create"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_shape"
