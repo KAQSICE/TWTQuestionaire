@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.tranced.twtquestionaire.GlobalPreference
 import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -145,7 +146,7 @@ class NewQuestionaireActivity : AppCompatActivity() {
                             0,
                             mutableListOf()
                         )
-                        QuestionairePreference.q1Paper = questionaire
+                        GlobalPreference.q1Paper = questionaire
                         finish()
                         startActivity(intent)
                     }

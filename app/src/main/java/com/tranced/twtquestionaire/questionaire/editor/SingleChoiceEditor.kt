@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
+import com.tranced.twtquestionaire.GlobalPreference
 import com.tranced.twtquestionaire.Option
 import com.tranced.twtquestionaire.Question
 import com.tranced.twtquestionaire.R
-import com.tranced.twtquestionaire.questionaire.QuestionairePreference
 import es.dmoral.toasty.Toasty
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -221,7 +221,7 @@ class SingleChoiceEditor : AppCompatActivity() {
         )
         if (getIsReturnableState()) {
             //TODO:还是写进缓存比较靠谱
-            QuestionairePreference.q1Question = singleChoiceQuestion
+            GlobalPreference.q1Question = singleChoiceQuestion
         } else {
             val message: String = if (singleChoiceQuestion.stem.isEmpty()) {
                 "题干不能为空"

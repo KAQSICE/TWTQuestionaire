@@ -11,9 +11,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
+import com.tranced.twtquestionaire.GlobalPreference
 import com.tranced.twtquestionaire.Question
 import com.tranced.twtquestionaire.R
-import com.tranced.twtquestionaire.questionaire.QuestionairePreference
 import es.dmoral.toasty.Toasty
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -136,7 +136,7 @@ class ParagraphEditor : AppCompatActivity() {
                 0,
                 mutableListOf()
             )
-            QuestionairePreference.q1Question = paragraphQuestion
+            GlobalPreference.q1Question = paragraphQuestion
             setResult(104)
             finish()
         } else {

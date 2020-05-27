@@ -114,7 +114,7 @@ class NewVoteActivity : AppCompatActivity() {
                         val intent =
                             Intent(
                                 this@NewVoteActivity,
-                                TODO("VoteEditorActivity::class.java")
+                                VoteEditorActivity::class.java
                             )
                         intent.putExtra("title", titleEditText.text.toString())
                         if (descriptionEditText.text.isNullOrEmpty()) {
