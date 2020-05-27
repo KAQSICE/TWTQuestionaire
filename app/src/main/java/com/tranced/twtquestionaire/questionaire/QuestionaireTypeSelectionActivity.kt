@@ -17,6 +17,7 @@ class QuestionaireTypeSelectionActivity : AppCompatActivity() {
     private val blankResultCode: Int = 103
     private val paragraphResultCode: Int = 104
     private val ratingResultCode: Int = 105
+    private val sortResultCode: Int = 106
 
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
@@ -98,6 +99,11 @@ height = (display.height * 0.5).toInt()
                 Intent(this@QuestionaireTypeSelectionActivity, RatingEditor::class.java)
             startActivityForResult(intent, 105)
         }
+        sortCardView.onClick {
+            val intent =
+                Intent(this@QuestionaireTypeSelectionActivity, SortEditor::class.java)
+            startActivityForResult(intent, 106)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -132,6 +138,11 @@ height = (display.height * 0.5).toInt()
             ratingResultCode -> {
                 intent.putExtra("question", 5)
                 setResult(5, intent)
+                finish()
+            }
+            sortResultCode -> {
+                intent.putExtra("question", 6)
+                setResult(6, intent)
                 finish()
             }
         }

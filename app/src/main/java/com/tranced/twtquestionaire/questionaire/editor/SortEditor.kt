@@ -220,13 +220,13 @@ class SortEditor : AppCompatActivity() {
     }
 
     /**
-     * 返回一个多选题
+     * 返回一个排序题
      */
     private fun returnSortQuestion() {
         setOptionId()
         sortQuestion = Question(
             stemEditText.text.toString(),
-            "多选",
+            "排序",
             score,
             "",
             optionList.size,

@@ -91,6 +91,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                         "填空" -> addBlankItem(question)
                         "段落" -> addParagraphItem(question)
                         "量表" -> addRatingItem(question)
+                        "排序" -> addSortItem(question)
                     }
                 }
                 itemManager = ItemManager(this)
