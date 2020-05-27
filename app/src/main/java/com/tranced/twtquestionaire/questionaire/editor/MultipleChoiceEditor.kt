@@ -71,7 +71,8 @@ class MultipleChoiceEditor : AppCompatActivity() {
      * 设置Toolbar及其属性
      */
     private fun setToolbar() {
-        toolbar.title = "编辑题目"
+        toolbar.title = ""
+        toolbarTitle.text = "编辑题目"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
@@ -80,15 +81,16 @@ class MultipleChoiceEditor : AppCompatActivity() {
         toolbar.apply {
             setNavigationOnClickListener {
                 //TODO:弹个窗问候一下（你关你emoji呢
+                optionList.clear()
                 finish()
             }
-            setOnMenuItemClickListener {
-                if (it.itemId == R.id.q1_e_multiple_toolbar_create) {
-                    finish()
-                    //TODO:判断一下如果为空就返回null否则返回question
-                }
-                return@setOnMenuItemClickListener true
-            }
+//            setOnMenuItemClickListener {
+//                if (it.itemId == R.id.q1_e_multiple_toolbar_create) {
+//                    finish()
+//                    //TODO:判断一下如果为空就返回null否则返回question
+//                }
+//                return@setOnMenuItemClickListener true
+//            }
         }
     }
 

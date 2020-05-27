@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import com.tranced.twtquestionaire.Option
 import com.tranced.twtquestionaire.Question
@@ -24,25 +23,25 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 
 private val optionList = mutableListOf<Option>()
 
-class SingleChoiceEditor : AppCompatActivity() {
-    private lateinit var singleChoiceQuestion: Question
+class SortEditor : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
     private lateinit var stemEditText: EditText
-    private lateinit var optionListRecyclerView: RecyclerView
-    private lateinit var addOptionButton: Button
     private lateinit var compulsionSwitch: Switch
     private lateinit var answerButton: TextView
     private lateinit var scoreButton: TextView
     private lateinit var conditionButton: TextView
     private lateinit var jumpButton: TextView
     private lateinit var createButton: Button
-    private var answerId: Int = -1
+    private var answerId = mutableListOf<Int>()
     private var score: Int = 0
+    private lateinit var optionListRecyclerView: RecyclerView
+    private lateinit var addOptionButton: Button
+    private lateinit var sortQuestion: Question
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.q1_e_single_choice)
+        setContentView(R.layout.q1_e_sort)
 //        setActivitySize()
         findViews()
         setToolbar()
@@ -50,6 +49,27 @@ class SingleChoiceEditor : AppCompatActivity() {
         setOnClickListeners()
     }
 
+    /**
+     * 这个还用说吗
+     */
+    private fun findViews() {
+        toolbar = findViewById(R.id.common_toolbar)
+        optionListRecyclerView = findViewById(R.id.q1_e_sort_option_list)
+        addOptionButton = findViewById(R.id.q1_e_sort_add_option)
+        toolbarTitle = findViewById(R.id.common_toolbar_title)
+        stemEditText = findViewById(R.id.q1_e_sort_input_question)
+        addOptionButton = findViewById(R.id.q1_e_sort_add_option)
+        compulsionSwitch = findViewById(R.id.q1_e_sort_compulsion_switch)
+        answerButton = findViewById(R.id.q1_e_sort_answer_button)
+        scoreButton = findViewById(R.id.q1_e_sort_score_button)
+        conditionButton = findViewById(R.id.q1_e_sort_condition_button)
+        jumpButton = findViewById(R.id.q1_e_sort_jump_button)
+        createButton = findViewById(R.id.q1_e_sort_create)
+    }
+
+    /**
+     * 设置Toolbar及其属性
+     */
     private fun setToolbar() {
         toolbar.title = ""
         toolbarTitle.text = "编辑题目"
@@ -64,58 +84,42 @@ class SingleChoiceEditor : AppCompatActivity() {
                 optionList.clear()
                 finish()
             }
-//            setOnMenuItemClickListener {
-//                if (it.itemId == R.id.q1_e_single_toolbar_create) {
-//                    finish()
-//                    //TODO:判断一下如果为空就返回null否则返回question
-//                }
-//                return@setOnMenuItemClickListener true
-//            }
         }
     }
 
-    private fun findViews() {
-        toolbar = findViewById(R.id.common_toolbar)
-        toolbarTitle = findViewById(R.id.common_toolbar_title)
-        optionListRecyclerView = findViewById(R.id.q1_e_single_option_list)
-        stemEditText = findViewById(R.id.q1_e_single_input_question)
-        addOptionButton = findViewById(R.id.q1_e_single_add_option)
-        compulsionSwitch = findViewById(R.id.q1_e_single_compulsion_switch)
-        answerButton = findViewById(R.id.q1_e_single_answer_button)
-        scoreButton = findViewById(R.id.q1_e_single_score_button)
-        conditionButton = findViewById(R.id.q1_e_single_condition_button)
-        jumpButton = findViewById(R.id.q1_e_single_jump_button)
-        createButton = findViewById(R.id.q1_e_single_create)
-    }
-
+    /**
+     * 初始化选项列表
+     */
     private fun initOptionListRecyclerView() {
         repeat(3) {
             optionList.add(Option("", it, ""))
         }
         optionListRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@SingleChoiceEditor)
-            adapter = SingleOptionAdapter()
-            (adapter as SingleOptionAdapter).setOnDeleteListener(object :
-                SingleOptionAdapter.OnDeleteListener {
-                override fun onDelete(position: Int) {
-                    (adapter as SingleOptionAdapter).apply {
-                        if (optionList.size <= 1) {
-                            Toasty.error(
-                                this@SingleChoiceEditor,
-                                "别删啦，再删人就傻啦！",
-                                Toasty.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            delete(position)
-                            optionListRecyclerView.adapter = this
-                            isDeleting = false
+            layoutManager = LinearLayoutManager(this@SortEditor)
+            adapter = SortOptionAdapter()
+            (adapter as SortOptionAdapter).apply {
+                (adapter as SortOptionAdapter).setOnDeleteListener(object :
+                    SortOptionAdapter.OnDeleteListener {
+                    override fun onDelete(position: Int) {
+                        (adapter as SortOptionAdapter).apply {
+                            if (optionList.size <= 1) {
+                                Toasty.error(
+                                    this@SortEditor,
+                                    "别删啦，再删人就傻啦！",
+                                    Toasty.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                delete(position)
+                                optionListRecyclerView.adapter = this
+                                isDeleting = false
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         }
         addOptionButton.onClick {
-            (optionListRecyclerView.adapter as SingleOptionAdapter).apply {
+            (optionListRecyclerView.adapter as SortOptionAdapter).apply {
                 optionList.add(
                     Option(
                         "",
@@ -123,11 +127,13 @@ class SingleChoiceEditor : AppCompatActivity() {
                         ""
                     )
                 )
-                notifyItemInserted(optionList.size - 1)
             }
         }
     }
 
+    /**
+     * 设置按钮们的点击监听
+     */
     private fun setOnClickListeners() {
         answerButton.onClick {
             var isAnyOptionEmpty = false
@@ -135,29 +141,23 @@ class SingleChoiceEditor : AppCompatActivity() {
                 if (option.content.isEmpty()) isAnyOptionEmpty = true
             }
             if (!isAnyOptionEmpty) {
-                val bottomSheet = QMUIBottomSheet.BottomListSheetBuilder(this@SingleChoiceEditor)
-                bottomSheet.apply {
-                    addItem("不设置答案")
-                    for (i in 1..optionList.size) {
-                        addItem("选项${i}")
-                    }
-                    setOnSheetItemClickListener { dialog, _, position, _ ->
-                        dialog.dismiss()
-                        answerId = position - 1
-                        if (answerId != -1) {
-                            answerButton.setText(R.string.q1_e_settled)
-                        } else {
-                            answerButton.setText(R.string.q1_e_unsettled)
-                        }
-                    }
-                    build().show()
+                val dialog = QMUIDialog.MultiCheckableDialogBuilder(this@SortEditor)
+                val itemTextArray = mutableListOf<String>("不设置答案")
+                for (i in 1..optionList.size) {
+                    itemTextArray.add("选项${i}")
                 }
-            } else {
-                Toasty.error(this@SingleChoiceEditor, "选项不能为空").show()
+                dialog.apply {
+                    addItems(itemTextArray.toTypedArray(), null)
+                    addAction("确定", null)
+                    addAction(
+                        "取消"
+                    ) { _, _ -> TODO("Not yet implemented") }
+                    show()
+                }
             }
         }
         scoreButton.onClick {
-            val builder = QMUIDialog.EditTextDialogBuilder(this@SingleChoiceEditor)
+            val builder = QMUIDialog.EditTextDialogBuilder(this@SortEditor)
             builder.setTitle("请输入分值")
                 .setInputType(InputType.TYPE_CLASS_NUMBER)
                 .addAction("取消") { dialog, _ ->
@@ -173,7 +173,7 @@ class SingleChoiceEditor : AppCompatActivity() {
                             scoreButton.setText(R.string.q1_e_unsettled)
                         }
                     } else {
-                        Toasty.error(this@SingleChoiceEditor, "请输入分值").show()
+                        Toasty.error(this@SortEditor, "请输入分值").show()
                         scoreButton.setText(R.string.q1_e_unsettled)
                     }
                 }
@@ -181,11 +181,26 @@ class SingleChoiceEditor : AppCompatActivity() {
             builder.editText.setText(score.toString())
         }
         createButton.onClick {
-            returnSingleChoiceQuestion()
-            setResult(101)
+            returnSortQuestion()
+            setResult(102)
             optionList.clear()
             finish()
         }
+    }
+
+    /**
+     * 获取题目能否返回的状态
+     */
+    private fun getIsReturnableState(): Boolean {
+        if (stemEditText.text.isEmpty()) {
+            return false
+        }
+        for (option in optionList) {
+            if (option.content.isEmpty()) {
+                return false
+            }
+        }
+        return true
     }
 
     /**
@@ -197,33 +212,31 @@ class SingleChoiceEditor : AppCompatActivity() {
         }
     }
 
-    private fun getIsReturnableState(): Boolean {
-        if (singleChoiceQuestion.stem.isEmpty()) {
-            return false
-        }
-        for (option in singleChoiceQuestion.options) {
-            if (option.content.isEmpty()) {
-                return false
-            }
-        }
-        return true
+    /**
+     * 这个用来进行二进制转换
+     */
+    private fun getCorrectAnswer() {
+        TODO()
     }
 
-    private fun returnSingleChoiceQuestion() {
+    /**
+     * 返回一个多选题
+     */
+    private fun returnSortQuestion() {
         setOptionId()
-        singleChoiceQuestion = Question(
+        sortQuestion = Question(
             stemEditText.text.toString(),
-            "单选",
+            "多选",
             score,
-            answerId.toString(),
+            "",
             optionList.size,
             optionList
         )
         if (getIsReturnableState()) {
             //TODO:还是写进缓存比较靠谱
-            QuestionairePreference.q1Question = singleChoiceQuestion
+            QuestionairePreference.q1Question = sortQuestion
         } else {
-            val message: String = if (singleChoiceQuestion.stem.isEmpty()) {
+            val message: String = if (sortQuestion.stem.isEmpty()) {
                 "题干不能为空"
             } else {
                 "选项不能为空"
@@ -236,12 +249,18 @@ class SingleChoiceEditor : AppCompatActivity() {
         }
     }
 
-    private class SingleOptionAdapter :
-        RecyclerView.Adapter<SingleOptionViewHolder>() {
-
+    /**
+     * SortOptionAdapter
+     * @author TranceD
+     */
+    private class SortOptionAdapter :
+        RecyclerView.Adapter<SortOptionViewHolder>() {
         private lateinit var onDeleteListener: OnDeleteListener
         var isDeleting = false
 
+        /**
+         * 选项删除监听器
+         */
         interface OnDeleteListener {
             fun onDelete(position: Int)
         }
@@ -255,23 +274,22 @@ class SingleChoiceEditor : AppCompatActivity() {
             notifyItemRemoved(position)
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleOptionViewHolder {
+        override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+        ): SortOptionViewHolder {
             val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.q1_e_single_option, parent, false)
-            val editText = itemView.findViewById<EditText>(R.id.q1_e_single_option_edit_text)!!
-            val deleteButton = itemView.findViewById<ImageView>(R.id.q1_e_single_delete)!!
-            return SingleOptionViewHolder(
-                itemView,
-                editText,
-                deleteButton
-            )
+            val editText = itemView.findViewById<EditText>(R.id.q1_e_single_option_edit_text)
+            val deleteButton = itemView.findViewById<ImageView>(R.id.q1_e_single_delete)
+            return SortOptionViewHolder(itemView, editText, deleteButton)
         }
 
         override fun getItemCount(): Int {
             return optionList.size
         }
 
-        override fun onBindViewHolder(holder: SingleOptionViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: SortOptionViewHolder, position: Int) {
             val watcher = object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     if (!isDeleting) {
@@ -311,7 +329,7 @@ class SingleChoiceEditor : AppCompatActivity() {
         }
     }
 
-    private class SingleOptionViewHolder(
+    private class SortOptionViewHolder(
         itemView: View,
         val editText: EditText,
         val deleteButton: ImageView

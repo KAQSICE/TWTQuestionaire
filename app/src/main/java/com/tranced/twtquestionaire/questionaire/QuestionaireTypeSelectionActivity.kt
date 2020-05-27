@@ -2,6 +2,7 @@ package com.tranced.twtquestionaire.questionaire
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
@@ -18,6 +19,7 @@ class QuestionaireTypeSelectionActivity : AppCompatActivity() {
     private val ratingResultCode: Int = 105
 
     private lateinit var toolbar: Toolbar
+    private lateinit var toolbarTitle: TextView
     private lateinit var singleCardView: CardView
     private lateinit var multipleCardView: CardView
     private lateinit var blankCardView: CardView
@@ -48,7 +50,9 @@ height = (display.height * 0.5).toInt()
 
     private fun setToolbar() {
         toolbar = findViewById(R.id.common_toolbar)
-        toolbar.title = "添加题目"
+        toolbarTitle = findViewById(R.id.common_toolbar_title)
+        toolbar.title = ""
+        toolbarTitle.text = "编辑题目"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)

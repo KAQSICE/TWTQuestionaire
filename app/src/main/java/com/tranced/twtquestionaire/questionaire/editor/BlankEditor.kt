@@ -30,7 +30,7 @@ class BlankEditor : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.q1_e_blank_editor)
+        setContentView(R.layout.q1_e_blank)
         findViews()
         setToolbar()
         setOnClickListeners()
@@ -48,7 +48,8 @@ class BlankEditor : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        toolbar.title = "编辑题目"
+        toolbar.title = ""
+        toolbarTitle.text = "编辑题目"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
