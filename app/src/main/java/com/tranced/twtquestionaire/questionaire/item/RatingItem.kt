@@ -18,7 +18,17 @@ class RatingItem(val question: Question) : Item {
             item as RatingItem
             holder.apply {
                 textView.text = item.question.stem
-                ratingBar.numStars = item.question.point
+                ratingBar.apply {
+                    if (item.question.point <= 6) {
+                        numStars = item.question.point
+                        max = item.question.point
+                        stepSize = 1f
+                    } else {
+                        numStars = 5
+                        max = item.question.point
+                        stepSize = 5f / item.question.point
+                    }
+                }
             }
         }
 

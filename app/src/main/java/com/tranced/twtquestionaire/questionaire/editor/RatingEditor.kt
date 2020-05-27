@@ -120,7 +120,7 @@ class RatingEditor : AppCompatActivity() {
     }
 
     private fun getIsReturnableState(): Boolean {
-        return stemEditText.text.toString().isNotEmpty()
+        return !(stemEditText.text.toString().isEmpty() || score == 0)
     }
 
     private fun returnRatingQuestion() {
@@ -137,7 +137,11 @@ class RatingEditor : AppCompatActivity() {
             setResult(105)
             finish()
         } else {
-            Toasty.error(this, "题干不能为空", Toasty.LENGTH_SHORT).show()
+            if (stemEditText.text.toString().isEmpty()) {
+                Toasty.error(this, "题干不能为空", Toasty.LENGTH_SHORT).show()
+            } else {
+                Toasty.error(this, "分值不能为空", Toasty.LENGTH_SHORT).show()
+            }
         }
     }
 }

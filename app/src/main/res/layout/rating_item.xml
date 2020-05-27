@@ -41,10 +41,12 @@
 
             <RatingBar
                 android:id="@+id/rating_item_rating_bar"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="33.5dp"
                 android:layout_marginVertical="21.5dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rating_text" />
 
 
