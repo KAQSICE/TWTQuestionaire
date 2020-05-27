@@ -16,11 +16,12 @@ import com.tranced.twtquestionaire.GlobalPreference
 import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.questionaire.QuestionairePreviewActivity
-import com.tranced.twtquestionaire.questionaire.QuestionaireTypeSelectionActivity
 import com.tranced.twtquestionaire.questionaire.editor.AddItemButton
 import com.tranced.twtquestionaire.questionaire.editor.addAddItemButton
 import com.tranced.twtquestionaire.questionaire.editor.addInfo
-import com.tranced.twtquestionaire.questionaire.item.*
+import com.tranced.twtquestionaire.questionaire.item.addBlankItem
+import com.tranced.twtquestionaire.questionaire.item.addMultipleChoiceItem
+import com.tranced.twtquestionaire.questionaire.item.addSingleChoiceItem
 
 class VoteEditorActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
@@ -55,7 +56,7 @@ class VoteEditorActivity : AppCompatActivity() {
 
     private fun setToolbar() {
         toolbar.title = ""
-        toolbarTitle.text = "编辑问卷"
+        toolbarTitle.text = "编辑投票"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
@@ -86,15 +87,12 @@ class VoteEditorActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@VoteEditorActivity)
             withItems {
                 clear()
-                addInfo(vote.title, vote.description)
+                addInfo(vote.title, vote.description, vote.type)
                 for (question in vote.questions) {
                     when (question.type) {
                         "单选" -> addSingleChoiceItem(question)
                         "多选" -> addMultipleChoiceItem(question)
                         "填空" -> addBlankItem(question)
-                        "段落" -> addParagraphItem(question)
-                        "量表" -> addRatingItem(question)
-                        "排序" -> addSortItem(question)
                     }
                 }
                 itemManager = ItemManager(this)
@@ -112,7 +110,7 @@ class VoteEditorActivity : AppCompatActivity() {
                 if (last() is AddItemButton) {
                     val intent = Intent(
                         this@VoteEditorActivity,
-                        QuestionaireTypeSelectionActivity::class.java
+                        VoteTypeSelectionActivity::class.java
                     )
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     startActivityForResult(intent, 0)
@@ -140,18 +138,6 @@ class VoteEditorActivity : AppCompatActivity() {
                 }
             }
             3 -> {
-                if (GlobalPreference.q1Question != null) {
-                    vote.questions.add(GlobalPreference.q1Question!!)
-                    initItemList()
-                }
-            }
-            4 -> {
-                if (GlobalPreference.q1Question != null) {
-                    vote.questions.add(GlobalPreference.q1Question!!)
-                    initItemList()
-                }
-            }
-            5 -> {
                 if (GlobalPreference.q1Question != null) {
                     vote.questions.add(GlobalPreference.q1Question!!)
                     initItemList()

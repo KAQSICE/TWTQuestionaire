@@ -6,14 +6,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.tranced.twtquestionaire.GlobalPreference
+import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.*
 
 class NewVoteActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
+    private lateinit var toolbarTitle: TextView
     private lateinit var titleEditText: EditText
     private lateinit var descriptionEditText: EditText
     private lateinit var beginEditText: EditText
@@ -34,6 +38,7 @@ class NewVoteActivity : AppCompatActivity() {
 
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
+        toolbarTitle = findViewById(R.id.common_toolbar_title)
         titleEditText = findViewById(R.id.new_vote_title)
         descriptionEditText = findViewById(R.id.new_vote_description)
         beginEditText = findViewById(R.id.new_vote_begin)
@@ -42,7 +47,8 @@ class NewVoteActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        toolbar.title = "新建投票"
+        toolbar.title = ""
+        toolbarTitle.text = "新建投票"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
@@ -116,14 +122,31 @@ class NewVoteActivity : AppCompatActivity() {
                                 this@NewVoteActivity,
                                 VoteEditorActivity::class.java
                             )
-                        intent.putExtra("title", titleEditText.text.toString())
-                        if (descriptionEditText.text.isNullOrEmpty()) {
-                            intent.putExtra("description", "")
-                        } else {
-                            intent.putExtra("description", descriptionEditText.text.toString())
-                        }
-                        intent.putExtra("beginDate", beginDate)
-                        intent.putExtra("endDate", endDate)
+                        val vote = Paper(
+                            titleEditText.text.toString(),
+                            "投票",
+                            when (descriptionEditText.text.isNullOrEmpty()) {
+                                true -> ""
+                                else -> descriptionEditText.text.toString()
+                            },
+                            "-1",
+                            "-1",
+                            0,
+                            when (endDate) {
+                                null -> -1
+                                else -> {
+                                    if (endDate!!.time > System.currentTimeMillis()) {
+                                        ((endDate!!.time - System.currentTimeMillis()) / (3600000 * 24)).toInt()
+                                    } else {
+                                        -1
+                                    }
+                                }
+                            },
+                            "TODO",
+                            0,
+                            mutableListOf()
+                        )
+                        GlobalPreference.vPaper = vote
                         finish()
                         startActivity(intent)
                     }

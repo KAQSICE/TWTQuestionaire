@@ -1,5 +1,6 @@
 package com.tranced.twtquestionaire.questionaire.editor
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,15 +10,22 @@ import cn.edu.twt.retrox.recyclerviewdsl.Item
 import cn.edu.twt.retrox.recyclerviewdsl.ItemController
 import com.tranced.twtquestionaire.R
 
-class QuestionaireInfoItem(val questionaireTitle: String, val questionaireDescription: String?) :
+class QuestionaireInfoItem(
+    val questionaireTitle: String,
+    val questionaireDescription: String?,
+    val type: String
+) :
     Item {
     companion object QuestionaireInfoItemController : ItemController {
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item) {
             holder as QuestionaireInfoItemViewHolder
             item as QuestionaireInfoItem
             holder.title.text = item.questionaireTitle
             if (item.questionaireDescription!!.isNotEmpty()) {
                 holder.description.text = item.questionaireDescription
+            } else {
+                holder.description.text = "这只${item.type}没有说明哟"
             }
         }
 
@@ -46,5 +54,5 @@ class QuestionaireInfoItem(val questionaireTitle: String, val questionaireDescri
     ) : RecyclerView.ViewHolder(itemView)
 }
 
-fun MutableList<Item>.addInfo(title: String, description: String?) =
-    add(QuestionaireInfoItem(title, description))
+fun MutableList<Item>.addInfo(title: String, description: String?, type: String) =
+    add(QuestionaireInfoItem(title, description, type))

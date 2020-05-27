@@ -84,7 +84,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@QuestionaireEditorActivity)
             withItems {
                 clear()
-                addInfo(questionaire.title, questionaire.description)
+                addInfo(questionaire.title, questionaire.description, questionaire.type)
                 for (question in questionaire.questions) {
                     when (question.type) {
                         "单选" -> addSingleChoiceItem(question)

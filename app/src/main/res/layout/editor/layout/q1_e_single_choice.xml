@@ -254,7 +254,9 @@
                 android:id="@+id/q1_e_single_create"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/button_shape"
                 android:text="创建"
+                android:textColor="#FFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/q1_e_single_more_settings_set" />
 
