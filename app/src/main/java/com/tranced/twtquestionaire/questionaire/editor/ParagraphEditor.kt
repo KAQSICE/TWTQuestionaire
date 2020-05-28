@@ -136,7 +136,7 @@ class ParagraphEditor : AppCompatActivity() {
                 0,
                 mutableListOf()
             )
-            GlobalPreference.q1Question = paragraphQuestion
+            GlobalPreference.question = paragraphQuestion
             setResult(104)
             finish()
         } else {

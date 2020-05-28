@@ -221,7 +221,7 @@ class SingleChoiceEditor : AppCompatActivity() {
         )
         if (getIsReturnableState()) {
             //TODO:还是写进缓存比较靠谱
-            GlobalPreference.q1Question = singleChoiceQuestion
+            GlobalPreference.question = singleChoiceQuestion
         } else {
             val message: String = if (singleChoiceQuestion.stem.isEmpty()) {
                 "题干不能为空"

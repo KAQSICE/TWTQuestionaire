@@ -126,20 +126,20 @@ class VoteEditorActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
             1 -> {
-                if (GlobalPreference.q1Question != null) {
-                    vote.questions.add(GlobalPreference.q1Question!!)
+                if (GlobalPreference.question != null) {
+                    vote.questions.add(GlobalPreference.question!!)
                     initItemList()
                 }
             }
             2 -> {
-                if (GlobalPreference.q1Question != null) {
-                    vote.questions.add(GlobalPreference.q1Question!!)
+                if (GlobalPreference.question != null) {
+                    vote.questions.add(GlobalPreference.question!!)
                     initItemList()
                 }
             }
             3 -> {
-                if (GlobalPreference.q1Question != null) {
-                    vote.questions.add(GlobalPreference.q1Question!!)
+                if (GlobalPreference.question != null) {
+                    vote.questions.add(GlobalPreference.question!!)
                     initItemList()
                 }
             }

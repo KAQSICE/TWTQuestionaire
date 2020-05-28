@@ -241,7 +241,7 @@ class MultipleChoiceEditor : AppCompatActivity() {
         )
         if (getIsReturnableState()) {
             //TODO:还是写进缓存比较靠谱
-            GlobalPreference.q1Question = multipleChoiceQuestion
+            GlobalPreference.question = multipleChoiceQuestion
         } else {
             val message: String = if (multipleChoiceQuestion.stem.isEmpty()) {
                 "题干不能为空"

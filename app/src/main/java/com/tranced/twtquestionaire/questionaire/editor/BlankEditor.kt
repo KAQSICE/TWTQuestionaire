@@ -134,7 +134,7 @@ class BlankEditor : AppCompatActivity() {
                 0,
                 mutableListOf()
             )
-            GlobalPreference.q1Question = blankQuestion
+            GlobalPreference.question = blankQuestion
             setResult(103)
             finish()
         } else {

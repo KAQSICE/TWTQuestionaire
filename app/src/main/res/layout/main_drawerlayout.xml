@@ -327,7 +327,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginHorizontal="7.5dp"
-                                android:text="@string/main_questionaire"
+                                android:text="@string/main_trash"
                                 android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintLeft_toRightOf="@id/main_drawerlayout_trash_icon"

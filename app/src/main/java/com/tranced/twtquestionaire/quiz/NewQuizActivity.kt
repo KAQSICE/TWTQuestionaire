@@ -1,19 +1,23 @@
 package com.tranced.twtquestionaire.quiz
-
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.tranced.twtquestionaire.GlobalPreference
+import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.questionaire.QuestionaireEditorActivity
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.*
 
 class NewQuizActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
+    private lateinit var toolbarTitle: TextView
     private lateinit var titleEditText: EditText
     private lateinit var descriptionEditText: EditText
     private lateinit var beginEditText: EditText
@@ -25,7 +29,7 @@ class NewQuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.new_quiz_activity)
+        setContentView(R.layout.new_questionaire_activity)
         findViews()
         setToolbar()
         setBeginAndEndDatePicker()
@@ -34,15 +38,17 @@ class NewQuizActivity : AppCompatActivity() {
 
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
-        titleEditText = findViewById(R.id.new_quiz_title)
-        descriptionEditText = findViewById(R.id.new_quiz_description)
-        beginEditText = findViewById(R.id.new_quiz_begin)
-        endEditText = findViewById(R.id.new_quiz_end)
-        createBtn = findViewById(R.id.new_quiz_create_btn)
+        toolbarTitle = findViewById(R.id.common_toolbar_title)
+        titleEditText = findViewById(R.id.new_questionaire_title)
+        descriptionEditText = findViewById(R.id.new_questionaire_description)
+        beginEditText = findViewById(R.id.new_questionaire_begin)
+        endEditText = findViewById(R.id.new_questionaire_end)
+        createBtn = findViewById(R.id.new_questionaire_create_btn)
     }
 
     private fun setToolbar() {
-        toolbar.title = "新建答题"
+        toolbar.title = ""
+        toolbarTitle.text = "新建答题"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
@@ -114,16 +120,33 @@ class NewQuizActivity : AppCompatActivity() {
                         val intent =
                             Intent(
                                 this@NewQuizActivity,
-                                TODO("QuizEditorActivity::class.java")
+                                QuestionaireEditorActivity::class.java
                             )
-                        intent.putExtra("title", titleEditText.text.toString())
-                        if (descriptionEditText.text.isNullOrEmpty()) {
-                            intent.putExtra("description", "")
-                        } else {
-                            intent.putExtra("description", descriptionEditText.text.toString())
-                        }
-                        intent.putExtra("beginDate", beginDate)
-                        intent.putExtra("endDate", endDate)
+                        val questionaire = Paper(
+                            titleEditText.text.toString(),
+                            "答题",
+                            when (descriptionEditText.text.isNullOrEmpty()) {
+                                true -> ""
+                                else -> descriptionEditText.text.toString()
+                            },
+                            "-1",
+                            "-1",
+                            0,
+                            when (endDate) {
+                                null -> -1
+                                else -> {
+                                    if (endDate!!.time > System.currentTimeMillis()) {
+                                        ((endDate!!.time - System.currentTimeMillis()) / (3600000 * 24)).toInt()
+                                    } else {
+                                        -1
+                                    }
+                                }
+                            },
+                            "TODO",
+                            0,
+                            mutableListOf()
+                        )
+                        GlobalPreference.q2Paper = questionaire
                         finish()
                         startActivity(intent)
                     }

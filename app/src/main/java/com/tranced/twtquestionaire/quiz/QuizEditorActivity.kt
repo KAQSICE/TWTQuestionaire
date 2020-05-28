@@ -1,4 +1,4 @@
-package com.tranced.twtquestionaire.questionaire
+package com.tranced.twtquestionaire.quiz
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,16 +15,18 @@ import cn.edu.twt.retrox.recyclerviewdsl.withItems
 import com.tranced.twtquestionaire.GlobalPreference
 import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.questionaire.QuestionairePreviewActivity
+import com.tranced.twtquestionaire.questionaire.QuestionaireTypeSelectionActivity
 import com.tranced.twtquestionaire.questionaire.editor.AddItemButton
 import com.tranced.twtquestionaire.questionaire.editor.addAddItemButton
 import com.tranced.twtquestionaire.questionaire.editor.addInfo
 import com.tranced.twtquestionaire.questionaire.item.*
 
-class QuestionaireEditorActivity : AppCompatActivity() {
+class QuizEditorActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
     private lateinit var itemList: RecyclerView
-    private lateinit var questionaire: Paper
+    private lateinit var quiz: Paper
     private lateinit var itemManager: ItemManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,12 +50,12 @@ class QuestionaireEditorActivity : AppCompatActivity() {
     }
 
     private fun getQuestionaireInfo() {
-        questionaire = GlobalPreference.q1Paper!!
+        quiz = GlobalPreference.q2Paper!!
     }
 
     private fun setToolbar() {
         toolbar.title = ""
-        toolbarTitle.text = "编辑问卷"
+        toolbarTitle.text = "编辑答题"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
@@ -69,7 +71,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                 if (it.itemId == R.id.q1_e_toolbar_preview) {
                     //TODO:要跳转至预览界面
                     val previewIntent = Intent(
-                        this@QuestionaireEditorActivity,
+                        this@QuizEditorActivity,
                         QuestionairePreviewActivity::class.java
                     )
                     startActivity(previewIntent)
@@ -81,11 +83,11 @@ class QuestionaireEditorActivity : AppCompatActivity() {
 
     private fun initItemList() {
         itemList.apply {
-            layoutManager = LinearLayoutManager(this@QuestionaireEditorActivity)
+            layoutManager = LinearLayoutManager(this@QuizEditorActivity)
             withItems {
                 clear()
-                addInfo(questionaire.title, questionaire.description, questionaire.type)
-                for (question in questionaire.questions) {
+                addInfo(quiz.title, quiz.description, quiz.type)
+                for (question in quiz.questions) {
                     when (question.type) {
                         "单选" -> addSingleChoiceItem(question)
                         "多选" -> addMultipleChoiceItem(question)
@@ -109,7 +111,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
             addAddItemButton(View.OnClickListener {
                 if (last() is AddItemButton) {
                     val intent = Intent(
-                        this@QuestionaireEditorActivity,
+                        this@QuizEditorActivity,
                         QuestionaireTypeSelectionActivity::class.java
                     )
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -127,37 +129,37 @@ class QuestionaireEditorActivity : AppCompatActivity() {
         when (resultCode) {
             1 -> {
                 if (GlobalPreference.question != null) {
-                    questionaire.questions.add(GlobalPreference.question!!)
+                    quiz.questions.add(GlobalPreference.question!!)
                     initItemList()
                 }
             }
             2 -> {
                 if (GlobalPreference.question != null) {
-                    questionaire.questions.add(GlobalPreference.question!!)
+                    quiz.questions.add(GlobalPreference.question!!)
                     initItemList()
                 }
             }
             3 -> {
                 if (GlobalPreference.question != null) {
-                    questionaire.questions.add(GlobalPreference.question!!)
+                    quiz.questions.add(GlobalPreference.question!!)
                     initItemList()
                 }
             }
             4 -> {
                 if (GlobalPreference.question != null) {
-                    questionaire.questions.add(GlobalPreference.question!!)
+                    quiz.questions.add(GlobalPreference.question!!)
                     initItemList()
                 }
             }
             5 -> {
                 if (GlobalPreference.question != null) {
-                    questionaire.questions.add(GlobalPreference.question!!)
+                    quiz.questions.add(GlobalPreference.question!!)
                     initItemList()
                 }
             }
             6 -> {
                 if (GlobalPreference.question != null) {
-                    questionaire.questions.add(GlobalPreference.question!!)
+                    quiz.questions.add(GlobalPreference.question!!)
                     initItemList()
                 }
             }

@@ -134,7 +134,7 @@ class RatingEditor : AppCompatActivity() {
                 0,
                 mutableListOf()
             )
-            GlobalPreference.q1Question = blankQuestion
+            GlobalPreference.question = blankQuestion
             setResult(105)
             finish()
         } else {

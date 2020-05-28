@@ -234,7 +234,7 @@ class SortEditor : AppCompatActivity() {
         )
         if (getIsReturnableState()) {
             //TODO:还是写进缓存比较靠谱
-            GlobalPreference.q1Question = sortQuestion
+            GlobalPreference.question = sortQuestion
         } else {
             val message: String = if (sortQuestion.stem.isEmpty()) {
                 "题干不能为空"
