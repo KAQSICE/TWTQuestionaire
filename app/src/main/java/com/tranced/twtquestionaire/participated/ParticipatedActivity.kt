@@ -21,6 +21,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class ParticipatedActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
+    private lateinit var toolbarTitle: TextView
     private lateinit var questionBtn: ImageButton
     private lateinit var voteBtn: ImageButton
     private lateinit var quizBtn: ImageButton
@@ -43,6 +44,7 @@ class ParticipatedActivity : AppCompatActivity() {
 
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
+        toolbarTitle = findViewById(R.id.common_toolbar_title)
         questionBtn = findViewById(R.id.p_q1_button)
         voteBtn = findViewById(R.id.p_v_button)
         quizBtn = findViewById(R.id.p_q2_button)
@@ -50,7 +52,8 @@ class ParticipatedActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        toolbar.title = "我参与的"
+        toolbar.title = ""
+        toolbarTitle.text = "我参与的"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)

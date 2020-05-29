@@ -53,7 +53,7 @@ class CreatedActivity : AppCompatActivity() {
 
     private fun setToolbar() {
         toolbar.title = ""
-        toolbarTitle.text = "我发布的"
+        toolbarTitle.text = "我创建的"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
