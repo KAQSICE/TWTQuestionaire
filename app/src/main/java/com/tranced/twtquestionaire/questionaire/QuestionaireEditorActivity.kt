@@ -97,9 +97,11 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                     }
                 }
                 addSavePaperButton(View.OnClickListener {
-                    GlobalPreference.createdPapers.add(
-                        questionaire
-                    )
+                    if (questionaire.questions.size > 0) {
+                        GlobalPreference.createdPapers.add(
+                            questionaire
+                        )
+                    }
                 })
                 itemManager = ItemManager(this)
             }
