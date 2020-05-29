@@ -112,6 +112,7 @@ class QuestionaireEditorActivity : AppCompatActivity() {
         }
     }
 
+    //TODO:其实大可不必这么麻烦，跟那个保存按钮做成一样的就行
     private fun refreshAddItemButton(itemManager: ItemManager) {
         itemManager.apply {
             addAddItemButton(View.OnClickListener {
