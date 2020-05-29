@@ -18,6 +18,7 @@ import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.questionaire.editor.AddItemButton
 import com.tranced.twtquestionaire.questionaire.editor.addAddItemButton
 import com.tranced.twtquestionaire.questionaire.editor.addInfo
+import com.tranced.twtquestionaire.questionaire.editor.addSavePaperButton
 import com.tranced.twtquestionaire.questionaire.item.*
 
 class QuestionaireEditorActivity : AppCompatActivity() {
@@ -95,6 +96,11 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                         "排序" -> addSortItem(question)
                     }
                 }
+                addSavePaperButton(View.OnClickListener {
+                    GlobalPreference.createdPapers.add(
+                        questionaire
+                    )
+                })
                 itemManager = ItemManager(this)
             }
             adapter = ItemAdapter(itemManager)

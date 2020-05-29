@@ -19,11 +19,17 @@ data class Question(
     var point: Int,
     var correctAnwser: String,
     var optionsCount: Int,
-    var options: MutableList<Option> //TODO:填空题怎么搞
+    var options: MutableList<Option>
 )
 
 data class Option(
     var name: String,
     var id: Int,
     var content: String
+)
+
+data class User(
+    var username: String,
+    var profession: String,
+    var faculty: String
 )

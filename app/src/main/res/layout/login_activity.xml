@@ -10,13 +10,74 @@
         android:id="@+id/login_toolbar"
         layout="@layout/common_toolbar" />
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@null"
+        android:paddingBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/twtlogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@mipmap/twtlogo"
+            app:layout_constraintBottom_toTopOf="@id/usernameEt"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/usernameEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="63dp"
+            android:layout_marginTop="50dp"
+            android:autofillHints="@null"
+            android:background="@drawable/edit_text_selector"
+            android:hint="用户名"
+            android:inputType="text"
+            android:maxLines="1"
+            app:layout_constraintBottom_toTopOf="@id/passwdEt"
+            app:layout_constraintTop_toBottomOf="@id/twtlogo" />
+
+        <EditText
+            android:id="@+id/passwdEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="63dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints="@null"
+            android:background="@drawable/edit_text_selector"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            app:layout_constraintTop_toBottomOf="@id/usernameEt" />
+
+        <TextView
+            android:id="@+id/forgetPasswdTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="忘记密码"
+            app:layout_constraintRight_toRightOf="@id/passwdEt"
+            app:layout_constraintTop_toBottomOf="@id/passwdEt" />
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/button_shape"
+            android:paddingHorizontal="41dp"
+            android:paddingVertical="10dp"
+            android:text="登录"
+            android:textColor="#FFF"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passwdEt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
