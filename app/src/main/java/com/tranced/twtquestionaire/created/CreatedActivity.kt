@@ -100,7 +100,7 @@ class CreatedActivity : AppCompatActivity() {
     }
 }
 
-private class PaperItem(val title: String, val state: String, val date: String, val score: String) :
+private class PaperItem(val title: String, val state: String, val count: String) :
     Item {
     companion object PaperItemController : ItemController {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item) {
@@ -109,8 +109,7 @@ private class PaperItem(val title: String, val state: String, val date: String, 
             holder.apply {
                 title.text = item.title
                 state.text = item.state
-                date.text = item.date
-                score.text = item.score
+                count.text = item.count
             }
         }
 
@@ -120,10 +119,8 @@ private class PaperItem(val title: String, val state: String, val date: String, 
             val title: TextView = itemView.findViewById(R.id.c_paper_item_title)
             val state: TextView = itemView.findViewById(R.id.c_paper_item_state)
             val stateIcon: ImageView = itemView.findViewById(R.id.c_paper_item_state_icon)
-            val date: TextView = itemView.findViewById(R.id.c_paper_item_date)
-            val score: TextView = itemView.findViewById(R.id.c_paper_item_score)
-
-            return PaperItemViewHolder(itemView, title, state, stateIcon, date, score)
+            val count: TextView = itemView.findViewById(R.id.c_paper_item_count)
+            return PaperItemViewHolder(itemView, title, state, stateIcon, count)
         }
     }
 
@@ -135,10 +132,9 @@ private class PaperItem(val title: String, val state: String, val date: String, 
         val title: TextView,
         val state: TextView,
         val stateIcon: ImageView,
-        val date: TextView,
-        val score: TextView
+        val count: TextView
     ) : RecyclerView.ViewHolder(itemView)
 }
 
 private fun MutableList<Item>.addPaperItem(paper: Paper) =
-    add(PaperItem(paper.title, "state", "date", "分儿"))
+    add(PaperItem(paper.title, "state", "1895"))
