@@ -21,6 +21,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class CreatedActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
+    private lateinit var toolbarTitle: TextView
     private lateinit var questionaireBtn: ImageButton
     private lateinit var voteBtn: ImageButton
     private lateinit var quizBtn: ImageButton
@@ -50,7 +51,7 @@ class CreatedActivity : AppCompatActivity() {
     }
 
     private fun setToolbar() {
-        toolbar.title = "我参与的"
+        toolbar.title = "我创建的"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
