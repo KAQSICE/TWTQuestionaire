@@ -48,6 +48,7 @@ android {
                             'src/main/res/layout/created',
                             'src/main/res/layout/participated',
                             'src/main/res/layout/editor',
+                            'src/main/res/layout/star',
                             'src/main/res'
                     ]
         }

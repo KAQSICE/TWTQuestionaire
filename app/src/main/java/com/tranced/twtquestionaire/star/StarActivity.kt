@@ -1,4 +1,4 @@
-package com.tranced.twtquestionaire.created
+package com.tranced.twtquestionaire.star
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +19,7 @@ import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.data.PaperPreference
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
-class CreatedActivity : AppCompatActivity() {
+class StarActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
     private lateinit var questionaireBtn: ImageButton
@@ -33,7 +33,7 @@ class CreatedActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.created_activity)
+        setContentView(R.layout.s_activity)
         findViews()
         setToolbar()
         getPapers()
@@ -45,23 +45,21 @@ class CreatedActivity : AppCompatActivity() {
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
         toolbarTitle = findViewById(R.id.common_toolbar_title)
-        questionaireBtn = findViewById(R.id.c_q1_button)
-        voteBtn = findViewById(R.id.c_v_button)
-        quizBtn = findViewById(R.id.c_q2_button)
-        paperListRv = findViewById(R.id.c_paper_list)
+        questionaireBtn = findViewById(R.id.s_q1_button)
+        voteBtn = findViewById(R.id.s_v_button)
+        quizBtn = findViewById(R.id.s_q2_button)
+        paperListRv = findViewById(R.id.s_paper_list)
     }
 
     private fun setToolbar() {
         toolbar.title = ""
-        toolbarTitle.text = "我发布的"
+        toolbarTitle.text = "我收藏的"
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setHomeButtonEnabled(true)
             setDisplayHomeAsUpEnabled(true)
         }
-        toolbar.setNavigationOnClickListener {
-            finish()
-        }
+        toolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun getPapers() {
@@ -81,7 +79,7 @@ class CreatedActivity : AppCompatActivity() {
 
     private fun initPaperListRv(list: MutableList<Paper>) {
         paperListRv.apply {
-            layoutManager = LinearLayoutManager(this@CreatedActivity)
+            layoutManager = LinearLayoutManager(this@StarActivity)
             withItems {
                 for (paper in list) {
                     addPaperItem(paper)
@@ -103,8 +101,7 @@ class CreatedActivity : AppCompatActivity() {
     }
 }
 
-private class PaperItem(val title: String, val state: String, val count: String) :
-    Item {
+private class PaperItem(val title: String, val state: String, val count: String) : Item {
     companion object PaperItemController : ItemController {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item) {
             holder as PaperItemViewHolder
@@ -118,11 +115,11 @@ private class PaperItem(val title: String, val state: String, val count: String)
 
         override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.c_paper_item, parent, false)
-            val title: TextView = itemView.findViewById(R.id.c_paper_item_title)
-            val state: TextView = itemView.findViewById(R.id.c_paper_item_state)
-            val stateIcon: ImageView = itemView.findViewById(R.id.c_paper_item_state_icon)
-            val count: TextView = itemView.findViewById(R.id.c_paper_item_count)
+                .inflate(R.layout.s_paper_item, parent, false)
+            val title: TextView = itemView.findViewById(R.id.s_paper_item_title)
+            val state: TextView = itemView.findViewById(R.id.s_paper_item_state)
+            val stateIcon: ImageView = itemView.findViewById(R.id.s_paper_item_state_icon)
+            val count: TextView = itemView.findViewById(R.id.s_paper_item_count)
             return PaperItemViewHolder(itemView, title, state, stateIcon, count)
         }
     }

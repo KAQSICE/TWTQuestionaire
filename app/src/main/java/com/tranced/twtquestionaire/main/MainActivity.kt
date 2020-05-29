@@ -26,6 +26,7 @@ import com.tranced.twtquestionaire.data.getData
 import com.tranced.twtquestionaire.participated.ParticipatedActivity
 import com.tranced.twtquestionaire.questionaire.NewQuestionaireActivity
 import com.tranced.twtquestionaire.quiz.NewQuizActivity
+import com.tranced.twtquestionaire.star.StarActivity
 import com.tranced.twtquestionaire.vote.NewVoteActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -144,7 +145,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         star.onClick {
-            val intent = Intent(this@MainActivity, TODO())
+            val intent = Intent(this@MainActivity, StarActivity::class.java)
             startActivity(intent)
         }
     }
