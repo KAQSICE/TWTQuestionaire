@@ -44,7 +44,7 @@ android {
             res.srcDirs =
                     [
                             'src/main/res/layout/questionaire',
-                            'src/main/res/layout/vote',
+                            'src/main/res/layout/quiz',
                             'src/main/res/layout/created',
                             'src/main/res/layout/participated',
                             'src/main/res/layout/editor',
