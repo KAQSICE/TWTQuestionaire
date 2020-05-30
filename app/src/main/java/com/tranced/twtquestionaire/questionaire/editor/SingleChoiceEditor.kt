@@ -164,6 +164,7 @@ class SingleChoiceEditor : AppCompatActivity() {
                     dialog.dismiss()
                 }
                 .addAction("确定") { dialog, _ ->
+                    @Suppress("DEPRECATION")
                     if (builder.editText.text.toString().isNotEmpty()) {
                         dialog.dismiss()
                         score = builder.editText.text.toString().toInt()
@@ -178,6 +179,7 @@ class SingleChoiceEditor : AppCompatActivity() {
                     }
                 }
                 .show()
+            @Suppress("DEPRECATION")
             builder.editText.setText(score.toString())
         }
         createButton.onClick {
@@ -223,11 +225,12 @@ class SingleChoiceEditor : AppCompatActivity() {
             //TODO:还是写进缓存比较靠谱
             GlobalPreference.question = singleChoiceQuestion
         } else {
-            val message: String = if (singleChoiceQuestion.stem.isEmpty()) {
-                "题干不能为空"
-            } else {
-                "选项不能为空"
-            }
+            val message: String =
+                if (singleChoiceQuestion.stem.isEmpty()) {
+                    "题干不能为空"
+                } else {
+                    "选项不能为空"
+                }
             AlertDialog.Builder(this)
                 .setTitle("警告")
                 .setMessage(message)
