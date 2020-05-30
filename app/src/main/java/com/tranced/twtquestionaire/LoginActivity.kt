@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.qmuiteam.qmui.kotlin.onClick
+import com.tranced.twtquestionaire.data.GlobalPreference
+import com.tranced.twtquestionaire.data.User
 import es.dmoral.toasty.Toasty
 
 class LoginActivity : AppCompatActivity() {
@@ -53,7 +55,12 @@ class LoginActivity : AppCompatActivity() {
         }
         loginButton.onClick {
             if (usernameEt.text.toString().isNotEmpty() && passwdEt.text.toString().isNotEmpty()) {
-                val user: User = User(usernameEt.text.toString(), "-1", "-1")
+                val user: User =
+                    User(
+                        usernameEt.text.toString(),
+                        "-1",
+                        "-1"
+                    )
                 GlobalPreference.user = user
                 TODO("Get User Info")
             } else if (usernameEt.text.toString().isEmpty()) {

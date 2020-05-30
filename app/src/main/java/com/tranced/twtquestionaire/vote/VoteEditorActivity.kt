@@ -12,16 +12,17 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.edu.twt.retrox.recyclerviewdsl.ItemAdapter
 import cn.edu.twt.retrox.recyclerviewdsl.ItemManager
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
-import com.tranced.twtquestionaire.GlobalPreference
-import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.VoteTypeSelectionActivity
+import com.tranced.twtquestionaire.data.GlobalPreference
+import com.tranced.twtquestionaire.data.Paper
+import com.tranced.twtquestionaire.editor.AddItemButton
+import com.tranced.twtquestionaire.editor.addAddItemButton
+import com.tranced.twtquestionaire.editor.addInfo
+import com.tranced.twtquestionaire.item.addBlankItem
+import com.tranced.twtquestionaire.item.addMultipleChoiceItem
+import com.tranced.twtquestionaire.item.addSingleChoiceItem
 import com.tranced.twtquestionaire.questionaire.QuestionairePreviewActivity
-import com.tranced.twtquestionaire.questionaire.editor.AddItemButton
-import com.tranced.twtquestionaire.questionaire.editor.addAddItemButton
-import com.tranced.twtquestionaire.questionaire.editor.addInfo
-import com.tranced.twtquestionaire.questionaire.item.addBlankItem
-import com.tranced.twtquestionaire.questionaire.item.addMultipleChoiceItem
-import com.tranced.twtquestionaire.questionaire.item.addSingleChoiceItem
 
 class VoteEditorActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar

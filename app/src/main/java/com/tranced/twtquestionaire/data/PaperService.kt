@@ -1,7 +1,5 @@
 package com.tranced.twtquestionaire.data
 
-import com.tranced.twtquestionaire.Paper
-
 private val testPaperList = mutableListOf<Paper>()
 
 fun getData() {

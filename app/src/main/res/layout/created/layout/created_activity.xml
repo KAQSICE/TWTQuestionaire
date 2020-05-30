@@ -11,44 +11,44 @@
         layout="@layout/common_toolbar" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/c_search"
+        android:id="@+id/created_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/created_toolbar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/c_button_chain"
+        android:id="@+id/created_button_chain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/c_search">
+        app:layout_constraintTop_toBottomOf="@id/created_search">
 
         <ImageButton
-            android:id="@+id/c_q1_button"
+            android:id="@+id/created_q1_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@mipmap/questionaire"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/c_v_button"
+            app:layout_constraintRight_toLeftOf="@id/created_v_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/c_v_button"
+            android:id="@+id/created_v_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@mipmap/vote"
-            app:layout_constraintLeft_toRightOf="@id/c_q1_button"
-            app:layout_constraintRight_toLeftOf="@id/c_q2_button"
+            app:layout_constraintLeft_toRightOf="@id/created_q1_button"
+            app:layout_constraintRight_toLeftOf="@id/created_q2_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/c_q2_button"
+            android:id="@+id/created_q2_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@mipmap/quiz"
-            app:layout_constraintLeft_toRightOf="@id/c_v_button"
+            app:layout_constraintLeft_toRightOf="@id/created_v_button"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,10 +56,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/c_paper_list"
+        android:id="@+id/created_paper_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/c_button_chain" />
+        app:layout_constraintTop_toBottomOf="@id/created_button_chain" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

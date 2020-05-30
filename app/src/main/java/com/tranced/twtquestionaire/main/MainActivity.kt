@@ -28,6 +28,7 @@ import com.tranced.twtquestionaire.questionaire.NewQuestionaireActivity
 import com.tranced.twtquestionaire.quiz.NewQuizActivity
 import com.tranced.twtquestionaire.star.StarActivity
 import com.tranced.twtquestionaire.vote.NewVoteActivity
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -147,6 +148,9 @@ class MainActivity : AppCompatActivity() {
         star.onClick {
             val intent = Intent(this@MainActivity, StarActivity::class.java)
             startActivity(intent)
+        }
+        trash.onClick {
+            Toasty.info(this@MainActivity, "Work In Progress", Toasty.LENGTH_LONG).show()
         }
     }
 

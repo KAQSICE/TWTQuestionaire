@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.edu.twt.retrox.recyclerviewdsl.Item
 import cn.edu.twt.retrox.recyclerviewdsl.ItemController
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
-import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.data.Paper
 import com.tranced.twtquestionaire.data.PaperPreference
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -45,10 +45,10 @@ class ParticipatedActivity : AppCompatActivity() {
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
         toolbarTitle = findViewById(R.id.common_toolbar_title)
-        questionBtn = findViewById(R.id.p_q1_button)
-        voteBtn = findViewById(R.id.p_v_button)
-        quizBtn = findViewById(R.id.p_q2_button)
-        paperListRv = findViewById(R.id.p_paper_list)
+        questionBtn = findViewById(R.id.participated_q1_button)
+        voteBtn = findViewById(R.id.participated_v_button)
+        quizBtn = findViewById(R.id.participated_q2_button)
+        paperListRv = findViewById(R.id.participated_paper_list)
     }
 
     private fun setToolbar() {
@@ -119,12 +119,13 @@ private class PaperItem(val title: String, val state: String, val date: String, 
 
         override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.p_paper_item, parent, false)
-            val title: TextView = itemView.findViewById(R.id.p_paper_item_title)
-            val state: TextView = itemView.findViewById(R.id.p_paper_item_state)
-            val stateIcon: ImageView = itemView.findViewById(R.id.p_paper_item_state_icon)
-            val date: TextView = itemView.findViewById(R.id.p_paper_item_date)
-            val score: TextView = itemView.findViewById(R.id.p_paper_item_score)
+                .inflate(R.layout.participated_paper_item, parent, false)
+            val title: TextView = itemView.findViewById(R.id.participated_paper_item_title)
+            val state: TextView = itemView.findViewById(R.id.participated_paper_item_state)
+            val stateIcon: ImageView =
+                itemView.findViewById(R.id.participated_paper_item_state_icon)
+            val date: TextView = itemView.findViewById(R.id.participated_paper_item_date)
+            val score: TextView = itemView.findViewById(R.id.participated_paper_item_score)
 
             return PaperItemViewHolder(itemView, title, state, stateIcon, date, score)
         }

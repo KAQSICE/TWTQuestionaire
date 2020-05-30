@@ -1,6 +1,5 @@
 package com.tranced.twtquestionaire.data
 
-import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.commons.experimental.preference.hawk
 
 object PaperPreference {

@@ -9,9 +9,9 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.tranced.twtquestionaire.GlobalPreference
-import com.tranced.twtquestionaire.Paper
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.data.GlobalPreference
+import com.tranced.twtquestionaire.data.Paper
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.*
 
@@ -122,30 +122,31 @@ class NewQuestionaireActivity : AppCompatActivity() {
                                 this@NewQuestionaireActivity,
                                 QuestionaireEditorActivity::class.java
                             )
-                        val questionaire = Paper(
-                            titleEditText.text.toString(),
-                            "问卷",
-                            when (descriptionEditText.text.isNullOrEmpty()) {
-                                true -> ""
-                                else -> descriptionEditText.text.toString()
-                            },
-                            "-1",
-                            "-1",
-                            0,
-                            when (endDate) {
-                                null -> -1
-                                else -> {
-                                    if (endDate!!.time > System.currentTimeMillis()) {
-                                        ((endDate!!.time - System.currentTimeMillis()) / (3600000 * 24)).toInt()
-                                    } else {
-                                        -1
+                        val questionaire =
+                            Paper(
+                                titleEditText.text.toString(),
+                                "问卷",
+                                when (descriptionEditText.text.isNullOrEmpty()) {
+                                    true -> ""
+                                    else -> descriptionEditText.text.toString()
+                                },
+                                "-1",
+                                "-1",
+                                0,
+                                when (endDate) {
+                                    null -> -1
+                                    else -> {
+                                        if (endDate!!.time > System.currentTimeMillis()) {
+                                            ((endDate!!.time - System.currentTimeMillis()) / (3600000 * 24)).toInt()
+                                        } else {
+                                            -1
+                                        }
                                     }
-                                }
-                            },
-                            "TODO",
-                            0,
-                            mutableListOf()
-                        )
+                                },
+                                "TODO",
+                                0,
+                                mutableListOf()
+                            )
                         GlobalPreference.q1Paper = questionaire
                         finish()
                         startActivity(intent)

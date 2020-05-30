@@ -9,12 +9,12 @@
         android:theme="@style/AppTheme">
         <activity android:name=".star.StarActivity"></activity>
         <activity android:name=".quiz.QuizEditorActivity" />
-        <activity android:name=".vote.VoteTypeSelectionActivity" />
+        <activity android:name=".VoteTypeSelectionActivity" />
         <activity android:name=".vote.VoteEditorActivity" />
-        <activity android:name=".questionaire.editor.SortEditor" />
-        <activity android:name=".questionaire.editor.ParagraphEditor" />
-        <activity android:name=".questionaire.editor.RatingEditor" />
-        <activity android:name=".questionaire.editor.BlankEditor" />
+        <activity android:name="com.tranced.twtquestionaire.editor.SortEditor" />
+        <activity android:name="com.tranced.twtquestionaire.editor.ParagraphEditor" />
+        <activity android:name="com.tranced.twtquestionaire.editor.RatingEditor" />
+        <activity android:name="com.tranced.twtquestionaire.editor.BlankEditor" />
         <activity
             android:name=".participated.ParticipatedActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -25,19 +25,19 @@
             android:name=".quiz.NewQuizActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".questionaire.editor.MultipleChoiceEditor"
+            android:name="com.tranced.twtquestionaire.editor.MultipleChoiceEditor"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".vote.NewVoteActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".questionaire.editor.SingleChoiceEditor"
+            android:name="com.tranced.twtquestionaire.editor.SingleChoiceEditor"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".questionaire.QuestionairePreviewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".questionaire.QuestionaireTypeSelectionActivity"
+            android:name=".TypeSelectionActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".questionaire.QuestionaireEditorActivity"
