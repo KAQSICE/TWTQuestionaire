@@ -51,7 +51,7 @@
     <string name="q1_e_settled">已设置</string>
     <string name="q1_e_unsettled">未设置</string>
 
-    <!-- vote -->
+    <!-- quiz -->
     <string name="new_vote_title">投票名称</string>
     <string name="new_vote_description">投票说明</string>
     <string name="new_vote_begin">开始时间</string>
@@ -60,7 +60,7 @@
     <string name="new_vote_description_hint">输入投票说明</string>
     <string name="new_vote_create_btn">创建投票</string>
 
-    <!-- quiz -->
+    <!-- vote -->
     <string name="new_quiz_title">答题名称</string>
     <string name="new_quiz_description">答题说明</string>
     <string name="new_quiz_begin">开始时间</string>
