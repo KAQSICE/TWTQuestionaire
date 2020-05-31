@@ -8,6 +8,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".trash.TrashActivity"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".star.StarActivity"
             android:theme="@style/AppTheme" />
         <activity
@@ -20,16 +23,16 @@
             android:name=".vote.VoteEditorActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.tranced.twtquestionaire.editor.SortEditor"
+            android:name=".editor.SortEditor"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.tranced.twtquestionaire.editor.ParagraphEditor"
+            android:name=".editor.ParagraphEditor"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.tranced.twtquestionaire.editor.RatingEditor"
+            android:name=".editor.RatingEditor"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.tranced.twtquestionaire.editor.BlankEditor"
+            android:name=".editor.BlankEditor"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".participated.ParticipatedActivity"
@@ -41,13 +44,13 @@
             android:name=".quiz.NewQuizActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.tranced.twtquestionaire.editor.MultipleChoiceEditor"
+            android:name=".editor.MultipleChoiceEditor"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".vote.NewVoteActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.tranced.twtquestionaire.editor.SingleChoiceEditor"
+            android:name=".editor.SingleChoiceEditor"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".questionaire.QuestionairePreviewActivity"

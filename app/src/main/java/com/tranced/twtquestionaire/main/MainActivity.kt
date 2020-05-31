@@ -27,6 +27,7 @@ import com.tranced.twtquestionaire.participated.ParticipatedActivity
 import com.tranced.twtquestionaire.questionaire.NewQuestionaireActivity
 import com.tranced.twtquestionaire.quiz.NewQuizActivity
 import com.tranced.twtquestionaire.star.StarActivity
+import com.tranced.twtquestionaire.trash.TrashActivity
 import com.tranced.twtquestionaire.vote.NewVoteActivity
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.GlobalScope
@@ -147,7 +148,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         trash.onClick {
-            Toasty.info(this@MainActivity, "Work In Progress", Toasty.LENGTH_LONG).show()
+//            Toasty.info(this@MainActivity, "Work In Progress", Toasty.LENGTH_LONG).show()
+            val intent = Intent(this@MainActivity, TrashActivity::class.java)
+            startActivity(intent)
         }
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

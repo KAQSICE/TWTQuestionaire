@@ -106,6 +106,7 @@ class CreatedActivity : AppCompatActivity() {
                                 dialog.dismiss()
                             }
                             .addAction("是的") { dialog, _ ->
+                                GlobalPreference.trashCan.add(paper)
                                 GlobalPreference.createdPapers.remove(paper)
                                 if (GlobalPreference.starPapers.contains(paper)) {
                                     GlobalPreference.starPapers.remove(paper)
