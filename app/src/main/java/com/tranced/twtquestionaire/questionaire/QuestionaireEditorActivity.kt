@@ -2,16 +2,14 @@ package com.tranced.twtquestionaire.questionaire
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cn.edu.twt.retrox.recyclerviewdsl.ItemAdapter
-import cn.edu.twt.retrox.recyclerviewdsl.ItemManager
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.TypeSelectionActivity
 import com.tranced.twtquestionaire.data.GlobalPreference
@@ -27,7 +25,6 @@ class QuestionaireEditorActivity : AppCompatActivity() {
     private lateinit var toolbarTitle: TextView
     private lateinit var itemList: RecyclerView
     private lateinit var questionaire: Paper
-    private lateinit var itemManager: ItemManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +33,6 @@ class QuestionaireEditorActivity : AppCompatActivity() {
         findViews()
         setToolbar()
         initItemList()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.q1_e_toolbar_menu, menu)
-        return true
     }
 
     private fun findViews() {
@@ -66,18 +58,6 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                 //TODO:这里应该问一句是否真的要退出
                 finish()
             }
-            setOnMenuItemClickListener {
-                //TODO:这里是预览还是设置
-                if (it.itemId == R.id.q1_e_toolbar_preview) {
-                    //TODO:要跳转至预览界面
-                    val previewIntent = Intent(
-                        this@QuestionaireEditorActivity,
-                        QuestionairePreviewActivity::class.java
-                    )
-                    startActivity(previewIntent)
-                }
-                return@setOnMenuItemClickListener true
-            }
         }
     }
 
@@ -99,35 +79,31 @@ class QuestionaireEditorActivity : AppCompatActivity() {
                 }
                 addSavePaperButton(View.OnClickListener {
                     if (questionaire.questions.size > 0) {
-                        GlobalPreference.createdPapers.add(
-                            questionaire
-                        )
+                        val builder =
+                            QMUIDialog.MessageDialogBuilder(this@QuestionaireEditorActivity)
+                        builder.setMessage("是否创建？")
+                            .addAction("取消") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .addAction("确定") { dialog, _ ->
+                                GlobalPreference.createdPapers.add(questionaire)
+                                dialog.dismiss()
+                                finish()
+                            }
+                            .show()
                     }
                 })
-                itemManager = ItemManager(this)
+                addAddItemButton(View.OnClickListener {
+                    if (last() is AddItemButton) {
+                        val intent = Intent(
+                            this@QuestionaireEditorActivity,
+                            TypeSelectionActivity::class.java
+                        )
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                        startActivityForResult(intent, 0)
+                    }
+                })
             }
-            adapter = ItemAdapter(itemManager)
-            itemManager.apply {
-                refreshAddItemButton(this)
-            }
-        }
-    }
-
-    private fun refreshAddItemButton(itemManager: ItemManager) {
-        itemManager.apply {
-            addAddItemButton(View.OnClickListener {
-                if (last() is AddItemButton) {
-                    val intent = Intent(
-                        this@QuestionaireEditorActivity,
-                        TypeSelectionActivity::class.java
-                    )
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                    startActivityForResult(intent, 0)
-                    removeAt(size - 1)
-                    //TODO: 这里添加对应item
-                    refreshAddItemButton(itemManager)
-                }
-            })
         }
     }
 

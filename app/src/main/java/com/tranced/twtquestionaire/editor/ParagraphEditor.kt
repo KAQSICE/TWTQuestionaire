@@ -24,7 +24,6 @@ class ParagraphEditor : AppCompatActivity() {
     private lateinit var compulsionSwitch: Switch
     private lateinit var answerButton: TextView
     private lateinit var scoreButton: TextView
-    private lateinit var conditionButton: TextView
     private lateinit var createButton: Button
     private var answer = ""
     private var score: Int = 0
@@ -45,7 +44,6 @@ class ParagraphEditor : AppCompatActivity() {
         compulsionSwitch = findViewById(R.id.q1_e_paragraph_compulsion_switch)
         answerButton = findViewById(R.id.q1_e_paragraph_answer_button)
         scoreButton = findViewById(R.id.q1_e_paragraph_score_button)
-        conditionButton = findViewById(R.id.q1_e_paragraph_condition_button)
         createButton = findViewById(R.id.q1_e_paragraph_create)
     }
 

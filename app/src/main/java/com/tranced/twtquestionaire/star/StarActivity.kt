@@ -15,8 +15,8 @@ import cn.edu.twt.retrox.recyclerviewdsl.Item
 import cn.edu.twt.retrox.recyclerviewdsl.ItemController
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.data.GlobalPreference
 import com.tranced.twtquestionaire.data.Paper
-import com.tranced.twtquestionaire.data.PaperPreference
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class StarActivity : AppCompatActivity() {
@@ -64,7 +64,7 @@ class StarActivity : AppCompatActivity() {
 
     private fun getPapers() {
         paperList.clear()
-        paperList.addAll(PaperPreference.paperList)
+        paperList.addAll(GlobalPreference.starPapers)
     }
 
     private fun initPaperFilter() {

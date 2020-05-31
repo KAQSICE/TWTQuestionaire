@@ -2,25 +2,23 @@ package com.tranced.twtquestionaire.quiz
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cn.edu.twt.retrox.recyclerviewdsl.ItemAdapter
 import cn.edu.twt.retrox.recyclerviewdsl.ItemManager
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.TypeSelectionActivity
 import com.tranced.twtquestionaire.data.GlobalPreference
 import com.tranced.twtquestionaire.data.Paper
-import com.tranced.twtquestionaire.editor.AddItemButton
 import com.tranced.twtquestionaire.editor.addAddItemButton
 import com.tranced.twtquestionaire.editor.addInfo
+import com.tranced.twtquestionaire.editor.addSavePaperButton
 import com.tranced.twtquestionaire.item.*
-import com.tranced.twtquestionaire.questionaire.QuestionairePreviewActivity
 
 class QuizEditorActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
@@ -36,11 +34,6 @@ class QuizEditorActivity : AppCompatActivity() {
         findViews()
         setToolbar()
         initItemList()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.q1_e_toolbar_menu, menu)
-        return true
     }
 
     private fun findViews() {
@@ -66,18 +59,6 @@ class QuizEditorActivity : AppCompatActivity() {
                 //TODO:这里应该问一句是否真的要退出
                 finish()
             }
-            setOnMenuItemClickListener {
-                //TODO:这里是预览还是设置
-                if (it.itemId == R.id.q1_e_toolbar_preview) {
-                    //TODO:要跳转至预览界面
-                    val previewIntent = Intent(
-                        this@QuizEditorActivity,
-                        QuestionairePreviewActivity::class.java
-                    )
-                    startActivity(previewIntent)
-                }
-                return@setOnMenuItemClickListener true
-            }
         }
     }
 
@@ -97,30 +78,30 @@ class QuizEditorActivity : AppCompatActivity() {
                         "排序" -> addSortItem(question)
                     }
                 }
-                itemManager = ItemManager(this)
-            }
-            adapter = ItemAdapter(itemManager)
-            itemManager.apply {
-                refreshAddItemButton(this)
-            }
-        }
-    }
-
-    private fun refreshAddItemButton(itemManager: ItemManager) {
-        itemManager.apply {
-            addAddItemButton(View.OnClickListener {
-                if (last() is AddItemButton) {
+                addSavePaperButton(View.OnClickListener {
+                    if (quiz.questions.size > 0) {
+                        val builder = QMUIDialog.MessageDialogBuilder(this@QuizEditorActivity)
+                        builder.setMessage("是否创建？")
+                            .addAction("取消") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .addAction("确定") { dialog, _ ->
+                                GlobalPreference.createdPapers.add(quiz)
+                                dialog.dismiss()
+                                finish()
+                            }
+                            .show()
+                    }
+                })
+                addAddItemButton(View.OnClickListener {
                     val intent = Intent(
                         this@QuizEditorActivity,
                         TypeSelectionActivity::class.java
                     )
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     startActivityForResult(intent, 0)
-                    removeAt(size - 1)
-                    //TODO: 这里添加对应item
-                    refreshAddItemButton(itemManager)
-                }
-            })
+                })
+            }
         }
     }
 

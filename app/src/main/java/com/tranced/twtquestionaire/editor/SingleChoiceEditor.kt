@@ -34,8 +34,6 @@ class SingleChoiceEditor : AppCompatActivity() {
     private lateinit var compulsionSwitch: Switch
     private lateinit var answerButton: TextView
     private lateinit var scoreButton: TextView
-    private lateinit var conditionButton: TextView
-    private lateinit var jumpButton: TextView
     private lateinit var createButton: Button
     private var answerId: Int = -1
     private var score: Int = 0
@@ -64,13 +62,6 @@ class SingleChoiceEditor : AppCompatActivity() {
                 optionList.clear()
                 finish()
             }
-//            setOnMenuItemClickListener {
-//                if (it.itemId == R.id.q1_e_single_toolbar_create) {
-//                    finish()
-//                    //TODO:判断一下如果为空就返回null否则返回question
-//                }
-//                return@setOnMenuItemClickListener true
-//            }
         }
     }
 
@@ -83,8 +74,6 @@ class SingleChoiceEditor : AppCompatActivity() {
         compulsionSwitch = findViewById(R.id.q1_e_single_compulsion_switch)
         answerButton = findViewById(R.id.q1_e_single_answer_button)
         scoreButton = findViewById(R.id.q1_e_single_score_button)
-        conditionButton = findViewById(R.id.q1_e_single_condition_button)
-        jumpButton = findViewById(R.id.q1_e_single_jump_button)
         createButton = findViewById(R.id.q1_e_single_create)
     }
 

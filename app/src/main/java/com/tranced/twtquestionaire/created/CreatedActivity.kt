@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,16 +14,17 @@ import cn.edu.twt.retrox.recyclerviewdsl.Item
 import cn.edu.twt.retrox.recyclerviewdsl.ItemController
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.data.GlobalPreference
 import com.tranced.twtquestionaire.data.Paper
-import com.tranced.twtquestionaire.data.PaperPreference
+import es.dmoral.toasty.Toasty
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class CreatedActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
-    private lateinit var questionaireBtn: ImageButton
-    private lateinit var voteBtn: ImageButton
-    private lateinit var quizBtn: ImageButton
+    private lateinit var questionaireBtn: ImageView
+    private lateinit var voteBtn: ImageView
+    private lateinit var quizBtn: ImageView
     private lateinit var paperListRv: RecyclerView
     private val q1List: MutableList<Paper> = mutableListOf()
     private val vList: MutableList<Paper> = mutableListOf()
@@ -66,7 +66,7 @@ class CreatedActivity : AppCompatActivity() {
 
     private fun getPapers() {
         paperList.clear()
-        paperList.addAll(PaperPreference.paperList)
+        paperList.addAll(GlobalPreference.createdPapers)
     }
 
     private fun initPaperFilter() {
@@ -84,7 +84,21 @@ class CreatedActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@CreatedActivity)
             withItems {
                 for (paper in list) {
-                    addPaperItem(paper)
+                    val onStarListener = View.OnClickListener {
+                        if (!GlobalPreference.starPapers.contains(paper)) {
+                            GlobalPreference.starPapers.add(paper)
+                        }
+                        Toasty.success(this@CreatedActivity, "已添加收藏").show()
+                    }
+                    val onDelListener = View.OnClickListener {
+                        GlobalPreference.createdPapers.remove(paper)
+                        if (GlobalPreference.starPapers.contains(paper)) {
+                            GlobalPreference.starPapers.remove(paper)
+                        }
+                        getPapers()
+                        initPaperListRv(paperList)
+                    }
+                    addPaperItem(paper, onStarListener, onDelListener)
                 }
             }
         }
@@ -103,7 +117,13 @@ class CreatedActivity : AppCompatActivity() {
     }
 }
 
-private class PaperItem(val title: String, val state: String, val count: String) :
+private class PaperItem(
+    val title: String,
+    val state: String,
+    val count: String,
+    val onStarListener: View.OnClickListener,
+    val onDelListener: View.OnClickListener
+) :
     Item {
     companion object PaperItemController : ItemController {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item) {
@@ -113,6 +133,8 @@ private class PaperItem(val title: String, val state: String, val count: String)
                 title.text = item.title
                 state.text = item.state
                 count.text = item.count
+                starBtn.setOnClickListener(item.onStarListener)
+                delBtn.setOnClickListener(item.onDelListener)
             }
         }
 
@@ -123,7 +145,9 @@ private class PaperItem(val title: String, val state: String, val count: String)
             val state: TextView = itemView.findViewById(R.id.created_paper_item_state)
             val stateIcon: ImageView = itemView.findViewById(R.id.created_paper_item_state_icon)
             val count: TextView = itemView.findViewById(R.id.created_paper_item_count)
-            return PaperItemViewHolder(itemView, title, state, stateIcon, count)
+            val starBtn: ImageView = itemView.findViewById(R.id.created_paper_item_star)
+            val delBtn: ImageView = itemView.findViewById(R.id.created_paper_item_del)
+            return PaperItemViewHolder(itemView, title, state, stateIcon, count, starBtn, delBtn)
         }
     }
 
@@ -135,9 +159,15 @@ private class PaperItem(val title: String, val state: String, val count: String)
         val title: TextView,
         val state: TextView,
         val stateIcon: ImageView,
-        val count: TextView
+        val count: TextView,
+        val starBtn: ImageView,
+        val delBtn: ImageView
     ) : RecyclerView.ViewHolder(itemView)
 }
 
-private fun MutableList<Item>.addPaperItem(paper: Paper) =
-    add(PaperItem(paper.title, "state", "1895"))
+private fun MutableList<Item>.addPaperItem(
+    paper: Paper,
+    onStarListener: View.OnClickListener,
+    onDelListener: View.OnClickListener
+) =
+    add(PaperItem(paper.title, "state", "1895", onStarListener, onDelListener))

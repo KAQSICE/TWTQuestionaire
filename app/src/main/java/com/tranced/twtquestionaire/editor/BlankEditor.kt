@@ -22,7 +22,6 @@ class BlankEditor : AppCompatActivity() {
     private lateinit var compulsionSwitch: Switch
     private lateinit var answerButton: TextView
     private lateinit var scoreButton: TextView
-    private lateinit var conditionButton: TextView
     private lateinit var createButton: Button
     private var answer = ""
     private var score: Int = 0
@@ -43,7 +42,6 @@ class BlankEditor : AppCompatActivity() {
         compulsionSwitch = findViewById(R.id.q1_e_blank_compulsion_switch)
         answerButton = findViewById(R.id.q1_e_blank_answer_button)
         scoreButton = findViewById(R.id.q1_e_blank_score_button)
-        conditionButton = findViewById(R.id.q1_e_blank_condition_button)
         createButton = findViewById(R.id.q1_e_blank_create)
     }
 

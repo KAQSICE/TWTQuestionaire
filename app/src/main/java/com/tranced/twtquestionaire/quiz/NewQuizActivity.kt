@@ -11,7 +11,6 @@ import androidx.appcompat.widget.Toolbar
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.data.GlobalPreference
 import com.tranced.twtquestionaire.data.Paper
-import com.tranced.twtquestionaire.questionaire.QuestionaireEditorActivity
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.*
 
@@ -19,7 +18,9 @@ class NewQuizActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
     private lateinit var titleEditText: EditText
+    private lateinit var titleHintText: TextView
     private lateinit var descriptionEditText: EditText
+    private lateinit var descriptionHintText: TextView
     private lateinit var beginEditText: EditText
     private lateinit var endEditText: EditText
     private lateinit var createBtn: Button
@@ -32,6 +33,7 @@ class NewQuizActivity : AppCompatActivity() {
         setContentView(R.layout.new_questionaire_activity)
         findViews()
         setToolbar()
+        setHintText()
         setBeginAndEndDatePicker()
         setCreateBtnOnClickListener()
     }
@@ -40,7 +42,9 @@ class NewQuizActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.common_toolbar)
         toolbarTitle = findViewById(R.id.common_toolbar_title)
         titleEditText = findViewById(R.id.new_questionaire_title)
+        titleHintText = findViewById(R.id.new_questionaire_title_hint)
         descriptionEditText = findViewById(R.id.new_questionaire_description)
+        descriptionHintText = findViewById(R.id.new_questionaire_description_hint)
         beginEditText = findViewById(R.id.new_questionaire_begin)
         endEditText = findViewById(R.id.new_questionaire_end)
         createBtn = findViewById(R.id.new_questionaire_create_btn)
@@ -57,6 +61,11 @@ class NewQuizActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             finish()
         }
+    }
+
+    private fun setHintText() {
+        titleHintText.text = "答题名称"
+        descriptionHintText.text = "答题说明"
     }
 
     private fun setBeginAndEndDatePicker() {
@@ -120,9 +129,9 @@ class NewQuizActivity : AppCompatActivity() {
                         val intent =
                             Intent(
                                 this@NewQuizActivity,
-                                QuestionaireEditorActivity::class.java
+                                QuizEditorActivity::class.java
                             )
-                        val questionaire =
+                        val quiz =
                             Paper(
                                 titleEditText.text.toString(),
                                 "答题",
@@ -147,7 +156,7 @@ class NewQuizActivity : AppCompatActivity() {
                                 0,
                                 mutableListOf()
                             )
-                        GlobalPreference.q2Paper = questionaire
+                        GlobalPreference.q2Paper = quiz
                         finish()
                         startActivity(intent)
                     }

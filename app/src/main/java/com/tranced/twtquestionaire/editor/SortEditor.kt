@@ -30,8 +30,6 @@ class SortEditor : AppCompatActivity() {
     private lateinit var compulsionSwitch: Switch
     private lateinit var answerButton: TextView
     private lateinit var scoreButton: TextView
-    private lateinit var conditionButton: TextView
-    private lateinit var jumpButton: TextView
     private lateinit var createButton: Button
     private var answerId = mutableListOf<Int>()
     private var score: Int = 0
@@ -62,8 +60,6 @@ class SortEditor : AppCompatActivity() {
         compulsionSwitch = findViewById(R.id.q1_e_sort_compulsion_switch)
         answerButton = findViewById(R.id.q1_e_sort_answer_button)
         scoreButton = findViewById(R.id.q1_e_sort_score_button)
-        conditionButton = findViewById(R.id.q1_e_sort_condition_button)
-        jumpButton = findViewById(R.id.q1_e_sort_jump_button)
         createButton = findViewById(R.id.q1_e_sort_create)
     }
 

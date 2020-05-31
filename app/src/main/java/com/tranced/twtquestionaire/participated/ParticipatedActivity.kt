@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -22,9 +21,9 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 class ParticipatedActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
-    private lateinit var questionBtn: ImageButton
-    private lateinit var voteBtn: ImageButton
-    private lateinit var quizBtn: ImageButton
+    private lateinit var questionBtn: ImageView
+    private lateinit var voteBtn: ImageView
+    private lateinit var quizBtn: ImageView
     private lateinit var paperListRv: RecyclerView
     private val q1List: MutableList<Paper> = mutableListOf()
     private val vList: MutableList<Paper> = mutableListOf()
@@ -145,4 +144,4 @@ private class PaperItem(val title: String, val state: String, val date: String, 
 }
 
 private fun MutableList<Item>.addPaperItem(paper: Paper) =
-    add(PaperItem(paper.title, "state", "date", "分数"))
+    add(PaperItem(paper.title, "state", "date", "N/A"))

@@ -14,4 +14,8 @@ object GlobalPreference {
     var q2Paper: Paper? by hawk("q2_e_paper", null)
 
     val createdPapers: MutableList<Paper> by hawk("created", mutableListOf())
+
+    val participatedPapers: MutableList<Paper> by hawk("participated", mutableListOf())
+
+    val starPapers: MutableList<Paper> by hawk("star", mutableListOf())
 }
