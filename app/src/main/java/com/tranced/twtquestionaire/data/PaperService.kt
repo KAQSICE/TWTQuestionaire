@@ -23,7 +23,7 @@ fun getData() {
             )
         )
     }
-    PaperPreference.paperList.apply {
+    GlobalPreference.participatedPapers.apply {
         clear()
         addAll(testPaperList)
     }

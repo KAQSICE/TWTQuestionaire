@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cn.edu.twt.retrox.recyclerviewdsl.ItemManager
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import com.tranced.twtquestionaire.R
@@ -25,7 +24,6 @@ class QuizEditorActivity : AppCompatActivity() {
     private lateinit var toolbarTitle: TextView
     private lateinit var itemList: RecyclerView
     private lateinit var quiz: Paper
-    private lateinit var itemManager: ItemManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

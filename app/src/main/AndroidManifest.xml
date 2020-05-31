@@ -33,25 +33,25 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".participated.ParticipatedActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".created.CreatedActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".quiz.NewQuizActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.tranced.twtquestionaire.editor.MultipleChoiceEditor"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".vote.NewVoteActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.tranced.twtquestionaire.editor.SingleChoiceEditor"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".questionaire.QuestionairePreviewActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".TypeSelectionActivity"
             android:theme="@style/AppTheme" />
@@ -60,7 +60,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".questionaire.NewQuestionaireActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".main.MainActivity"

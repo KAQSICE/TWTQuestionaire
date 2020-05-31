@@ -41,7 +41,7 @@
                 android:layout_marginTop="18.5dp"
                 android:layout_marginBottom="17dp"
                 android:contentDescription="@null"
-                android:src="@drawable/grey_indicator"
+                android:src="@drawable/green_indicator"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/created_paper_item_state"

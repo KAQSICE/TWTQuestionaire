@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -14,13 +15,15 @@ import cn.edu.twt.retrox.recyclerviewdsl.Item
 import cn.edu.twt.retrox.recyclerviewdsl.ItemController
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
 import com.tranced.twtquestionaire.R
+import com.tranced.twtquestionaire.data.GlobalPreference
 import com.tranced.twtquestionaire.data.Paper
-import com.tranced.twtquestionaire.data.PaperPreference
+import es.dmoral.toasty.Toasty
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class ParticipatedActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
+    private lateinit var searchSv: SearchView
     private lateinit var questionBtn: ImageView
     private lateinit var voteBtn: ImageView
     private lateinit var quizBtn: ImageView
@@ -44,6 +47,7 @@ class ParticipatedActivity : AppCompatActivity() {
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
         toolbarTitle = findViewById(R.id.common_toolbar_title)
+        searchSv = findViewById(R.id.participated_search)
         questionBtn = findViewById(R.id.participated_q1_button)
         voteBtn = findViewById(R.id.participated_v_button)
         quizBtn = findViewById(R.id.participated_q2_button)
@@ -65,7 +69,7 @@ class ParticipatedActivity : AppCompatActivity() {
 
     private fun getPapers() {
         paperList.clear()
-        paperList.addAll(PaperPreference.paperList)
+        paperList.addAll(GlobalPreference.participatedPapers)
     }
 
     private fun initPaperFilter() {
@@ -99,6 +103,17 @@ class ParticipatedActivity : AppCompatActivity() {
         quizBtn.onClick {
             initPaperListRv(q2List)
         }
+        searchSv.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Toasty.info(this@ParticipatedActivity, "Work In Progress", Toasty.LENGTH_LONG)
+                    .show()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
     }
 }
 
@@ -144,4 +159,4 @@ private class PaperItem(val title: String, val state: String, val date: String, 
 }
 
 private fun MutableList<Item>.addPaperItem(paper: Paper) =
-    add(PaperItem(paper.title, "state", "date", "N/A"))
+    add(PaperItem(paper.title, "N/A", "N/A", "N/A"))

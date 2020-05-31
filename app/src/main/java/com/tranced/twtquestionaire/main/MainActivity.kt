@@ -15,11 +15,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.orhanobut.hawk.Hawk
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet
+import com.tranced.twtquestionaire.LoginActivity
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.created.CreatedActivity
 import com.tranced.twtquestionaire.data.getData
@@ -97,13 +97,10 @@ class MainActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
         toolbar.setNavigationOnClickListener {
-            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                drawerLayout.closeDrawer(GravityCompat.START)
-            } else {
-                drawerLayout.openDrawer(GravityCompat.START)
-            }
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
         }
-        toolbar.setNavigationIcon(R.mipmap.main_navigation_icon)
+        toolbar.setNavigationIcon(R.mipmap.ic_person_white_36dp)
     }
 
     private fun initDrawerLayout() {
@@ -152,6 +149,16 @@ class MainActivity : AppCompatActivity() {
         trash.onClick {
             Toasty.info(this@MainActivity, "Work In Progress", Toasty.LENGTH_LONG).show()
         }
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Toasty.info(this@MainActivity, "Work In Progress", Toasty.LENGTH_LONG).show()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
     }
 
     private fun setSwipeRefreshLayout() {

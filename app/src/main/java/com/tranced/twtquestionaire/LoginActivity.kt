@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setOnClickListeners() {
         forgetPasswdTv.onClick {
-            Toasty.error(this, "WIP", Toasty.LENGTH_SHORT).show()
+            Toasty.error(this, "Work In Progress", Toasty.LENGTH_LONG).show()
         }
         loginButton.onClick {
             if (usernameEt.text.toString().isNotEmpty() && passwdEt.text.toString().isNotEmpty()) {
@@ -62,7 +62,8 @@ class LoginActivity : AppCompatActivity() {
                         "-1"
                     )
                 GlobalPreference.user = user
-                TODO("Get User Info")
+                Toasty.info(this, "Work In Progress", Toasty.LENGTH_LONG).show()
+                finish()
             } else if (usernameEt.text.toString().isEmpty()) {
                 Toasty.error(this, "用户名不能为空", Toasty.LENGTH_SHORT).show()
             } else {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -17,11 +18,13 @@ import cn.edu.twt.retrox.recyclerviewdsl.withItems
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.data.GlobalPreference
 import com.tranced.twtquestionaire.data.Paper
+import es.dmoral.toasty.Toasty
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class StarActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
+    private lateinit var searchSv: SearchView
     private lateinit var questionaireBtn: ImageButton
     private lateinit var voteBtn: ImageButton
     private lateinit var quizBtn: ImageButton
@@ -33,7 +36,7 @@ class StarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.s_activity)
+        setContentView(R.layout.star_activity)
         findViews()
         setToolbar()
         getPapers()
@@ -45,10 +48,11 @@ class StarActivity : AppCompatActivity() {
     private fun findViews() {
         toolbar = findViewById(R.id.common_toolbar)
         toolbarTitle = findViewById(R.id.common_toolbar_title)
-        questionaireBtn = findViewById(R.id.s_q1_button)
-        voteBtn = findViewById(R.id.s_v_button)
-        quizBtn = findViewById(R.id.s_q2_button)
-        paperListRv = findViewById(R.id.s_paper_list)
+        searchSv = findViewById(R.id.star_search)
+        questionaireBtn = findViewById(R.id.star_q1_button)
+        voteBtn = findViewById(R.id.star_v_button)
+        quizBtn = findViewById(R.id.star_q2_button)
+        paperListRv = findViewById(R.id.star_paper_list)
     }
 
     private fun setToolbar() {
@@ -98,6 +102,16 @@ class StarActivity : AppCompatActivity() {
         quizBtn.onClick {
             initPaperListRv(q2List)
         }
+        searchSv.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Toasty.info(this@StarActivity, "Work In Progress", Toasty.LENGTH_LONG).show()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
     }
 }
 
@@ -115,11 +129,11 @@ private class PaperItem(val title: String, val state: String, val count: String)
 
         override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.s_paper_item, parent, false)
-            val title: TextView = itemView.findViewById(R.id.s_paper_item_title)
-            val state: TextView = itemView.findViewById(R.id.s_paper_item_state)
-            val stateIcon: ImageView = itemView.findViewById(R.id.s_paper_item_state_icon)
-            val count: TextView = itemView.findViewById(R.id.s_paper_item_count)
+                .inflate(R.layout.star_paper_item, parent, false)
+            val title: TextView = itemView.findViewById(R.id.star_paper_item_title)
+            val state: TextView = itemView.findViewById(R.id.star_paper_item_state)
+            val stateIcon: ImageView = itemView.findViewById(R.id.star_paper_item_state_icon)
+            val count: TextView = itemView.findViewById(R.id.star_paper_item_count)
             return PaperItemViewHolder(itemView, title, state, stateIcon, count)
         }
     }
@@ -137,4 +151,4 @@ private class PaperItem(val title: String, val state: String, val count: String)
 }
 
 private fun MutableList<Item>.addPaperItem(paper: Paper) =
-    add(PaperItem(paper.title, "state", "1895"))
+    add(PaperItem(paper.title, "N/A", "N/A"))

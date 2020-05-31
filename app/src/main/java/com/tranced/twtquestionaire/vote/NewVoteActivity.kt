@@ -1,6 +1,5 @@
 package com.tranced.twtquestionaire.vote
 
-import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -9,9 +8,11 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.data.GlobalPreference
 import com.tranced.twtquestionaire.data.Paper
+import es.dmoral.toasty.Toasty
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.*
 
@@ -108,15 +109,14 @@ class NewVoteActivity : AppCompatActivity() {
         createBtn.onClick {
             //TODO:这里还要判断一下日期先后
             if (titleEditText.text.toString().isEmpty()) {
-                AlertDialog.Builder(this@NewVoteActivity)
-                    .setTitle("警告")
-                    .setMessage("问卷名称不能为空")
-                    .setPositiveButton("确定", null)
-                    .show()
+                Toasty.error(this@NewVoteActivity, "投票标题不能为空", Toasty.LENGTH_SHORT).show()
             } else {
-                AlertDialog.Builder(this@NewVoteActivity)
-                    .setTitle("是否创建")
-                    .setPositiveButton("确定") { _, _ ->
+                QMUIDialog.MessageDialogBuilder(this@NewVoteActivity)
+                    .setMessage("是否创建")
+                    .addAction("取消") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .addAction("确定") { _, _ ->
                         val intent =
                             Intent(
                                 this@NewVoteActivity,
@@ -132,16 +132,7 @@ class NewVoteActivity : AppCompatActivity() {
                             "-1",
                             "-1",
                             0,
-                            when (endDate) {
-                                null -> -1
-                                else -> {
-                                    if (endDate!!.time > System.currentTimeMillis()) {
-                                        ((endDate!!.time - System.currentTimeMillis()) / (3600000 * 24)).toInt()
-                                    } else {
-                                        -1
-                                    }
-                                }
-                            },
+                            -1,
                             "TODO",
                             0,
                             mutableListOf()
@@ -150,7 +141,6 @@ class NewVoteActivity : AppCompatActivity() {
                         finish()
                         startActivity(intent)
                     }
-                    .setNegativeButton("取消", null)
                     .show()
             }
         }
