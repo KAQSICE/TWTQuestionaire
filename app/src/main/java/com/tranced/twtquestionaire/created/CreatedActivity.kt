@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.edu.twt.retrox.recyclerviewdsl.Item
 import cn.edu.twt.retrox.recyclerviewdsl.ItemController
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import com.tranced.twtquestionaire.R
 import com.tranced.twtquestionaire.data.GlobalPreference
 import com.tranced.twtquestionaire.data.Paper
@@ -87,21 +88,35 @@ class CreatedActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@CreatedActivity)
             withItems {
                 for (paper in list) {
+                    var starState = GlobalPreference.starPapers.contains(paper)
                     val onStarListener = View.OnClickListener {
-                        if (!GlobalPreference.starPapers.contains(paper)) {
+                        if (starState) {
+                            GlobalPreference.starPapers.remove(paper)
+                            starState = false
+                        } else {
                             GlobalPreference.starPapers.add(paper)
+                            starState = true
                         }
                         Toasty.success(this@CreatedActivity, "已添加收藏").show()
                     }
                     val onDelListener = View.OnClickListener {
-                        GlobalPreference.createdPapers.remove(paper)
-                        if (GlobalPreference.starPapers.contains(paper)) {
-                            GlobalPreference.starPapers.remove(paper)
-                        }
-                        getPapers()
-                        initPaperListRv(paperList)
+                        QMUIDialog.MessageDialogBuilder(this@CreatedActivity)
+                            .setMessage("真的要删除吗")
+                            .addAction("手滑了") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .addAction("是的") { dialog, _ ->
+                                GlobalPreference.createdPapers.remove(paper)
+                                if (GlobalPreference.starPapers.contains(paper)) {
+                                    GlobalPreference.starPapers.remove(paper)
+                                }
+                                dialog.dismiss()
+                                getPapers()
+                                initPaperListRv(paperList)
+                            }
+                            .show()
                     }
-                    addPaperItem(paper, onStarListener, onDelListener)
+                    addPaperItem(paper, onDelListener)
                 }
             }
         }
@@ -131,10 +146,7 @@ class CreatedActivity : AppCompatActivity() {
 }
 
 private class PaperItem(
-    val title: String,
-    val state: String,
-    val count: String,
-    val onStarListener: View.OnClickListener,
+    val paper: Paper,
     val onDelListener: View.OnClickListener
 ) :
     Item {
@@ -143,10 +155,28 @@ private class PaperItem(
             holder as PaperItemViewHolder
             item as PaperItem
             holder.apply {
-                title.text = item.title
-                state.text = item.state
-                count.text = item.count
-                starBtn.setOnClickListener(item.onStarListener)
+                title.text = item.paper.title
+                state.text = "N/A"
+                count.text = "N/A"
+                starBtn.apply {
+                    if (GlobalPreference.starPapers.contains(item.paper)) {
+                        setImageResource(R.mipmap.c_star)
+                    } else {
+                        setImageResource(R.mipmap.c_star_n)
+                    }
+                    onClick {
+                        if (GlobalPreference.starPapers.contains(item.paper)) {
+                            GlobalPreference.starPapers.remove(item.paper)
+                            Toasty.success(itemView.context, "取消收藏", Toasty.LENGTH_SHORT).show()
+                            setImageResource(R.mipmap.c_star_n)
+                        } else {
+                            GlobalPreference.starPapers.add(item.paper)
+                            Toasty.success(itemView.context, "收藏成功", Toasty.LENGTH_SHORT).show()
+                            setImageResource(R.mipmap.c_star)
+                        }
+                    }
+
+                }
                 delBtn.setOnClickListener(item.onDelListener)
             }
         }
@@ -180,7 +210,6 @@ private class PaperItem(
 
 private fun MutableList<Item>.addPaperItem(
     paper: Paper,
-    onStarListener: View.OnClickListener,
     onDelListener: View.OnClickListener
 ) =
-    add(PaperItem(paper.title, "N/A", "N/A", onStarListener, onDelListener))
+    add(PaperItem(paper, onDelListener))
