@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setOnClickListeners() {
         forgetPasswdTv.onClick {
-            Toasty.error(this, "Work In Progress", Toasty.LENGTH_LONG).show()
+            Toasty.info(this, "Work In Progress", Toasty.LENGTH_LONG).show()
         }
         loginButton.onClick {
             if (usernameEt.text.toString().isNotEmpty() && passwdEt.text.toString().isNotEmpty()) {

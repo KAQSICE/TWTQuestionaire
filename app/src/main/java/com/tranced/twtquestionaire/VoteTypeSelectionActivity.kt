@@ -2,6 +2,7 @@ package com.tranced.twtquestionaire
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -9,6 +10,7 @@ import androidx.cardview.widget.CardView
 import com.tranced.twtquestionaire.editor.BlankEditor
 import com.tranced.twtquestionaire.editor.MultipleChoiceEditor
 import com.tranced.twtquestionaire.editor.SingleChoiceEditor
+import es.dmoral.toasty.Toasty
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class VoteTypeSelectionActivity : AppCompatActivity() {
@@ -22,6 +24,7 @@ class VoteTypeSelectionActivity : AppCompatActivity() {
     private lateinit var singleCardView: CardView
     private lateinit var multipleCardView: CardView
     private lateinit var blankCardView: CardView
+    private lateinit var importButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +53,7 @@ class VoteTypeSelectionActivity : AppCompatActivity() {
         singleCardView = findViewById(R.id.v_e_type_selection_single)
         multipleCardView = findViewById(R.id.v_e_type_selection_multiple)
         blankCardView = findViewById(R.id.v_e_type_selection_blank)
+        importButton = findViewById(R.id.v_e_type_selection_import)
     }
 
     private fun setOnClickListeners() {
@@ -67,6 +71,10 @@ class VoteTypeSelectionActivity : AppCompatActivity() {
             val intent =
                 Intent(this@VoteTypeSelectionActivity, BlankEditor::class.java)
             startActivityForResult(intent, 103)
+        }
+        importButton.onClick {
+            Toasty.info(this@VoteTypeSelectionActivity, "Work In Progress", Toasty.LENGTH_SHORT)
+                .show()
         }
     }
 

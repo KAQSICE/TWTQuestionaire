@@ -2,11 +2,13 @@ package com.tranced.twtquestionaire
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.tranced.twtquestionaire.editor.*
+import es.dmoral.toasty.Toasty
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class TypeSelectionActivity : AppCompatActivity() {
@@ -26,6 +28,7 @@ class TypeSelectionActivity : AppCompatActivity() {
     private lateinit var paragraphCardView: CardView
     private lateinit var ratingCardView: CardView
     private lateinit var sortCardView: CardView
+    private lateinit var importButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +60,7 @@ class TypeSelectionActivity : AppCompatActivity() {
         paragraphCardView = findViewById(R.id.q1_e_type_selection_paragraph)
         ratingCardView = findViewById(R.id.q1_e_type_selection_rating)
         sortCardView = findViewById(R.id.q1_e_type_selection_sort)
+        importButton = findViewById(R.id.q1_e_type_selection_import)
     }
 
     private fun setOnClickListeners() {
@@ -89,6 +93,9 @@ class TypeSelectionActivity : AppCompatActivity() {
             val intent =
                 Intent(this@TypeSelectionActivity, SortEditor::class.java)
             startActivityForResult(intent, 106)
+        }
+        importButton.onClick {
+            Toasty.info(this@TypeSelectionActivity, "Work In Progress", Toasty.LENGTH_SHORT).show()
         }
     }
 
