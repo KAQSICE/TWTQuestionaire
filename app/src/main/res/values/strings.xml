@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TWTForm</string>
+    <string name="questionEditorOptionEditTextHint">请输入选项</string>
+    <string name="questionEditorContentEditTextHint">请输入题干</string>
+    <string name="star">*</string>
+    <string name="questionEditorAdd">添加选项</string>
+</resources>
