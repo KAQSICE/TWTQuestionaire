@@ -67,7 +67,7 @@ class PreviewActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.withItems {
             addPreviewInfoItem(GlobalPreference.paper!!)
-            for (question in GlobalPreference.questionList) {
+            for (question in GlobalPreference.paper!!.questions) {
                 when (question.type) {
                     0 -> addSingleItem(question.content, question.options)
                     1 -> addMultiItem(question.content, question.options)

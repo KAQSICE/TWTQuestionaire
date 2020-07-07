@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.edu.twt.retrox.recyclerviewdsl.Item
 import cn.edu.twt.retrox.recyclerviewdsl.ItemController
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
+import com.orhanobut.hawk.Hawk
 import es.dmoral.toasty.Toasty
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import tk.tranced.twtform.R
@@ -115,19 +116,19 @@ class QuestionEditorActivity : AppCompatActivity() {
                         }
                     }
                     if (submitState) {
-                        GlobalPreference.questionList.add(
+                        val tempPaper = GlobalPreference.paper
+                        tempPaper!!.questions.add(
                             Question(
                                 content = mContent,
                                 type = questionType,
                                 point = -1, //TODO:这里还没有做分值设定
                                 correctAnswer = mutableListOf(),    //TODO:这里还没有做正确答案设置
-                                options = mutableListOf(),
+                                options = mOptions,
                                 random = 0, //TODO:这里还没有做随机题目
                                 necessary = 0   //TODO:这里还没有做是否必答(其实可以做，但是我懒
                             )
                         )
-                        GlobalPreference.questionList.last().options.clear()
-                        GlobalPreference.questionList.last().options.addAll(mOptions)
+                        Hawk.put("paper", tempPaper);
                         mContent = ""
                         mOptions.clear()
                         PreviewActivity.previewActivity.initPreviewRecyclerView()
