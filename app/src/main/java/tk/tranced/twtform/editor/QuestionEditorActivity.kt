@@ -31,6 +31,7 @@ class QuestionEditorActivity : AppCompatActivity() {
     }
 
     private var questionType: Int = 0
+    private var parentIndicator: Int = 0
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
     private lateinit var recyclerView: RecyclerView
@@ -41,6 +42,7 @@ class QuestionEditorActivity : AppCompatActivity() {
         setContentView(R.layout.question_editor_activity)
         questionEditorActivity = this
         questionType = intent.getIntExtra("questionType", 0)
+        parentIndicator = intent.getIntExtra("parent", 0)
         findViews()
         setToolbar()
         initQuestionEditorRecyclerView()
@@ -96,50 +98,58 @@ class QuestionEditorActivity : AppCompatActivity() {
 
     private fun setSubmitListener() {
         submitButton.apply {
-            text = "创建"
-            onClick {
-                if (mContent == "") {
-                    Toasty.error(this@QuestionEditorActivity, "题干不能为空").show()
-                } else {
-                    var submitState: Boolean = true
-                    val mOptionsSet: MutableSet<String> = mutableSetOf()
-                    when (questionType) {
-                        2 -> {
-
-                        }
-                        else -> {
-                            for (option in mOptions) {
-                                submitState = option.isNotEmpty()
-                            }
-                            mOptionsSet.addAll(mOptions)
-                            submitState = mOptionsSet.size == mOptions.size
-                        }
-                    }
-                    if (submitState) {
-                        val tempPaper = GlobalPreference.paper
-                        tempPaper!!.questions.add(
-                            Question(
-                                content = mContent,
-                                type = questionType,
-                                point = -1, //TODO:这里还没有做分值设定
-                                correctAnswer = mutableListOf(),    //TODO:这里还没有做正确答案设置
-                                options = mOptions,
-                                random = 0, //TODO:这里还没有做随机题目
-                                necessary = 0   //TODO:这里还没有做是否必答(其实可以做，但是我懒
-                            )
-                        )
-                        Hawk.put("paper", tempPaper);
-                        mContent = ""
-                        mOptions.clear()
-                        PreviewActivity.previewActivity.initPreviewRecyclerView()
-                        finish()
-                    } else {
-                        if (mOptionsSet.size != mOptions.size) {
-                            Toasty.error(this@QuestionEditorActivity, "选项重复").show()
+            //如果是从QuestionTypeActivity进入就是创建新问题，创建的新问题
+            when (parentIndicator) {
+                0 -> {
+                    text = "创建"
+                    onClick {
+                        if (mContent == "") {
+                            Toasty.error(this@QuestionEditorActivity, "题干不能为空").show()
                         } else {
-                            Toasty.error(this@QuestionEditorActivity, "选项不能为空").show()
+                            var submitState: Boolean = true
+                            val mOptionsSet: MutableSet<String> = mutableSetOf()
+                            when (questionType) {
+                                2 -> {
+
+                                }
+                                else -> {
+                                    for (option in mOptions) {
+                                        submitState = option.isNotEmpty()
+                                    }
+                                    mOptionsSet.addAll(mOptions)
+                                    submitState = mOptionsSet.size == mOptions.size
+                                }
+                            }
+                            if (submitState) {
+                                val tempPaper = GlobalPreference.paper
+                                tempPaper!!.questions.add(
+                                    Question(
+                                        content = mContent,
+                                        type = questionType,
+                                        point = -1, //TODO:这里还没有做分值设定
+                                        correctAnswer = mutableListOf(),    //TODO:这里还没有做正确答案设置
+                                        options = mOptions,
+                                        random = 0, //TODO:这里还没有做随机题目
+                                        necessary = 0   //TODO:这里还没有做是否必答(其实可以做，但是我懒
+                                    )
+                                )
+                                Hawk.put("paper", tempPaper);
+                                mContent = ""
+                                mOptions.clear()
+                                PreviewActivity.previewActivity.initPreviewRecyclerView()
+                                finish()
+                            } else {
+                                if (mOptionsSet.size != mOptions.size) {
+                                    Toasty.error(this@QuestionEditorActivity, "选项重复").show()
+                                } else {
+                                    Toasty.error(this@QuestionEditorActivity, "选项不能为空").show()
+                                }
+                            }
                         }
                     }
+                }
+                1 -> {
+                    text = "完成"
                 }
             }
         }

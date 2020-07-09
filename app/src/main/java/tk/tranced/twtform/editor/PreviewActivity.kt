@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.edu.twt.retrox.recyclerviewdsl.Item
 import cn.edu.twt.retrox.recyclerviewdsl.ItemController
 import cn.edu.twt.retrox.recyclerviewdsl.withItems
+import com.orhanobut.hawk.Hawk
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import tk.tranced.twtform.R
 import tk.tranced.twtform.data.Paper
@@ -75,6 +76,7 @@ class PreviewActivity : AppCompatActivity() {
                 }
             }
             addPreviewAddItem()
+            addPreviewCreateItem()
         }
     }
 }
@@ -278,6 +280,43 @@ class PreviewBlankItem(val content: String) : Item {
     ) : RecyclerView.ViewHolder(itemView)
 }
 
+class PreviewCreateItem : Item {
+    companion object PreviewCreateItemController : ItemController {
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: Item) {
+            holder as PreviewCreateItemViewHolder
+            item as PreviewCreateItem
+            holder.apply {
+                createButton.apply {
+                    text = "创建"
+                    //TODO:这里应该也要判断上级
+                    onClick {
+                        //把问题加入到我创建的问卷之列
+                        val tempCreatedPaperList = GlobalPreference.createdPaperList
+                        tempCreatedPaperList.add(GlobalPreference.paper!!)
+                        Hawk.put("createdPaperList", tempCreatedPaperList)
+                        PreviewActivity.previewActivity.finish()
+                    }
+                }
+            }
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+            val itemView: View = LayoutInflater.from(parent.context)
+                .inflate(R.layout.preview_create_item, parent, false)
+            val createButton: Button = itemView.findViewById(R.id.previewCreateButton)
+            return PreviewCreateItemViewHolder(itemView, createButton)
+        }
+    }
+
+    override val controller: ItemController
+        get() = PreviewCreateItemController
+
+    private class PreviewCreateItemViewHolder(
+        itemView: View,
+        val createButton: Button
+    ) : RecyclerView.ViewHolder(itemView)
+}
+
 fun MutableList<Item>.addPreviewInfoItem(paper: Paper) = add(PreviewInfoItem(paper))
 
 fun MutableList<Item>.addPreviewAddItem() = add(PreviewAddItem())
@@ -289,3 +328,5 @@ private fun MutableList<Item>.addMultiItem(content: String, options: MutableList
     add(PreviewMultiItem(content, options))
 
 private fun MutableList<Item>.addBlankItem(content: String) = add(PreviewBlankItem(content))
+
+fun MutableList<Item>.addPreviewCreateItem() = add(PreviewCreateItem())

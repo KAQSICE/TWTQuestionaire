@@ -80,6 +80,10 @@ class QuestionTypeItem(val questionType: Int) : Item {
                             val mIntent =
                                 Intent(itemView.context, QuestionEditorActivity::class.java)
                             mIntent.putExtra("questionType", 0)
+                            mIntent.putExtra(
+                                "parent",
+                                0
+                            )   //这里的parent指QuestionEditor的上级，0是类型选择，1是问卷预览
                             itemView.context.startActivity(mIntent)
                             QuestionTypeActivity.questionTypeActivity.finish()
 
