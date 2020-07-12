@@ -14,6 +14,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import tk.tranced.twtform.R
 import tk.tranced.twtform.newpaper.NewpaperActivity
+import tk.tranced.twtform.paperlist.PaperlistActivity
 
 class MainItem(val pos: Int) : Item {
     companion object MainItemController : ItemController {
@@ -49,6 +50,10 @@ class MainItem(val pos: Int) : Item {
                     2 -> {
                         mainItemIcon.setImageResource(R.mipmap.main_created_icon)
                         mainItemContent.text = "我创建的"
+                        mainItemCardView.onClick {
+                            val intent = Intent(itemView.context, PaperlistActivity::class.java)
+                            itemView.context.startActivity(intent)
+                        }
                     }
                     3 -> {
                         mainItemIcon.setImageResource(R.mipmap.main_star_icon)

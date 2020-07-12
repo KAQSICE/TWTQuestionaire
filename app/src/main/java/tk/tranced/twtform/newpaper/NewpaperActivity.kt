@@ -157,8 +157,8 @@ class NewpaperActivity : AppCompatActivity() {
                                 PreviewActivity::class.java
                             )
                         intent.putExtra("paperType", paperType)
+                        intent.putExtra("parent", 0)
                         GlobalPreference.paper = Paper(
-                            -1, //TODO:这里是id(?
                             titleEditText.text.toString(),
                             paperType,
                             when (descriptionEditText.text.isNullOrEmpty()) {
@@ -179,7 +179,9 @@ class NewpaperActivity : AppCompatActivity() {
                             },
                             mutableListOf(),
                             0,
-                            -1
+                            -1,
+                            -1,
+                            0
                         )
                         finish()
                         startActivity(intent)

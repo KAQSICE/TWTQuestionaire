@@ -30,6 +30,7 @@ class PreviewActivity : AppCompatActivity() {
 
     private var paperType: Int = 0
     private val paperTypeText = arrayOf("问卷", "答题", "投票")
+    private var parentIndicator: Int = 0
     private lateinit var toolbar: Toolbar
     private lateinit var toolbarTitle: TextView
     private lateinit var recyclerView: RecyclerView
@@ -39,6 +40,7 @@ class PreviewActivity : AppCompatActivity() {
         setContentView(R.layout.preview_activity)
         previewActivity = this
         paperType = intent.getIntExtra("paperType", 0)
+        parentIndicator = intent.getIntExtra("parent", 0)
         findViews()
         setToolbar()
         initPreviewRecyclerView()

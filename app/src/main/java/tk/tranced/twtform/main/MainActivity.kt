@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
         mainToolbar.setNavigationOnClickListener {
-            //TODO：这里跳转到登陆页面
+            TODO("这里跳转到登陆页面")
         }
         mainToolbar.setNavigationIcon(R.mipmap.ic_person_white_36dp)
     }

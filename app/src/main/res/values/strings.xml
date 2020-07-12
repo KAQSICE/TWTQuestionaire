@@ -4,4 +4,7 @@
     <string name="questionEditorContentEditTextHint">请输入题干</string>
     <string name="star">*</string>
     <string name="questionEditorAdd">添加选项</string>
+    <string name="questionnaire">问卷</string>
+    <string name="quiz">答题</string>
+    <string name="vote">投票</string>
 </resources>
